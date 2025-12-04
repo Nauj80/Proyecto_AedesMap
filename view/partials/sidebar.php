@@ -210,6 +210,27 @@
                     </div>
                 </li>
                 <li class="nav-item">
+                    <a data-bs-toggle="collapse" href="#reportes">
+                        <i class="fas fa-newspaper"></i>
+                        <p>Reportes</p>
+                        <span class="caret"></span>
+                    </a>
+                    <div class="collapse" id="reportes">
+                        <ul class="nav nav-collapse">
+                            <li>
+                                <a href="charts/charts.html">
+                                    <span class="sub-item">Chart Js</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="charts/sparkline.html">
+                                    <span class="sub-item">Sparkline</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item">
                     <a data-bs-toggle="collapse" href="#info">
                         <i class="fas fa-info"></i>
                         <p>Sobre AedesMap</p>
