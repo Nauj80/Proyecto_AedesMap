@@ -3,8 +3,8 @@
         <!-- Logo Header -->
         <div class="logo-header" data-background-color="dark">
 
-            <a href="index.html" class="logo">
-                <img src="assets/img/kaiadmin/logo_light.svg" alt="navbar brand" class="navbar-brand" height="20">
+            <a href="../web/index.php" class="logo">
+                <img src="assets/img/kaiadmin/logo_light.svg" alt="navbar brand" class="navbar-brand" height="35">
             </a>
             <div class="nav-toggle">
                 <button class="btn btn-toggle toggle-sidebar">
@@ -19,8 +19,8 @@
             </button>
 
         </div>
-        <!-- End Logo Header -->	
-    </div>	
+        <!-- End Logo Header -->
+    </div>
     <div class="sidebar-wrapper scrollbar scrollbar-inner">
         <div class="sidebar-content">
             <ul class="nav nav-secondary">
@@ -76,13 +76,13 @@
                     <div class="collapse" id="tipotanque">
                         <ul class="nav nav-collapse">
                             <li>
-                                <a href="sidebar-style-2.html">
-                                    <span class="sub-item">Sidebar Style 2</span>
+                                <a href="<?php echo getUrl("TipoTanques", "TipoTanques", "list"); ?>">
+                                    <span class="sub-item">Consultar Tipos de Tanque</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="icon-menu.html">
-                                    <span class="sub-item">Icon Menu</span>
+                                <a href="<?php echo getUrl("TipoTanques", "TipoTanques", "getCreate"); ?>">
+                                    <span class="sub-item">Crear Tipo de Tanque</span>
                                 </a>
                             </li>
                         </ul>
@@ -97,13 +97,13 @@
                     <div class="collapse" id="tanques">
                         <ul class="nav nav-collapse">
                             <li>
-                                <a href="sidebar-style-2.html">
-                                    <span class="sub-item">Sidebar Style 2</span>
+                                <a href="<?php echo getUrl("Tanque", "Tanque", "list"); ?>">
+                                    <span class="sub-item">Consultar Tanques</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="icon-menu.html">
-                                    <span class="sub-item">Icon Menu</span>
+                                <a href="<?php echo getUrl("Tanque", "Tanque", "getCreate"); ?>">
+                                    <span class="sub-item">Crear Tanques</span>
                                 </a>
                             </li>
                         </ul>
