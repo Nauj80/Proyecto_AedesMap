@@ -19,8 +19,8 @@
             </button>
 
         </div>
-        <!-- End Logo Header -->	
-    </div>	
+        <!-- End Logo Header -->
+    </div>
     <div class="sidebar-wrapper scrollbar scrollbar-inner">
         <div class="sidebar-content">
             <ul class="nav nav-secondary">
@@ -46,22 +46,13 @@
                         <ul class="nav nav-collapse">
                             <li>
                                 <a href="components/avatars.html">
-                                    <span class="sub-item">Avatars</span>
+                                    <span class="sub-item">Registrar Zoocriadero</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="components/buttons.html">
-                                    <span class="sub-item">Buttons</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="components/gridsystem.html">
-                                    <span class="sub-item">Grid System</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="components/panels.html">
-                                    <span class="sub-item">Panels</span>
+                                <a href="zoocriadero/ConsultarZoocriadero.php">
+
+                                    <span class="sub-item">Consultar Zoocriaderos</span>
                                 </a>
                             </li>
                         </ul>
