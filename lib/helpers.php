@@ -41,7 +41,6 @@
                 require_once("../controller/".$modulo."/".$controlador."Controller.php");
 
                 $controlador = $controlador."Controller";
-                
 
                 $objClase = new $controlador();
 

@@ -50,7 +50,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="zoocriadero/ConsultarZoocriadero.php">
+                                <a href="<?php echo getUrl("Zoocriadero", "Zoocriadero", "listar"); ?>">
 
                                     <span class="sub-item">Consultar Zoocriaderos</span>
                                 </a>
