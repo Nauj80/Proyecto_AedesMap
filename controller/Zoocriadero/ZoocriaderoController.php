@@ -9,6 +9,7 @@ class ZoocriaderoController
         $objeto = new ZoocriaderoModel();
         $sql = "SELECT * FROM zoocriaderos";
         $zoo = $objeto->select($sql);
+        $zooCria = pg_fetch_all($zoo);
         include_once '../view/zoocriaderos/ConsultarZoocriaderos.php';
     }
 }
