@@ -2,10 +2,8 @@
 
     <div class="row mb-3">
         <div class="col-md-4 mb-3">
-            <input type="text" class="form-control" placeholder="Buscar...">
-        </div>
-        <div class="col-md-4">
-            <button class="btn btn-primary w-100">Buscar</button>
+            <input type="text" class="form-control" placeholder="Buscar..." id="filtro"
+                data-url="<?php echo getUrl("Zoocriadero", "Zoocriadero", "filtro", false, pagina: "ajax"); ?>">
         </div>
     </div>
 
@@ -37,7 +35,7 @@
                         <td class="d-flex gap-3">
                             <a id="Consultar"
                                 href="<?= getUrl("Zoocriadero", "Zoocriadero", "consultar", ["id_zoocriadero" => $zoocriadero['id_zoocriadero']]); ?>"
-                                class="btn btn-success">Consultar</a>
+                                class="btn btn-success">Ver Detalle</a>
                             <a id="Actualizar"
                                 href="<?= getUrl("Zoocriadero", "Zoocriadero", "editar", ["id_zoocriadero" => $zoocriadero['id_zoocriadero']]); ?>"
                                 class="btn btn-warning">Editar</a>

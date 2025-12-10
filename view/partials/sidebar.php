@@ -58,6 +58,7 @@
                         </ul>
                     </div>
                 </li>
+                
                 <li class="nav-item">
                     <a data-bs-toggle="collapse" href="#tipotanque">
                         <i class="fas fa-th-large"></i>
