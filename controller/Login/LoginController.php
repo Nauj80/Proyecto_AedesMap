@@ -28,6 +28,7 @@ class LoginController
             $stored_hash = isset($usu['usu_clave']) ? $usu['usu_clave'] : '';
 
             $valid = false;
+            dd($stored_hash);
             if (!empty($stored_hash)) {
                 if (password_verify($usu_clave, $stored_hash)) {
                     $valid = true;
@@ -37,13 +38,11 @@ class LoginController
             }
 
             if ($valid) {
-                $_SESSION['auth'] = "ok";
                 $_SESSION['logueado'] = true;
-
-                // CORREGIDO: Ruta correcta desde web/ajax.php
-                redirect("index.php");
-                return;
             }
+            $_SESSION['auth'] = "ok";
+            redirect("index.php");
+            return;
         }
 
         $_SESSION['error'] = "Documento o contraseña incorrectos";

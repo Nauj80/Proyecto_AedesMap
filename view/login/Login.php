@@ -82,7 +82,7 @@ if (isset($_SESSION['auth']) && $_SESSION['auth'] == "ok") {
 
                 <div class="mb-3">
                     <label class="form-label">Contraseña</label>
-                    <input type="password" name="contrasena" class="form-control" placeholder="Ingresa tu contraseña"
+                    <input type="password" name="usu_clave" class="form-control" placeholder="Ingresa tu contraseña"
                         required>
                 </div>
 
