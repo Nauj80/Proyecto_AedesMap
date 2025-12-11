@@ -47,7 +47,7 @@ if (isset($_SESSION['auth']) && $_SESSION['auth'] == "ok") {
         <div class="login-box">
 
             <div class="text-center mb-4">
-                <h2 class="fw-bold text-primary">🦟 AedesMap</h2>
+                <img src="../../web/assets/img/kaiadmin/logo.png" alt="Logo" width="180">
             </div>
 
             <h3 class="text-center mb-4">Inicio de Sesión</h3>
