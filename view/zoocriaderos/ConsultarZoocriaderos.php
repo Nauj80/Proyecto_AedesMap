@@ -1,3 +1,6 @@
+<?php
+include_once 'modales/verDetalle.php';
+?>
 <div class="container mt-4">
 
     <div class="row mb-3">
@@ -33,11 +36,12 @@
                         <td><?= $zoocriadero['barrio'] ?></td>
                         <td><?= $zoocriadero['correo'] ?></td>
                         <td class="d-flex gap-3">
-                            <a class="btn btn-success" id="verDetalle"
-                                href="<?= getUrl("Zoocriadero", "Zoocriadero", "verDetalle", array("id_zoocriadero" => $zoocriadero['id_zoocriadero'], "id_usuario" => $zoocriadero['id_usuario'])); ?> data-url="
-                                <?php echo getUrl("Zoocriadero", "Zoocriadero", "listar", false, pagina: "ajax"); ?>">Ver
-                                Detalle</a>
-                            <a id="Actualizar"
+                            <button type="button" class="btn btn-success btn-ver-detalle" data-bs-toggle="modal"
+                                data-bs-target="#modalVerDetalle"
+                                data-url="<?= getUrl("Zoocriadero", "Zoocriadero", "verDetalle", array("id_zoocriadero" => $zoocriadero['id_zoocriadero']), "ajax"); ?>">
+                                Ver Detalle
+                            </button>
+                            <a id=" Actualizar"
                                 href="<?= getUrl("Zoocriadero", "Zoocriadero", "editar", ["id_zoocriadero" => $zoocriadero['id_zoocriadero']]); ?>"
                                 class="btn btn-warning">Editar</a>
                             <a id="Inhabilitar"
@@ -52,8 +56,3 @@
         </table>
     </div>
 </div>
-<?php
-include_once '../view/zoocriaderos/modales/verDetalle.php';
-include_once '../view/zoocriaderos/modales/formEditar.php';
-
-?>

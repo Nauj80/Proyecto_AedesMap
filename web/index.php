@@ -1,13 +1,6 @@
 <?php
-// web/index.php
 include_once '../lib/helpers.php';
-
-// Verificar si está logueado
-if(!isset($_SESSION['auth']) || $_SESSION['auth'] != "ok") {
-    header("Location: ../view/login/Login.php");
-    exit();
-}
-
+include_once '../lib/helpersLogin.php';
 include_once '../view/partials/header.php';
 
 echo "<body>";

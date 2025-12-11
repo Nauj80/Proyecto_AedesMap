@@ -1,13 +1,8 @@
 <?php
 // view/login/Login.php
-include_once("../../lib/helpers.php");
-
-// Si ya está logueado, redirigir
-if (isset($_SESSION['auth']) && $_SESSION['auth'] == "ok") {
-    header("Location: ../../web/index.php");
-    exit();
-}
+include_once("../lib/helpers.php");
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -47,7 +42,7 @@ if (isset($_SESSION['auth']) && $_SESSION['auth'] == "ok") {
         <div class="login-box">
 
             <div class="text-center mb-4">
-                <img src="../../web/assets/img/kaiadmin/logo.png" alt="Logo" width="180">
+                <img src="../web/assets/img/kaiadmin/logo.png" alt="Logo" width="180">
             </div>
 
             <h3 class="text-center mb-4">Inicio de Sesión</h3>
@@ -61,19 +56,8 @@ if (isset($_SESSION['auth']) && $_SESSION['auth'] == "ok") {
                     <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                 </div>
             <?php endif; ?>
-
-            <?php if (isset($_SESSION['success'])): ?>
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <?php
-                    echo $_SESSION['success'];
-                    unset($_SESSION['success']);
-                    ?>
-                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                </div>
-            <?php endif; ?>
-
             <!-- CORREGIDO: La ruta correcta al ajax.php -->
-            <form action="../../web/ajax.php?modulo=Login&controlador=Login&funcion=login" method="POST">
+            <form action="<?= getUrl("Login", "Login", "login", false, "ajax"); ?>" method="POST">
                 <div class="mb-3">
                     <label class="form-label">Número de documento</label>
                     <input type="text" class="form-control" placeholder="Ingresa tu documento" name="documento"

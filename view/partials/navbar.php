@@ -278,7 +278,9 @@
 								<div class="dropdown-divider"></div>
 								<a class="dropdown-item" href="#">Account Setting</a>
 								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="<?php session_destroy() ?>">Logout</a>
+								<a class="dropdown-item" href="<?php
+								echo getUrl("Login", "Login", "logout");
+								?>">Cerrar Sesion</a>
 							</li>
 						</div>
 					</ul>
@@ -286,5 +288,4 @@
 			</ul>
 		</div>
 	</nav>
-	<!-- End Navbar -->
 </div>

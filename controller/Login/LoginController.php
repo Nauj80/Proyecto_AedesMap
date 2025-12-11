@@ -1,5 +1,4 @@
 <?php
-// controller/Login/LoginController.php
 
 include_once("../model/Login/loginModel.php");
 
@@ -12,7 +11,7 @@ class LoginController
         // Validar que vengan los datos
         if (!isset($_POST['documento']) || !isset($_POST['usu_clave'])) {
             $_SESSION['error'] = "Documento y contraseña son obligatorios";
-            redirect("../view/login/Login.php");
+            redirect("Login.php");
             return;
         }
 
@@ -41,15 +40,13 @@ class LoginController
 
         // Si falla
         $_SESSION['error'] = "Documento o contraseña incorrectos";
-        redirect("../view/login/Login.php");
+        redirect("Login.php");
     }
 
     public function logout()
     {
-        session_start();
-        $_SESSION = array();
         session_destroy();
-        redirect("../view/login/Login.php");
+        redirect("Login.php");
     }
 }
 ?>
