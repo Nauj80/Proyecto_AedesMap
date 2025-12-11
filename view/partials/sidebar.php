@@ -46,27 +46,19 @@
                         <ul class="nav nav-collapse">
                             <li>
                                 <a href="components/avatars.html">
-                                    <span class="sub-item">Avatars</span>
+                                    <span class="sub-item">Registrar Zoocriadero</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="components/buttons.html">
-                                    <span class="sub-item">Buttons</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="components/gridsystem.html">
-                                    <span class="sub-item">Grid System</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="components/panels.html">
-                                    <span class="sub-item">Panels</span>
+                                <a href="<?php echo getUrl("Zoocriadero", "Zoocriadero", "listar"); ?>">
+
+                                    <span class="sub-item">Consultar Zoocriaderos</span>
                                 </a>
                             </li>
                         </ul>
                     </div>
                 </li>
+                
                 <li class="nav-item">
                     <a data-bs-toggle="collapse" href="#tipotanque">
                         <i class="fas fa-th-large"></i>
