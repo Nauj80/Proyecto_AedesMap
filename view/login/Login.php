@@ -77,13 +77,12 @@ if (isset($_SESSION['auth']) && $_SESSION['auth'] == "ok") {
                 <div class="mb-3">
                     <label class="form-label">Número de documento</label>
                     <input type="text" class="form-control" placeholder="Ingresa tu documento" name="documento"
-                        required>
+                        minlength="9" maxlength="11" required>
                 </div>
-
                 <div class="mb-3">
                     <label class="form-label">Contraseña</label>
-                    <input type="password" name="usu_clave" class="form-control" placeholder="Ingresa tu contraseña"
-                        required>
+                    <input type="password" class="form-control" placeholder="Ingresa tu clave" name="usu_clave"
+                        minlength="8" required>
                 </div>
 
                 <div class="d-grid mb-3">
