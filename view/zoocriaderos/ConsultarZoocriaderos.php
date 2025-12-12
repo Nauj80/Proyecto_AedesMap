@@ -1,5 +1,6 @@
 <?php
 include_once 'modales/verDetalle.php';
+include_once 'modales/editar.php';
 ?>
 <div class="container mt-4">
 
@@ -21,7 +22,14 @@ include_once 'modales/verDetalle.php';
                     <th>Telefono</th>
                     <th>Barrio</th>
                     <th>Correo</th>
-                    <th>Acciones</th>
+                    <?php
+                    //mirar si tiene algunas de las aciones que estan por dentro si no para no mostrar nada
+                    if (tieneAccion("Zoocriaderos", "Ver_detalle") || tieneAccion("Zoocriaderos", "Editar") || tieneAccion("Zoocriaderos", "Inhabilitar")) {
+                        ?>
+                        <th>Acciones</th>
+                        <?php
+                    }
+                    ?>
                 </tr>
             </thead>
             <tbody>
@@ -35,19 +43,39 @@ include_once 'modales/verDetalle.php';
                         <td><?= $zoocriadero['telefono'] ?></td>
                         <td><?= $zoocriadero['barrio'] ?></td>
                         <td><?= $zoocriadero['correo'] ?></td>
-                        <td class="d-flex gap-3">
-                            <button type="button" class="btn btn-success btn-ver-detalle" data-bs-toggle="modal"
-                                data-bs-target="#modalVerDetalle"
-                                data-url="<?= getUrl("Zoocriadero", "Zoocriadero", "verDetalle", array("id_zoocriadero" => $zoocriadero['id_zoocriadero']), "ajax"); ?>">
-                                Ver Detalle
-                            </button>
-                            <a id=" Actualizar"
-                                href="<?= getUrl("Zoocriadero", "Zoocriadero", "editar", ["id_zoocriadero" => $zoocriadero['id_zoocriadero']]); ?>"
-                                class="btn btn-warning">Editar</a>
-                            <a id="Inhabilitar"
-                                href="<?= getUrl("Zoocriadero", "Zoocriadero", "Inhabilitar", ["id_zoocriadero" => $zoocriadero['id_zoocriadero']]); ?>"
-                                class="btn btn-danger">Inhabilitar</a>
-                        </td>
+                        <?php
+                        //mirar si tiene algunas de las aciones que estan por dentro si no para no mostrar nada
+                        if (tieneAccion("Zoocriaderos", "Ver_detalle") || tieneAccion("Zoocriaderos", "Editar") || tieneAccion("Zoocriaderos", "Inhabilitar")) {
+                            ?>
+                            <td class="d-flex gap-3">
+                                <?php
+                                if (tieneAccion("Zoocriaderos", "Ver_detalle")) {
+                                    ?>
+                                    <button type="button" class="btn btn-success btn-ver-detalle" data-bs-toggle="modal"
+                                        data-bs-target="#modalVerDetalle"
+                                        data-url="<?= getUrl("Zoocriadero", "Zoocriadero", "verDetalle", array("id_zoocriadero" => $zoocriadero['id_zoocriadero']), "ajax"); ?>">
+                                        Ver Detalle
+                                    </button>
+                                <?php } ?>
+                                <?php
+                                if (tieneAccion("Zoocriaderos", "Editar")) {
+
+                                    ?>
+                                    <button type="button" class="btn btn-warning btn-Editar" data-bs-toggle="modal"
+                                        data-bs-target="#modalEditarZoocriadero"
+                                        data-url="<?= getUrl("Zoocriadero", "Zoocriadero", "editar", array("id_zoocriadero" => $zoocriadero['id_zoocriadero']), "ajax"); ?>">
+                                        Editar
+                                    </button>
+                                <?php } ?>
+                                <?php
+                                if (tieneAccion("Zoocriaderos", "Inhabilitar")) {
+                                    ?>
+                                    <a id="Inhabilitar"
+                                        href="<?= getUrl("Zoocriadero", "Zoocriadero", "Inhabilitar", ["id_zoocriadero" => $zoocriadero['id_zoocriadero']]); ?>"
+                                        class="btn btn-danger">Inhabilitar</a>
+                                <?php } ?>
+                            </td>
+                        <?php } ?>
                     </tr>
                     <?php
                 }

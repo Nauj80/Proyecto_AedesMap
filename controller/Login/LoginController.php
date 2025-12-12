@@ -35,6 +35,13 @@ class LoginController
                 $_SESSION['auth'] = "ok";
                 $this->contruirPermisos();
                 $this->permisos($id_rol);
+                $_SESSION['usuario'] = [
+                    'documento' => $usu['documento'],
+                    'nombre' => $usu['nombre'],
+                    'apellido' => $usu['apellido'],
+                    'telefono' => $usu['telefono'],
+                    'correo' => $usu['correo']
+                ];
                 redirect("index.php");
                 return;
             }

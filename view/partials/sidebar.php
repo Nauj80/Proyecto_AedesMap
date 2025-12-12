@@ -48,17 +48,25 @@
                         ?>
                         <div class="collapse" id="zoocriadero">
                             <ul class="nav nav-collapse">
-                                <li>
-                                    <a href="components/avatars.html">
-                                        <span class="sub-item">Registrar Zoocriadero</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="<?php echo getUrl("Zoocriadero", "Zoocriadero", "listar"); ?>">
+                                <?php
+                                if (tienePermiso("Zoocriaderos", "Registrar")) {
+                                    ?>
+                                    <li>
+                                        <a href="components/avatars.html">
+                                            <span class="sub-item">Registrar Zoocriadero</span>
+                                        </a>
+                                    </li>
+                                <?php } ?>
+                                <?php
+                                if (tienePermiso("Zoocriaderos", "Consultar")) {
+                                    ?>
+                                    <li>
+                                        <a href="<?php echo getUrl("Zoocriadero", "Zoocriadero", "listar"); ?>">
 
-                                        <span class="sub-item">Consultar Zoocriaderos</span>
-                                    </a>
-                                </li>
+                                            <span class="sub-item">Consultar Zoocriaderos</span>
+                                        </a>
+                                    </li>
+                                <?php } ?>
                             </ul>
                         </div>
                         <?php
@@ -256,27 +264,34 @@
                     <?php
                 }
                 ?>
-                <li class="nav-item">
-                    <a data-bs-toggle="collapse" href="#reportes">
-                        <i class="fas fa-newspaper"></i>
-                        <p>Reportes</p>
-                        <span class="caret"></span>
-                    </a>
-                    <div class="collapse" id="reportes">
-                        <ul class="nav nav-collapse">
-                            <li>
-                                <a href="charts/charts.html">
-                                    <span class="sub-item">Chart Js</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="charts/sparkline.html">
-                                    <span class="sub-item">Sparkline</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
+                <?php
+                if (tieneModulo("Reportes")) {
+
+                    ?>
+                    <li class="nav-item">
+                        <a data-bs-toggle="collapse" href="#reportes">
+                            <i class="fas fa-newspaper"></i>
+                            <p>Reportes</p>
+                            <span class="caret"></span>
+                        </a>
+                        <div class="collapse" id="reportes">
+                            <ul class="nav nav-collapse">
+                                <li>
+                                    <a href="charts/charts.html">
+                                        <span class="sub-item">Chart Js</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="charts/sparkline.html">
+                                        <span class="sub-item">Sparkline</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <?php
+                }
+                ?>
                 <li class="nav-item">
                     <a data-bs-toggle="collapse" href="#info">
                         <i class="fas fa-info"></i>
