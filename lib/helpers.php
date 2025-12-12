@@ -8,6 +8,26 @@ function redirect($url)
         "</script>";
 
 }
+function tieneModulo($modulo)
+{
+    return isset($_SESSION['modulos'])
+        && in_array($modulo, $_SESSION['modulos']);
+}
+
+function tieneAccion($modulo, $accion)
+{
+    return isset($_SESSION['acciones'][$modulo])
+        && in_array($accion, $_SESSION['acciones'][$modulo]);
+}
+
+function tienePermiso($modulo, $accion)
+{
+    $permiso = $modulo . ":" . $accion;
+
+    return isset($_SESSION['permisos'])
+        && in_array($permiso, $_SESSION['permisos']);
+}
+
 function dd($var)
 {
     echo "<pre>";

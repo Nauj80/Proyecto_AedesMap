@@ -26,13 +26,15 @@ class LoginController
         if ($resultado && pg_num_rows($resultado) > 0) {
 
             $usu = pg_fetch_assoc($resultado);
-
+            $id_rol = $usu['id_rol'];
             // Obtener el hash almacenado
             $stored_hash = $usu['contrasena'];
 
             // Verificar usando bcrypt
             if (password_verify($usu_clave, $stored_hash)) {
                 $_SESSION['auth'] = "ok";
+                $this->contruirPermisos();
+                $this->permisos($id_rol);
                 redirect("index.php");
                 return;
             }
@@ -47,6 +49,52 @@ class LoginController
     {
         session_destroy();
         redirect("Login.php");
+    }
+
+    private function permisos($id_rol)
+    {
+        $sql = "
+            SELECT 
+            r.id_rol,
+            r.nombre AS rol,
+            m.id_modulo,
+            m.nombre AS modulo,
+            a.id_accion,
+            a.nombre AS accion
+            FROM permisos p
+            INNER JOIN roles r        ON p.id_rol = r.id_rol
+            INNER JOIN modulos m      ON p.id_modulo = m.id_modulo
+            INNER JOIN acciones a     ON p.id_accion = a.id_accion
+            WHERE p.id_rol = $id_rol
+            ORDER BY m.nombre, a.nombre";
+
+        $obj = new LoginModel();
+        $result = $obj->select($sql);
+
+        while ($row = pg_fetch_assoc($result)) {
+
+            $modulo = $row['modulo'];
+            $accion = $row['accion'];
+
+            // Guardar módulo
+            if (!in_array($modulo, $_SESSION['modulos'])) {
+                $_SESSION['modulos'][] = $modulo;
+            }
+
+            // Guardar acción por módulo
+            $_SESSION['acciones'][$modulo][] = $accion;
+
+            // Guardar permisos (módulo + acción)
+            $_SESSION['permisos'][] = $modulo . ":" . $accion;
+        }
+
+    }
+    private function contruirPermisos()
+    {
+        $_SESSION['modulos'] = [];
+        $_SESSION['acciones'] = [];
+        $_SESSION['permisos'] = [];
+
     }
 }
 ?>
