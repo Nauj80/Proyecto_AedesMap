@@ -1,3 +1,5 @@
+<<<<<<< Updated upstream
+=======
 <?php
 
 include_once '../model/TipoTanques/TipoTanquesModel.php';
@@ -15,9 +17,9 @@ class TipoTanquesController
         $objeto = new TipoTanquesModel();
         $nombre = $_POST['nombreTipoTanque'];
 
-        $id = $objeto->autoIncrement("tipo_tanque", "id");
+        $id = $objeto->autoIncrement("tipo_tanque", "id_tipo_tanque");
 
-        $sql = "INSERT INTO tipo_tanque VALUES($id, '$nombre', 1)";
+        $sql = "INSERT INTO tipo_tanque VALUES($id, 1, '$nombre')";
 
         $ejecutar = $objeto->insert($sql);
 
@@ -27,6 +29,7 @@ class TipoTanquesController
             jsonResponse(false, "No se pudo registrar el tipo de tanque");
         }
     }
+
     public function list()
     {
         $objeto = new TipoTanquesModel();
@@ -52,12 +55,12 @@ class TipoTanquesController
         }
 
         // Obtener el total de registros
-        $sqlTotal = 'SELECT COUNT(*) as total FROM tipo_tanque tt, estado_tipo_tanque ett WHERE tt.id_estado = ett.id';
+        $sqlTotal = 'SELECT COUNT(*) as total FROM tipo_tanque tt, estado_tipo_tanque ett WHERE tt.id_estado_tipo_tanque = ett.id_estado_tipo_tanque';
         $resultTotal = $objeto->select($sqlTotal);
         $totalRegistros = pg_fetch_assoc($resultTotal)['total'];
 
         // Obtener los registros de la página actual
-        $sql = 'SELECT tt.*, ett.nombre AS estado FROM tipo_tanque tt, estado_tipo_tanque ett WHERE tt.id_estado = ett.id ORDER BY ' . $sortColumn . ' ' . $sortOrder . ' LIMIT ' . $registrosPorPagina . ' OFFSET ' . $offset;
+        $sql = 'SELECT tt.*, ett.nombre AS estado FROM tipo_tanque tt, estado_tipo_tanque ett WHERE tt.id_estado_tipo_tanque = ett.id_estado_tipo_tanque ORDER BY ' . $sortColumn . ' ' . $sortOrder . ' LIMIT ' . $registrosPorPagina . ' OFFSET ' . $offset;
         $tipoTanques = $objeto->select($sql);
 
         // Calcular total de páginas
@@ -75,7 +78,7 @@ class TipoTanquesController
         $objeto = new TipoTanquesModel();
         $id = $_GET['id'];
 
-        $sql = "SELECT * FROM tipo_tanque WHERE id = $id";
+        $sql = "SELECT * FROM tipo_tanque WHERE id_tipo_tanque = $id";
 
         $tipoTanque = $objeto->select($sql);
 
@@ -90,7 +93,7 @@ class TipoTanquesController
         $nombre = $_POST['nombreTipoTanque'];
 
 
-        $sql = "UPDATE tipo_tanque SET nombre = '$nombre' WHERE id = $id";
+        $sql = "UPDATE tipo_tanque SET nombre = '$nombre' WHERE id_tipo_tanque = $id";
 
         $ejecutar = $obj->update($sql);
 
@@ -104,7 +107,7 @@ class TipoTanquesController
     {
         $objeto = new TipoTanquesModel();
         $id = $_GET['id'];
-        $sql = "SELECT * FROM tipo_tanque WHERE id = $id";
+        $sql = "SELECT * FROM tipo_tanque WHERE id_tipo_tanque = $id";
 
         $tipoTanque = $objeto->select($sql);
 
@@ -116,7 +119,7 @@ class TipoTanquesController
         $objeto = new TipoTanquesModel();
         $id = $_POST['id'];
 
-        $sql = "UPDATE tipo_tanque SET id_estado = 2 WHERE id = $id";
+        $sql = "UPDATE tipo_tanque SET id_estado_tipo_tanque = 2 WHERE id_tipo_tanque = $id";
         $tipoTanque = $objeto->update($sql);
 
         if ($tipoTanque) {
@@ -130,7 +133,7 @@ class TipoTanquesController
     {
         $objeto = new TipoTanquesModel();
         $id = $_POST['id'];
-        $sql = "UPDATE tipo_tanque SET id_estado = 1 where id = $id";
+        $sql = "UPDATE tipo_tanque SET id_estado_tipo_tanque = 1 where id_tipo_tanque = $id";
         $tipoTanque = $objeto->update($sql);
         if ($tipoTanque) {
             jsonResponse(true, "Tipo de tanque habilitado correctamente", ['redirect' => getUrl("TipoTanques", "TipoTanques", "list")]);
@@ -139,3 +142,4 @@ class TipoTanquesController
         }
     }
 }
+>>>>>>> Stashed changes

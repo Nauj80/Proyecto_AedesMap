@@ -44,7 +44,7 @@ include_once '../view/partials/header.php';
                                 <div class="col-md-4 ms-auto me-auto">
                                     <div class="form-group">
                                         <label for="nombreTipoTanque">Nombre</label>
-                                        <input type="text" class="form-control" name="id" value="<?php echo $tt['id'] ?>" hidden>
+                                        <input type="text" class="form-control" name="id" value="<?php echo $tt['id_tipo_tanque'] ?>" hidden>
                                         <input type="text" class="form-control" name="nombreTipoTanque" id="nombreTipoTanque" placeholder="Ingrese un nombre para el tipo de tanque" value="<?php echo $tt['nombre'] ?>">
                                     </div>
                                 </div>
