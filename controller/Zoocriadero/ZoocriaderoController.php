@@ -88,7 +88,7 @@ class ZoocriaderoController
             } elseif (strpos($error_msg, 'correo') !== false && strpos($error_msg, 'llave duplicada') !== false) {
                 $_SESSION['error'] = 'Ya existe un zoocriadero con ese correo electrónico.';
             } else {
-                $_SESSION['error'] = 'Error al actualizar el zoocriadero: ' . $error_msg;
+                $_SESSION['error'] = 'Error al actualizar el zoocriadero';
             }
         }
 
@@ -113,6 +113,23 @@ class ZoocriaderoController
             } else {
                 echo json_encode(['success' => false, 'message' => 'Error al cambiar el estado del zoocriadero.']);
             }
+        }
+    }
+    public function registrar()
+    {
+        $objeto = new ZoocriaderoModel();
+        $sqlTipoTanque = "SELECT * FROM tipo_tanque WHERE id_estado_tipo_tanque = 1";
+        $tipoTanque = $objeto->select($sqlTipoTanque);
+        $tiposTanque = pg_fetch_all($tipoTanque);
+        include_once '../view/zoocriaderos/RegistrarZoocriadero.php';
+    }
+    public function guardar()
+    {
+        $objeto = new ZoocriaderoModel();
+        // Aquí iría la lógica para guardar un nuevo zoocriadero
+        // Recoger datos del formulario, validar, y luego insertar en la base de datos
+        if (isset($_SESSION['GuardadarZoocriadero'])) {
+            dd($_SESSION['GuardadarZoocriadero']);
         }
     }
 }

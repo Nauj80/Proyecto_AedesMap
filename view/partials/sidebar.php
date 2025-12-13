@@ -49,10 +49,10 @@
                         <div class="collapse" id="zoocriadero">
                             <ul class="nav nav-collapse">
                                 <?php
-                                if (tienePermiso("Zoocriaderos", "Registrar")) {
+                                if (tienePermiso("Zoocriaderos", "Crear")) {
                                     ?>
                                     <li>
-                                        <a href="components/avatars.html">
+                                        <a href="<?= getUrl("Zoocriadero", "Zoocriadero", "registrar") ?>">
                                             <span class="sub-item">Registrar Zoocriadero</span>
                                         </a>
                                     </li>
