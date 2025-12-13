@@ -40,6 +40,9 @@ include_once '../view/partials/header.php';
                             <div class="card-title">Eliminar tipo de tanque</div>
                         </div>
                         <div class="card-body">
+                            <div class="alert alert-danger" role="alert">
+                                ¿Seguro que desea eliminar el Tipo de Tanque: <strong> <?php echo $tt['nombre'] ?></strong> ?
+                            </div>
                             <div class="row">
                                 <div class="col-md-4 ms-auto me-auto">
                                     <div class="form-group">

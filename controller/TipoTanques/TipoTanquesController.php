@@ -1,5 +1,3 @@
-<<<<<<< Updated upstream
-=======
 <?php
 
 include_once '../model/TipoTanques/TipoTanquesModel.php';
@@ -142,4 +140,3 @@ class TipoTanquesController
         }
     }
 }
->>>>>>> Stashed changes

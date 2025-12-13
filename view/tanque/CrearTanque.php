@@ -41,7 +41,7 @@ include_once '../view/partials/header.php';
                             <div class="col-md-6 col-lg-6">
                                 <div class="form-group">
                                     <label for="zoocriadero">Zoocriadero</label>
-                                    <select class="form-select" id="zoocriadero" name="zoocriadero" required>
+                                    <select class="form-select form-control" id="zoocriadero" name="zoocriadero" required>
                                         <option value="">Seleccione...</option>
                                         <?php
                                         while ($zoo = pg_fetch_assoc($zoocriadero)) {
@@ -53,7 +53,7 @@ include_once '../view/partials/header.php';
                                 </div>
                                 <div class="form-group">
                                     <label for="tipoTanque">Tipo de tanque</label>
-                                    <select class="form-select" id="tipoTanque" name="tipoTanque" required>
+                                    <select class="form-select form-control" id="tipoTanque" name="tipoTanque" required>
                                         <option value="">Seleccione...</option>
                                         <?php
                                         while ($tipoT = pg_fetch_assoc($tipoTanque)) {
@@ -93,5 +93,3 @@ include_once '../view/partials/header.php';
         </div>
     </div>
 </body>
-
-</html>

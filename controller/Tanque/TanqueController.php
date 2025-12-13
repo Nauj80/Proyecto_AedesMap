@@ -91,8 +91,13 @@ class TanqueController
         $id = $_GET['id'];
 
         $sql = "SELECT * FROM tanques WHERE id_tanque = $id";
-
         $Tanque = $objeto->select($sql);
+
+        $sql = "SELECT * FROM zoocriaderos";
+        $zoocriadero = $objeto->select($sql);
+
+        $sql = "SELECT * FROM tipo_tanque";
+        $tipoTanque = $objeto->select($sql);
 
         include_once '../view/tanque/EditarTanque.php';
     }
@@ -109,7 +114,7 @@ class TanqueController
         $anchoTanque = $_POST['anchoTanque'];
         $profundidadTanque = $_POST['profundidadTanque'];
 
-        $sql = "UPDATE tipo_tanque SET nombre = '$' WHERE id_tipo_tanque = $id";
+        $sql = "UPDATE tanques SET id_zoocriadero = $zoocriadero, id_tipo_tanque = $tipoTanque, cantidad_peces = $cantidadPeces, ancho = $anchoTanque, alto = $altoTanque, profundo = $profundidadTanque WHERE id_tanque = $id";
 
         $ejecutar = $obj->update($sql);
 
@@ -124,8 +129,13 @@ class TanqueController
         $objeto = new TanquesModel();
         $id = $_GET['id'];
         $sql = "SELECT * FROM tanques WHERE id_tanque = $id";
-
         $Tanque = $objeto->select($sql);
+
+        $sql = "SELECT * FROM zoocriaderos";
+        $zoocriadero = $objeto->select($sql);
+
+        $sql = "SELECT * FROM tipo_tanque";
+        $tipoTanque = $objeto->select($sql);
 
         include_once '../view/tanque/EliminarTanque.php';
     }
@@ -139,7 +149,7 @@ class TanqueController
         $tipoTanque = $objeto->update($sql);
 
         if ($tipoTanque) {
-            jsonResponse(true, "Tipo tanque inhabilitado correctamente", ['redirect' => getUrl("TipoTanques", "TipoTanques", "list")]);
+            jsonResponse(true, "Tipo tanque inhabilitado correctamente", ['redirect' => getUrl("Tanque", "Tanque", "list")]);
         } else {
             jsonResponse(false, "Hubo un problema al inhabilitar el tipo de tanque");
         }
