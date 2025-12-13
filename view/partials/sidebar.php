@@ -4,7 +4,7 @@
         <div class="logo-header" data-background-color="dark">
 
             <a href="index.html" class="logo">
-                <img src="assets/img/kaiadmin/logo_light.svg" alt="navbar brand" class="navbar-brand" height="20">
+                <img src="assets/img/kaiadmin/logo_light.svg" alt="navbar brand" class="navbar-brand" height="35">
             </a>
             <div class="nav-toggle">
                 <button class="btn btn-toggle toggle-sidebar">
@@ -118,8 +118,13 @@
                     <div class="collapse" id="tipoactividades">
                         <ul class="nav nav-collapse">
                             <li>
-                                <a href="forms/forms.html">
-                                    <span class="sub-item">Basic Form</span>
+                                <a href="<?php echo getUrl("TipoActividades","TipoActividades","create")?>">
+                                    <span class="sub-item">Registro de actividad</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="<?php echo getUrl("TipoActividades","TipoActividades","list")?>">
+                                    <span class="sub-item">Lista de actividades</span>
                                 </a>
                             </li>
                         </ul>
@@ -131,16 +136,17 @@
                         <p>Actividades en tanques</p>
                         <span class="caret"></span>
                     </a>
+                    
                     <div class="collapse" id="actividades">
                         <ul class="nav nav-collapse">
                             <li>
-                                <a href="tables/tables.html">
-                                    <span class="sub-item">Basic Table</span>
+                                 <a href="<?php echo getUrl("ActividadesSeguimiento","Actividades","create")?>">
+                                    <span class="sub-item">Registro de seguimiento</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="tables/datatables.html">
-                                    <span class="sub-item">Datatables</span>
+                                <a href="<?php echo getUrl("ActividadesSeguimiento","Actividades","list")?>">
+                                    <span class="sub-item">Lista de seguimientos</span>
                                 </a>
                             </li>
                         </ul>
@@ -231,7 +237,7 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a data-bs-toggle="collapse" href="#info">
+                    <a data-bs-toggle="collapse" href="info.php">
                         <i class="fas fa-info"></i>
                         <p>Sobre AedesMap</p>
                     </a>
