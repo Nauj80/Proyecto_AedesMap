@@ -16,7 +16,7 @@ class ZoocriaderoController
     public function filtro()
     {
         $objeto = new ZoocriaderoModel();
-        $buscar = pg_escape_string($objeto->getConnect(), $_GET['buscar']);
+        $buscar = $_GET['buscar'];
 
         $sql = "SELECT zoocriaderos.*, usuarios.nombre AS nombre_usuario FROM zoocriaderos INNER JOIN usuarios ON zoocriaderos.id_usuario = usuarios.id_usuario WHERE (nombre_zoocriadero LIKE '%$buscar%' OR direccion LIKE '%$buscar%' OR usuarios.nombre LIKE '%$buscar%' OR barrio LIKE '%$buscar%');";
         $zoo = $objeto->select($sql);
@@ -29,7 +29,7 @@ class ZoocriaderoController
         $objeto = new ZoocriaderoModel();
 
         if (isset($_GET['id_zoocriadero'])) {
-            $id = intval($_GET['id_zoocriadero']);
+            $id = $_GET['id_zoocriadero'];
 
             $sql = "SELECT zoocriaderos.*, usuarios.nombre AS nombre_usuario 
                 FROM zoocriaderos 
@@ -48,7 +48,7 @@ class ZoocriaderoController
         $objeto = new ZoocriaderoModel();
 
         if (isset($_GET['id_zoocriadero'])) {
-            $id = intval($_GET['id_zoocriadero']);
+            $id = $_GET['id_zoocriadero'];
 
             $sql = "SELECT zoocriaderos.*, usuarios.nombre AS nombre_usuario 
                 FROM zoocriaderos 
