@@ -5,7 +5,18 @@
         
         public function select($sql){
             $result = pg_query($this->getConnect(),$sql);
-            return $result;
+
+            if(!$result){
+                echo "Error: Could not execute query";
+                return [];
+            }
+            
+            $data = [];
+            while ($row = pg_fetch_assoc($result)) {
+                $data[] = $row;
+            }
+ 
+            return $data;
         }
 
         public function insert($sql){
