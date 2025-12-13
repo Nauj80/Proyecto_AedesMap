@@ -4,7 +4,7 @@
         <div class="logo-header" data-background-color="dark">
 
             <a href="index.html" class="logo">
-                <img src="assets/img/kaiadmin/logo_light.svg" alt="navbar brand" class="navbar-brand" height="35">
+                <img src="assets/img/kaiadmin/logo_light.svg" alt="navbar brand" class="navbar-brand" height="20">
             </a>
             <div class="nav-toggle">
                 <button class="btn btn-toggle toggle-sidebar">
@@ -293,7 +293,7 @@
                 }
                 ?>
                 <li class="nav-item">
-                    <a data-bs-toggle="collapse" href="info.php">
+                    <a data-bs-toggle="collapse" href="#info">
                         <i class="fas fa-info"></i>
                         <p>Sobre AedesMap</p>
                     </a>
