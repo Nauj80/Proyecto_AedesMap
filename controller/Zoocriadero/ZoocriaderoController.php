@@ -18,7 +18,7 @@ class ZoocriaderoController
         $objeto = new ZoocriaderoModel();
         $buscar = $_GET['buscar'];
 
-        $sql = "SELECT zoocriaderos.*, usuarios.nombre AS nombre_usuario FROM zoocriaderos INNER JOIN usuarios ON zoocriaderos.id_usuario = usuarios.id_usuario WHERE (nombre_zoocriadero LIKE '%$buscar%' OR direccion LIKE '%$buscar%' OR usuarios.nombre LIKE '%$buscar%' OR barrio LIKE '%$buscar%');";
+        $sql = "SELECT zoocriaderos.*, usuarios.nombre AS nombre_usuario FROM zoocriaderos INNER JOIN usuarios ON zoocriaderos.id_usuario = usuarios.id_usuario WHERE (nombre_zoocriadero ILIKE '%$buscar%' OR direccion ILIKE '%$buscar%' OR usuarios.nombre ILIKE '%$buscar%' OR barrio ILIKE '%$buscar%')";
         $zoo = $objeto->select($sql);
         $zooCria = pg_fetch_all($zoo);
         include_once '../view/zoocriaderos/Filtro.php';
@@ -95,20 +95,25 @@ class ZoocriaderoController
         // Redirigir de vuelta a la lista
         redirect(getUrl("Zoocriadero", "Zoocriadero", "listar"));
     }
-    /*
-                public function inhabilitar()
-                {
-                    $objeto = new ZoocriaderoModel();
-                    $id = $_POST['id_zoocriadero'];
+    public function inhabilitar()
+    {
+        $objeto = new ZoocriaderoModel();
 
-                    $sql = "UPDATE zoocriaderos SET estado = 'inactivo' WHERE id_zoocriadero = $id";
-                    $result = $objeto->update($sql);
+        if (isset($_GET['id_zoocriadero']) && isset($_GET['estado'])) {
+            $id = $_GET['id_zoocriadero'];
+            $estado_actual = $_GET['estado'];
+            $nuevo_estado = $estado_actual == 1 ? 2 : 1; // 1=activo, 2=inactivo
 
-                    if ($result) {
-                        echo json_encode(['success' => true]);
-                    } else {
-                        echo json_encode(['success' => false]);
-                    }
-                }*/
+            $sql = "UPDATE zoocriaderos SET id_estado_zoocriadero = $nuevo_estado WHERE id_zoocriadero = $id";
+            $result = $objeto->update($sql);
+
+            if ($result) {
+                $accion = $nuevo_estado == 1 ? 'habilitado' : 'inhabilitado';
+                echo json_encode(['success' => true, 'message' => "Zoocriadero $accion correctamente."]);
+            } else {
+                echo json_encode(['success' => false, 'message' => 'Error al cambiar el estado del zoocriadero.']);
+            }
+        }
+    }
 }
 ?>
