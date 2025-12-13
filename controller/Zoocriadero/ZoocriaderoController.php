@@ -254,10 +254,5 @@ class ZoocriaderoController
             error_log($e->getMessage());
         }
     }
-    public function logout()
-    {
-        session_destroy();
-        redirect("Login.php");
-    }
 }
 ?>

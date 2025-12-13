@@ -295,8 +295,7 @@ foreach ($names as $name) {
 								<div class="dropdown-divider"></div>
 								<a class="dropdown-item" href="#">Account Setting</a>
 								<div class="dropdown-divider"></div>
-								<a class="dropdown-item"
-									href="<?= getUrl("Zoocriadero", "Zoocriadero", "logout") ?>">Logout</a>
+								<a class="dropdown-item" href="<?= getUrl("Login", "Login", "logout") ?>">Logout</a>
 							</li>
 						</div>
 					</ul>
