@@ -121,16 +121,143 @@ class ZoocriaderoController
         $sqlTipoTanque = "SELECT * FROM tipo_tanque WHERE id_estado_tipo_tanque = 1";
         $tipoTanque = $objeto->select($sqlTipoTanque);
         $tiposTanque = pg_fetch_all($tipoTanque);
+
+        $sqlusuario = "SELECT * FROM usuarios WHERE id_estado_usuario = 1";
+        $usuario = $objeto->select($sqlusuario);
+        $usuarios = pg_fetch_all($usuario);
+
         include_once '../view/zoocriaderos/RegistrarZoocriadero.php';
     }
     public function guardar()
     {
         $objeto = new ZoocriaderoModel();
-        // Aquí iría la lógica para guardar un nuevo zoocriadero
-        // Recoger datos del formulario, validar, y luego insertar en la base de datos
-        if (isset($_SESSION['GuardadarZoocriadero'])) {
-            dd($_SESSION['GuardadarZoocriadero']);
+
+        try {
+            $nombre = $_POST['nombre'];
+            $barrio = $_POST['barrio'];
+            $comuna = $_POST['comuna'];
+            $direccion = $_POST['direccion'];
+            $telefono = $_POST['telefono'];
+            $correo = $_POST['correo'];
+            $latitud = (float) $_POST['latitud'];
+            $longitud = (float) $_POST['longitud'];
+
+            $id_encargado = (int) $_POST['id_encargado'];
+            $doc_encargado = $_POST['documento_encargado'];
+            $nombres_encargado = $_POST['nombres_encargado'];
+            $apellidos_encargado = $_POST['apellidos_encargado'];
+
+            $tanques = json_decode($_POST['tanques'], true);
+
+            // =========================
+            // 2. INICIAR TRANSACCIÓN
+            // =========================
+            pg_query($objeto->getConnect(), "BEGIN");
+
+            // =========================
+            // 3. INSERT ZOOCRIADERO
+            // =========================
+            $sqlZoo = "
+                INSERT INTO zoocriaderos
+                (
+                    id_usuario,
+                    nombre_zoocriadero,
+                    direccion,
+                    telefono,
+                    comuna,
+                    barrio,
+                    correo,
+                    id_estado_zoocriadero,
+                    coordenada
+                )
+                VALUES
+                (
+                    $id_encargado,
+                    '$nombre',
+                    '$direccion',
+                    '$telefono',
+                    '$comuna',
+                    '$barrio',
+                    '$correo',
+                    1,
+                    ST_SetSRID(
+                        ST_MakePoint($longitud, $latitud),
+                        4326
+                    )
+                )
+                RETURNING id_zoocriadero
+            ";
+
+            $resultZoo = $objeto->insert($sqlZoo);
+
+            if (!$resultZoo) {
+                throw new Exception('Error al insertar zoocriadero');
+            }
+
+            $row = pg_fetch_assoc($resultZoo);
+            $id_zoocriadero = $row['id_zoocriadero'];
+
+            // =========================
+            // 4. INSERT TANQUES
+            // =========================
+            foreach ($tanques as $tanque) {
+
+                $id_tipo_tanque = (int) $tanque['tipo'];
+                $cantidad_peces = (int) $tanque['cantidad_peces'];
+                $ancho = (float) $tanque['ancho'];
+                $alto = (float) $tanque['largo'];
+                $profundo = (float) $tanque['profundidad'];
+
+                $sqlTanque = "
+                    INSERT INTO tanques
+                    (
+                        id_zoocriadero,
+                        id_tipo_tanque,
+                        cantidad_peces,
+                        ancho,
+                        alto,
+                        profundo,
+                        id_estado_tanque
+                    )
+                    VALUES
+                    (
+                        $id_zoocriadero,
+                        $id_tipo_tanque,
+                        $cantidad_peces,
+                        $ancho,
+                        $alto,
+                        $profundo,
+                        1
+                    )
+            ";
+
+                if (!$objeto->insert($sqlTanque)) {
+                    throw new Exception('Error al insertar tanque');
+                }
+            }
+
+            // =========================
+            // 5. COMMIT
+            // =========================
+            pg_query($objeto->getConnect(), "COMMIT");
+
+            $_SESSION['success'] = 'Zoocriadero y tanques registrados correctamente';
+
+        } catch (Exception $e) {
+
+            // =========================
+            // 6. ROLLBACK
+            // =========================
+            pg_query($objeto->getConnect(), "ROLLBACK");
+
+            $_SESSION['error'] = 'Ocurrió un error al registrar el zoocriadero, por favor intente de nuevo';
+            error_log($e->getMessage());
         }
+    }
+    public function logout()
+    {
+        session_destroy();
+        redirect("Login.php");
     }
 }
 ?>

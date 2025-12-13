@@ -149,6 +149,7 @@
     }
 </style>
 
+
 <div class="container">
     <div class="form-container">
         <div class="row mb-4">
@@ -157,7 +158,8 @@
             </div>
         </div>
 
-        <form id="formZoocriadero">
+        <form id="formZoocriadero"
+            data-url="<?php echo getUrl("Zoocriadero", "Zoocriadero", "guardar", false, "ajax"); ?>">
             <!-- Información del Zoocriadero -->
             <div class="mb-5">
                 <h4 class="section-title">
@@ -182,8 +184,7 @@
                         <label for="comuna" class="form-label">
                             <i class="fas fa-city"></i> Comuna *
                         </label>
-                        <input type="text" class="form-control" id="comuna" name="comuna" required minlength="3"
-                            maxlength="50" value="Comuna 13" disabled>
+                        <input type="text" class="form-control" id="comuna" name="comuna" value="Comuna 13" readonly>
                     </div>
                     <div class="col-12 mb-3">
                         <label class="form-label">
@@ -273,27 +274,48 @@
                 <h4 class="section-title">
                     <i class="fas fa-user-tie"></i> Información del Encargado
                 </h4>
+
                 <div class="row">
+                    <!-- Documento -->
                     <div class="col-md-4 mb-3">
                         <label for="documentoEncargado" class="form-label">
                             <i class="fas fa-id-card"></i> Documento *
                         </label>
                         <input type="text" class="form-control" id="documentoEncargado" name="documentoEncargado"
-                            required minlength="6" maxlength="15">
+                            list="listaUsuarios" required minlength="6" maxlength="15">
+
+                        <datalist id="listaUsuarios">
+                            <?php foreach ($usuarios as $u): ?>
+                                <option value="<?= $u['documento'] ?>">
+                                    <?= $u['nombre'] . ' ' . $u['apellido'] ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </datalist>
                     </div>
+
+                    <!-- Nombres -->
                     <div class="col-md-4 mb-3">
                         <label for="nombresEncargado" class="form-label">
                             <i class="fas fa-user"></i> Nombres *
                         </label>
-                        <input type="text" class="form-control" id="nombresEncargado" name="nombresEncargado" required
-                            minlength="2" maxlength="50">
+                        <input type="text" class="form-control" id="nombresEncargado" name="nombresEncargado" readonly>
+
+
                     </div>
+                    <div class="col-md-4 mb-3" hidden>
+                        <label for="idEncargado" class="form-label">
+                            <i class="fas fa-user"></i> ID *
+                        </label>
+                        <input type="text" hidden value="" name="idEncargado" id="idEncargado" required>
+                    </div>
+
+                    <!-- Apellidos -->
                     <div class="col-md-4 mb-3">
                         <label for="apellidosEncargado" class="form-label">
                             <i class="fas fa-user"></i> Apellidos *
                         </label>
                         <input type="text" class="form-control" id="apellidosEncargado" name="apellidosEncargado"
-                            required minlength="2" maxlength="50">
+                            readonly>
                     </div>
                 </div>
             </div>
@@ -332,7 +354,99 @@
             </div>
         </form>
     </div>
+    <!-- Modal Success -->
+    <div class="modal fade" id="modalSuccess" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-sm">
+            <div class="modal-content shadow-lg border-0 rounded-4">
+
+                <div class="modal-header bg-success text-white rounded-top-4 border-0">
+                    <h5 class="modal-title fw-bold">
+                        <i class="fas fa-circle-check me-2"></i> Zoocriadero Registrado
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+
+                <div class="modal-body text-center px-4 py-4">
+                    <div class="mb-3">
+                        <i class="fas fa-check-circle text-success" style="font-size: 3rem;"></i>
+                    </div>
+                    <p class="fs-6 text-muted mb-0">
+                        <?= $_SESSION['success'] ?? '' ?>
+                    </p>
+                </div>
+
+                <div class="modal-footer border-0 justify-content-center pb-4">
+                    <button type="button" class="btn btn-success px-4 rounded-pill" data-bs-dismiss="modal">
+                        Aceptar
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Modal Error -->
+    <div class="modal fade" id="modalError" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-sm">
+            <div class="modal-content shadow-lg border-0 rounded-4">
+
+                <div class="modal-header bg-danger text-white rounded-top-4 border-0">
+                    <h5 class="modal-title fw-bold">
+                        <i class="fas fa-triangle-exclamation me-2"></i> Probelma al Registrar
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+
+                <div class="modal-body text-center px-4 py-4">
+                    <div class="mb-3">
+                        <i class="fas fa-xmark-circle text-danger" style="font-size: 3rem;"></i>
+                    </div>
+                    <p class="fs-6 text-muted mb-0">
+                        <?= $_SESSION['error'] ?? '' ?>
+                    </p>
+                </div>
+
+                <div class="modal-footer border-0 justify-content-center pb-4">
+                    <button type="button" class="btn btn-danger px-4 rounded-pill" data-bs-dismiss="modal">
+                        Cerrar
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
 </div>
+<?php if (isset($_SESSION['success'])) { ?>
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                const modal = new bootstrap.Modal(
+                    document.getElementById('modalSuccess')
+                );
+                modal.show();
+            }, 1000); // 2000 ms = 2 segundos
+        });
+    </script>
+    <?php
+    unset($_SESSION['success']);
+} ?>
+
+<?php if (isset($_SESSION['error'])) { ?>
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                const modal = new bootstrap.Modal(
+                    document.getElementById('modalError')
+                );
+                modal.show();
+            }, 1000); // 2 segundos
+        });
+    </script>
+    <?php
+    unset($_SESSION['error']);
+} ?>
 
 <!-- Modal Mapa -->
 <div class="modal fade" id="modalMapa" tabindex="-1" aria-hidden="true">
@@ -352,7 +466,7 @@
                         <label for="latitud" class="form-label">
                             <i class="fas fa-map-pin"></i> Latitud
                         </label>
-                        <input type="text" class="form-control" id="latitud" name="latitud" placeholder="Ej: 3.451647"
+                        <input type="text" class="form-control" id="latitud" name="latitud" placeholder="Ej: 9.451647"
                             readonly>
                     </div>
                     <div class="col-md-6 mb-3">
@@ -360,7 +474,7 @@
                             <i class="fas fa-map-pin"></i> Longitud
                         </label>
                         <input type="text" class="form-control" id="longitud" name="longitud"
-                            placeholder="Ej: -76.531985" readonly>
+                            placeholder="Ej: -16.531985" readonly>
                     </div>
                 </div>
 
@@ -384,7 +498,10 @@
     let numeroTanques = 0;
     let mapa = null;
     let marcador = null;
-    let ubicacionSeleccionada = { lat: 3.451647, lng: -76.531985 };
+    let ubicacionSeleccionada = {
+        lat: +(Math.random() * 20).toFixed(5),          // 0 a 20
+        lng: -+(Math.random() * 70).toFixed(6)          // -0 a -20
+    };
 
     // Actualizar vista previa de dirección en tiempo real
     function actualizarVistaPrevia() {
@@ -581,10 +698,11 @@
         actualizarContador();
     }
 
-    // Submit del formulario
+    // Submit formulario zoocriadero
     document.getElementById('formZoocriadero').addEventListener('submit', function (e) {
         e.preventDefault();
-        console.log('Enviando formulario...');
+
+        let url = $(this).data('url');
         const formData = new FormData(this);
 
         // Construir dirección completa
@@ -596,19 +714,10 @@
                 barrio: formData.get('barrio'),
                 comuna: formData.get('comuna'),
                 direccion: direccionCompleta,
-                direccion_desglosada: {
-                    tipo_via: formData.get('tipoVia'),
-                    numero_via: formData.get('numeroVia'),
-                    numero_placa: formData.get('numeroPlaca'),
-                    complemento: formData.get('complemento'),
-                    adicional: formData.get('adicional') || ''
-                },
                 telefono: formData.get('telefono'),
                 correo: formData.get('correo'),
-                ubicacion: {
-                    latitud: ubicacionSeleccionada.lat,
-                    longitud: ubicacionSeleccionada.lng
-                }
+                latitud: ubicacionSeleccionada.lat,
+                longitud: ubicacionSeleccionada.lng
             },
             encargado: {
                 documento: formData.get('documentoEncargado'),
@@ -618,11 +727,11 @@
             tanques: []
         };
 
+        // Recoger datos de tanques
         const tanques = document.querySelectorAll('.tanque-card');
         tanques.forEach((tanque, index) => {
             const numero = index + 1;
             datos.tanques.push({
-                numero: numero,
                 tipo: formData.get(`tanques[${numero}][tipo]`),
                 cantidad_peces: formData.get(`tanques[${numero}][cantidad_peces]`),
                 ancho: formData.get(`tanques[${numero}][ancho]`),
@@ -631,22 +740,62 @@
             });
         });
 
+        // Validaciones
         if (datos.tanques.length === 0) {
-            alert('Por favor, agrega al menos un tanque al zoocriadero.');
+            alert('Por favor, agrega al menos un tanque.');
             return;
         }
-        if (!datos.zoocriadero.ubicacion.latitud || !datos.zoocriadero.ubicacion.longitud) {
-            alert('Por favor, agrega la ubicación del zoocriadero.');
-            return;
-        }
-        if (datos.encargado.documento.trim() === '' || datos.encargado.nombres.trim() === '' || datos.encargado.apellidos.trim() === '') {
-            alert('Por favor, completa toda la información del encargado.');
-            return;
-        }
-        document.cookie = datos
-        /*
-        console.log('Datos del formulario:', datos);
-        alert('Formulario enviado correctamente. Revisa la consola para ver los datos.');
-        */
+
+        $.ajax({
+            url: url,
+            type: "POST",
+            data: {
+                // Datos del zoocriadero
+                nombre: formData.get('nombreZoo'),
+                barrio: formData.get('barrio'),
+                comuna: formData.get('comuna'),
+                direccion: direccionCompleta,
+                telefono: formData.get('telefono'),
+                correo: formData.get('correo'),
+                latitud: ubicacionSeleccionada.lat,
+                longitud: ubicacionSeleccionada.lng,
+
+                // Datos del encargado
+                id_encargado: formData.get('idEncargado'),
+                documento_encargado: formData.get('documentoEncargado'),
+                nombres_encargado: formData.get('nombresEncargado'),
+                apellidos_encargado: formData.get('apellidosEncargado'),
+
+                // Tanques como JSON string
+                tanques: JSON.stringify(datos.tanques)
+            },
+            success: function () {
+                window.location.href = "<?= getUrl('Zoocriadero', 'Zoocriadero', 'registrar'); ?>";
+            }
+        });
     });
+    // Array de usuarios enviado desde PHP
+    const usuarios = <?= json_encode($usuarios) ?>;
+
+    const inputDocumento = document.getElementById('documentoEncargado');
+    const inputNombres = document.getElementById('nombresEncargado');
+    const inputApellidos = document.getElementById('apellidosEncargado');
+    const inputIdEncargado = document.getElementById('idEncargado');
+
+    inputDocumento.addEventListener('input', function () {
+        const documento = this.value.trim();
+        const usuario = usuarios.find(u => u.documento == documento);
+
+        if (usuario) {
+
+            inputNombres.value = usuario.nombre;
+            inputApellidos.value = usuario.apellido;
+            inputIdEncargado.value = usuario.id_usuario;
+        } else {
+            inputNombres.value = '';
+            inputApellidos.value = '';
+            inputIdEncargado.value = '';
+        }
+    });
+
 </script>

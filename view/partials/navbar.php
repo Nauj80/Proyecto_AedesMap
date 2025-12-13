@@ -47,7 +47,8 @@ foreach ($names as $name) {
 
 			<ul class="navbar-nav topbar-nav ms-md-auto align-items-center">
 				<li class="nav-item topbar-icon dropdown hidden-caret d-flex d-lg-none">
-					<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false" aria-haspopup="true">
+					<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+						aria-expanded="false" aria-haspopup="true">
 						<i class="fa fa-search"></i>
 					</a>
 					<ul class="dropdown-menu dropdown-search animated fadeIn">
@@ -59,7 +60,8 @@ foreach ($names as $name) {
 					</ul>
 				</li>
 				<li class="nav-item topbar-icon dropdown hidden-caret">
-					<a class="nav-link dropdown-toggle" href="#" id="messageDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					<a class="nav-link dropdown-toggle" href="#" id="messageDropdown" role="button"
+						data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 						<i class="fa fa-envelope"></i>
 					</a>
 					<ul class="dropdown-menu messages-notif-box animated fadeIn" aria-labelledby="messageDropdown">
@@ -124,12 +126,14 @@ foreach ($names as $name) {
 							</div>
 						</li>
 						<li>
-							<a class="see-all" href="javascript:void(0);">See all messages<i class="fa fa-angle-right"></i> </a>
+							<a class="see-all" href="javascript:void(0);">See all messages<i
+									class="fa fa-angle-right"></i> </a>
 						</li>
 					</ul>
 				</li>
 				<li class="nav-item topbar-icon dropdown hidden-caret">
-					<a class="nav-link dropdown-toggle" href="#" id="notifDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					<a class="nav-link dropdown-toggle" href="#" id="notifDropdown" role="button"
+						data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 						<i class="fa fa-bell"></i>
 						<span class="notification">4</span>
 					</a>
@@ -182,7 +186,8 @@ foreach ($names as $name) {
 							</div>
 						</li>
 						<li>
-							<a class="see-all" href="javascript:void(0);">See all notifications<i class="fa fa-angle-right"></i> </a>
+							<a class="see-all" href="javascript:void(0);">See all notifications<i
+									class="fa fa-angle-right"></i> </a>
 						</li>
 					</ul>
 				</li>
@@ -262,7 +267,8 @@ foreach ($names as $name) {
 						</div>
 
 						<span class="profile-username">
-							<span class="op-7">Hola,</span> <span class="fw-bold"><?php echo $_SESSION['usuario']['nombre'] . " " . $_SESSION['usuario']['apellido']; ?></span>
+							<span class="op-7">Hola,</span> <span
+								class="fw-bold"><?php echo $_SESSION['usuario']['nombre'] . " " . $_SESSION['usuario']['apellido']; ?></span>
 						</span>
 					</a>
 					<ul class="dropdown-menu dropdown-user animated fadeIn">
@@ -276,7 +282,8 @@ foreach ($names as $name) {
 									</div>
 									<div class="u-text">
 										<h4><?php echo $_SESSION["usuario"]["nombre"]; ?></h4>
-										<p class="text-muted"><?php echo $_SESSION["usuario"]["correo"]; ?></p><a href="profile.html" class="btn btn-xs btn-secondary btn-sm">View Profile</a>
+										<p class="text-muted"><?php echo $_SESSION["usuario"]["correo"]; ?></p><a
+											href="profile.html" class="btn btn-xs btn-secondary btn-sm">View Profile</a>
 									</div>
 								</div>
 							</li>
@@ -288,7 +295,8 @@ foreach ($names as $name) {
 								<div class="dropdown-divider"></div>
 								<a class="dropdown-item" href="#">Account Setting</a>
 								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="#">Logout</a>
+								<a class="dropdown-item"
+									href="<?= getUrl("Zoocriadero", "Zoocriadero", "logout") ?>">Logout</a>
 							</li>
 						</div>
 					</ul>

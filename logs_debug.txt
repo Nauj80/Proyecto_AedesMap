@@ -1,0 +1,47 @@
+ENTRÓ A GUARDAR - 2025-12-13 22:15:06
+Array
+(
+    [zoocriadero] => Array
+        (
+            [nombre] => zooooooooooooooo
+            [barrio] => San Javier
+            [comuna] => 
+            [direccion] => Calle 23 # 23 - 23 23
+            [telefono] => 3153246814
+            [correo] => Nico@gmail.com
+            [latitud] => 3.451647
+            [longitud] => -76.531985
+        )
+
+    [encargado] => Array
+        (
+            [documento] => 1231231231
+            [nombres] => carlos
+            [apellidos] => quiñones
+        )
+
+    [tanques] => Array
+        (
+            [0] => Array
+                (
+                    [tipo] => 3
+                    [cantidad_peces] => 23
+                    [ancho] => 23
+                    [largo] => 23
+                    [profundidad] => 1
+                )
+
+            [1] => Array
+                (
+                    [tipo] => 4
+                    [cantidad_peces] => 21
+                    [ancho] => 21
+                    [largo] => 21
+                    [profundidad] => 2
+                )
+
+        )
+
+)
+
+
