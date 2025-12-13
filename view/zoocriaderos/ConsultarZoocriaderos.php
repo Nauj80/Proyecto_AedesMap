@@ -1,6 +1,15 @@
 <?php
 include_once 'modales/verDetalle.php';
 include_once 'modales/editar.php';
+
+// Mostrar error si existe
+if (isset($_SESSION['error'])) {
+    echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">';
+    echo $_SESSION['error'];
+    echo '<button type="button" class="btn-close" data-bs-dismiss="alert"></button>';
+    echo '</div>';
+    unset($_SESSION['error']);
+}
 ?>
 <div class="container mt-4">
 

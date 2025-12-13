@@ -9,10 +9,11 @@
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
             </div>
 
-            <form id="formEditarZoocriadero" method="POST">
+            <form id="formEditarZoocriadero" method="POST"
+                action="<?php echo getUrl("Zoocriadero", "Zoocriadero", "actualizar"); ?>">
 
                 <div class="modal-body" id="contenidoEditar">
-                    <!-- AQUÍ JS INYECTARÁ LOS CAMPOS DEL FORMULARIO -->
+
                 </div>
 
                 <div class="modal-footer">
@@ -21,7 +22,6 @@
                         <i class="fas fa-save"></i> Guardar Cambios
                     </button>
                 </div>
-
             </form>
         </div>
     </div>
