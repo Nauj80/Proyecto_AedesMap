@@ -6,6 +6,42 @@ function redirect($url)
     echo "<script>" .
         "window.location.href = '$url';" .
         "</script>";
+
+}
+function tieneModulo($modulo)
+{
+    return isset($_SESSION['modulos'])
+        && in_array($modulo, $_SESSION['modulos']);
+}
+
+function tieneAccion($modulo, $accion)
+{
+    return isset($_SESSION['acciones'][$modulo])
+        && in_array($accion, $_SESSION['acciones'][$modulo]);
+}
+
+function tienePermiso($modulo, $accion)
+{
+    $permiso = $modulo . ":" . $accion;
+
+    return isset($_SESSION['permisos'])
+        && in_array($permiso, $_SESSION['permisos']);
+}
+
+function dd($var)
+{
+    echo "<pre>";
+    die(print_r($var));
+}
+
+function getUrl($modulo, $controlador, $funcion, $parametros = false, $pagina = false)
+{
+session_start();
+function redirect($url)
+{
+    echo "<script>" .
+        "window.location.href = '$url';" .
+        "</script>";
 }
 function dd($var)
 {
@@ -19,9 +55,20 @@ function getUrl($modulo, $controlador, $funcion, $parametros = false, $pagina = 
     if ($pagina == false) {
         $pagina = "index";
     }
+    if ($pagina == false) {
+        $pagina = "index";
+    }
 
     $url = "$pagina.php?modulo=$modulo&controlador=$controlador&funcion=$funcion";
+    $url = "$pagina.php?modulo=$modulo&controlador=$controlador&funcion=$funcion";
 
+    if ($parametros != false) {
+        foreach ($parametros as $key => $valor) {
+            $url .= "&$key=$valor";
+        }
+    }
+    return $url;
+}
     if ($parametros != false) {
         foreach ($parametros as $key => $valor) {
             $url .= "&$key=$valor";
@@ -51,16 +98,32 @@ function resolve()
     $modulo = ucwords($_GET['modulo']); // modulo-> carpeta dentro del controlador
     $controlador = ucwords($_GET['controlador']); // controlador -> archivo controller dentro del modulo
     $funcion = $_GET['funcion']; // funcion -> metodo dentro de la clase del controlador
+function resolve()
+{
 
+    $modulo = ucwords($_GET['modulo']); // modulo-> carpeta dentro del controlador
+    $controlador = ucwords($_GET['controlador']); // controlador -> archivo controller dentro del modulo
+    $funcion = $_GET['funcion']; // funcion -> metodo dentro de la clase del controlador
+
+    if (is_dir("../controller/" . $modulo)) {
+        if (is_file("../controller/" . $modulo . "/" . $controlador . "Controller.php")) {
     if (is_dir("../controller/" . $modulo)) {
         if (is_file("../controller/" . $modulo . "/" . $controlador . "Controller.php")) {
 
             require_once("../controller/" . $modulo . "/" . $controlador . "Controller.php");
+            require_once("../controller/" . $modulo . "/" . $controlador . "Controller.php");
 
             $controlador = $controlador . "Controller";
+            $controlador = $controlador . "Controller";
+
 
             $objClase = new $controlador();
+            $objClase = new $controlador();
 
+            if (method_exists($objClase, $funcion)) {
+                $objClase->$funcion();
+            } else {
+                echo "La funcion especificada no existe";
             if (method_exists($objClase, $funcion)) {
                 $objClase->$funcion();
             } else {
@@ -68,7 +131,13 @@ function resolve()
             }
         } else {
             echo "El controlador especificado no existe";
+        } else {
+            echo "El controlador especificado no existe";
         }
+    } else {
+        echo "El modulo especificado no existe";
+    }
+}
     } else {
         echo "El modulo especificado no existe";
     }

@@ -1,6 +1,8 @@
 <?php
-include_once("../../lib/helpers.php");
+// view/login/Login.php
+include_once("../lib/helpers.php");
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -40,20 +42,31 @@ include_once("../../lib/helpers.php");
         <div class="login-box">
 
             <div class="text-center mb-4">
-                <img src="../../web/assets/img/kaiadmin/logo.png" alt="Logo" width="180">
+                <img src="../web/assets/img/kaiadmin/logo.png" alt="Logo" width="180">
             </div>
 
             <h3 class="text-center mb-4">Inicio de Sesión</h3>
 
-            <form action="<?php echo getUrl("Login", "Login", funcion: "login"); ?>" method="POST">
-                <div class="mb-3">
-                    <label class="form-label">Numero de documento</label>
-                    <input type="text" class="form-control" placeholder="Número de documento" name="usu_correo">
+            <?php if (isset($_SESSION['error'])): ?>
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <?php
+                    echo $_SESSION['error'];
+                    unset($_SESSION['error']);
+                    ?>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                 </div>
-
+            <?php endif; ?>
+            <!-- CORREGIDO: La ruta correcta al ajax.php -->
+            <form action="<?= getUrl("Login", "Login", "login", false, "ajax"); ?>" method="POST">
+                <div class="mb-3">
+                    <label class="form-label">Número de documento</label>
+                    <input type="text" class="form-control" placeholder="Ingresa tu documento" name="documento"
+                        minlength="9" maxlength="11" required>
+                </div>
                 <div class="mb-3">
                     <label class="form-label">Contraseña</label>
-                    <input type="password" name="contrasena" class="form-control" placeholder="Contraseña" required>
+                    <input type="password" class="form-control" placeholder="Ingresa tu clave" name="usu_clave"
+                        minlength="8" required>
                 </div>
 
                 <div class="d-grid mb-3">
@@ -63,7 +76,7 @@ include_once("../../lib/helpers.php");
                 </div>
 
                 <div class="text-center">
-                    <a href="registrar.php" class="fw-bold" style="color:#0056d6;">¿Olvidaste tu contraseña?</a>
+                    <a href="#" class="fw-bold" style="color:#0056d6;">¿Olvidaste tu contraseña?</a>
                 </div>
 
             </form>
@@ -72,6 +85,7 @@ include_once("../../lib/helpers.php");
 
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
