@@ -40,7 +40,7 @@ include_once '../view/partials/header.php';
                         <div class="row">
                             <div class="col-md-6 col-lg-6">
                                 <div class="form-group">
-                                    <label for="zoocriadero">Zoocriadero</label>
+                                    <label for="zoocriadero">Zoocriadero *</label>
                                     <select class="form-select form-control" id="zoocriadero" name="zoocriadero" required>
                                         <option value="">Seleccione...</option>
                                         <?php
@@ -52,7 +52,7 @@ include_once '../view/partials/header.php';
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="tipoTanque">Tipo de tanque</label>
+                                    <label for="tipoTanque">Tipo de tanque *</label>
                                     <select class="form-select form-control" id="tipoTanque" name="tipoTanque" required>
                                         <option value="">Seleccione...</option>
                                         <?php
@@ -64,21 +64,21 @@ include_once '../view/partials/header.php';
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="cantidadPeces">Cantidad de peces</label>
+                                    <label for="cantidadPeces">Cantidad de peces *</label>
                                     <input type="number" class="form-control" id="cantidadPeces" name="cantidadPeces" placeholder="Ingrese la cantidad de peces">
                                 </div>
                             </div>
                             <div class="col-md-6 col-lg-6">
                                 <div class="form-group">
-                                    <label for="altoTanque">Altura del tanque (cm)</label>
+                                    <label for="altoTanque">Altura del tanque (cm) *</label>
                                     <input type="number" class="form-control" id="altoTanque" name="altoTanque" placeholder="Ingrese la altura del tanque en cm">
                                 </div>
                                 <div class="form-group">
-                                    <label for="anchoTanque">Ancho del tanque (cm)</label>
+                                    <label for="anchoTanque">Ancho del tanque (cm) *</label>
                                     <input type="number" class="form-control" id="anchoTanque" name="anchoTanque" placeholder="Ingrese el ancho del tanque en cm">
                                 </div>
                                 <div class="form-group">
-                                    <label for="profundidadTanque">Profundidad del tanque (cm)</label>
+                                    <label for="profundidadTanque">Profundidad del tanque (cm) *</label>
                                     <input type="number" class="form-control" id="profundidadTanque" name="profundidadTanque" placeholder="Ingrese la profundidad del tanque en cm">
                                 </div>
                             </div>

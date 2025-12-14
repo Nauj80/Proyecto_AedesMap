@@ -47,7 +47,7 @@ include_once '../view/partials/header.php';
                                 <div class="col-md-6 col-lg-6">
                                     <input type="hidden" name="id" value="<?php echo $tan["id_tanque"] ?>">
                                     <div class="form-group">
-                                        <label for="zoocriadero">Zoocriadero</label>
+                                        <label for="zoocriadero">Zoocriadero *</label>
                                         <select class="form-select form-control" id="zoocriadero" name="zoocriadero" value="<?php echo $tan["id_zoocriadero"] ?>" required>
                                             <option value="">Seleccione...</option>
                                             <?php
@@ -64,7 +64,7 @@ include_once '../view/partials/header.php';
                                         <div class="invalid-feedback"></div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="tipoTanque">Tipo de tanque</label>
+                                        <label for="tipoTanque">Tipo de tanque *</label>
                                         <select class="form-select form-control" id="tipoTanque" name="tipoTanque" value="<?php echo $tan["id_zoocriadero"] ?>" required>
                                             <option value="">Seleccione...</option>
                                             <?php
@@ -86,24 +86,24 @@ include_once '../view/partials/header.php';
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="cantidadPeces">Cantidad de peces</label>
+                                        <label for="cantidadPeces">Cantidad de peces *</label>
                                         <input type="text" class="form-control n" id="cantidadPeces" name="cantidadPeces" placeholder="Ingrese la cantidad de peces" value="<?php echo $tan['cantidad_peces'] ?>">
                                         <div class="invalid-feedback"></div>
                                     </div>
                                 </div>
                                 <div class="col-md-6 col-lg-6">
                                     <div class="form-group">
-                                        <label for="altoTanque">Altura del tanque (cm)</label>
+                                        <label for="altoTanque">Altura del tanque (cm) *</label>
                                         <input type="text" class="form-control f" id="altoTanque" name="altoTanque" placeholder="Ingrese la altura del tanque en cm" value="<?php echo $tan['alto'] ?>">
                                         <div class="invalid-feedback"></div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="anchoTanque">Ancho del tanque (cm)</label>
+                                        <label for="anchoTanque">Ancho del tanque (cm) *</label>
                                         <input type="text" class="form-control f" id="anchoTanque" name="anchoTanque" placeholder="Ingrese el ancho del tanque en cm" value="<?php echo $tan['ancho'] ?>">
                                         <div class="invalid-feedback"></div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="profundidadTanque">Profundidad del tanque (cm)</label>
+                                        <label for="profundidadTanque">Profundidad del tanque (cm) *</label>
                                         <input type="text" class="form-control f" id="profundidadTanque" name="profundidadTanque" placeholder="Ingrese la profundidad del tanque en cm" value="<?php echo $tan['profundo'] ?>">
                                         <div class="invalid-feedback"></div>
                                     </div>
@@ -115,7 +115,7 @@ include_once '../view/partials/header.php';
                                     print_r(
                                         '
                                         <div class="form-group">
-                                            <label for="estadoTanque">Estado tanque</label>
+                                            <label for="estadoTanque">Estado tanque *</label>
                                             <select class="form-select form-control" id="estadoTanque" name="estadoTanque" value="<?php echo $tan["id_estado_tanque"] ?>" required>
                                                 <option value="">Seleccione...</option>
                                         '

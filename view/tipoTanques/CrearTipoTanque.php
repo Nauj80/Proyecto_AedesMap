@@ -40,7 +40,7 @@ include_once '../view/partials/header.php';
                         <div class="row">
                             <div class="col-md-4 ms-auto me-auto">
                                 <div class="form-group">
-                                    <label for="nombreTipoTanque">Nombre</label>
+                                    <label for="nombreTipoTanque">Nombre *</label>
                                     <input type="text" class="form-control" name="nombreTipoTanque" id="nombreTipoTanque" placeholder="Ingrese un nombre para el tipo de tanque" required>
                                     <div class="invalid-feedback"></div>
                                 </div>
