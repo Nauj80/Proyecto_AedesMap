@@ -4,6 +4,7 @@ include_once '../lib/helpersLogin.php';
 include_once '../view/partials/header.php';
 ?>
 
+
 <body>
     <div class="page-header">
         <h3 class="fw-bold mb-3">Editar Tanques</h3>
@@ -17,13 +18,13 @@ include_once '../view/partials/header.php';
                 <i class="icon-arrow-right"></i>
             </li>
             <li class="nav-item">
-                <a href="">Tanques</a>
+                <a href="<?php echo getUrl("Tanque", "Tanque", "listar"); ?>">Tanques</a>
             </li>
             <li class="separator">
                 <i class="icon-arrow-right"></i>
             </li>
             <li class="nav-item">
-                <a href="<?php echo getUrl("Tanque", "Tanque", "getUpdate"); ?>">Editar Tanque</a>
+                <a href="<?php echo getUrl("Tanque", "Tanque", "getUpdate", array("id" => $_GET['id'])); ?>">Editar Tanque</a>
             </li>
         </ul>
 
@@ -36,7 +37,8 @@ include_once '../view/partials/header.php';
                 while ($tan = pg_fetch_assoc($Tanque)) {
 
                 ?>
-                    <form action="index.php?modulo=Tanque&controlador=Tanque&funcion=postUpdate" method="post">
+                    <!-- <form action="index.php?modulo=Tanque&controlador=Tanque&funcion=postUpdate" method="post"> -->
+                    <form action="<?php echo getUrl("Tanque", "Tanque", "postUpdate"); ?>" id="formu" method="post">
                         <div class="card-header">
                             <div class="card-title">Formulario edicion de tanque</div>
                         </div>
@@ -46,7 +48,7 @@ include_once '../view/partials/header.php';
                                     <input type="hidden" name="id" value="<?php echo $tan["id_tanque"] ?>">
                                     <div class="form-group">
                                         <label for="zoocriadero">Zoocriadero</label>
-                                        <select class="form-select" id="zoocriadero" name="zoocriadero" value="<?php echo $tan["id_zoocriadero"] ?>" required>
+                                        <select class="form-select form-control" id="zoocriadero" name="zoocriadero" value="<?php echo $tan["id_zoocriadero"] ?>" required>
                                             <option value="">Seleccione...</option>
                                             <?php
                                             while ($zoo = pg_fetch_assoc($zoocriadero)) {
@@ -59,10 +61,11 @@ include_once '../view/partials/header.php';
                                             }
                                             ?>
                                         </select>
+                                        <div class="invalid-feedback"></div>
                                     </div>
                                     <div class="form-group">
                                         <label for="tipoTanque">Tipo de tanque</label>
-                                        <select class="form-select" id="tipoTanque" name="tipoTanque" value="<?php echo $tan["id_zoocriadero"] ?>" required>
+                                        <select class="form-select form-control" id="tipoTanque" name="tipoTanque" value="<?php echo $tan["id_zoocriadero"] ?>" required>
                                             <option value="">Seleccione...</option>
                                             <?php
 
@@ -79,32 +82,70 @@ include_once '../view/partials/header.php';
                                             }
                                             ?>
                                         </select>
+                                        <div class="invalid-feedback"></div>
                                     </div>
 
                                     <div class="form-group">
                                         <label for="cantidadPeces">Cantidad de peces</label>
-                                        <input type="text" class="form-control" id="cantidadPeces" name="cantidadPeces" placeholder="Ingrese la cantidad de peces" value="<?php echo $tan['cantidad_peces'] ?>">
+                                        <input type="text" class="form-control n" id="cantidadPeces" name="cantidadPeces" placeholder="Ingrese la cantidad de peces" value="<?php echo $tan['cantidad_peces'] ?>">
+                                        <div class="invalid-feedback"></div>
                                     </div>
                                 </div>
                                 <div class="col-md-6 col-lg-6">
                                     <div class="form-group">
                                         <label for="altoTanque">Altura del tanque (cm)</label>
-                                        <input type="text" class="form-control" id="altoTanque" name="altoTanque" placeholder="Ingrese la altura del tanque en cm" value="<?php echo $tan['alto'] ?>">
+                                        <input type="text" class="form-control f" id="altoTanque" name="altoTanque" placeholder="Ingrese la altura del tanque en cm" value="<?php echo $tan['alto'] ?>">
+                                        <div class="invalid-feedback"></div>
                                     </div>
                                     <div class="form-group">
                                         <label for="anchoTanque">Ancho del tanque (cm)</label>
-                                        <input type="text" class="form-control" id="anchoTanque" name="anchoTanque" placeholder="Ingrese el ancho del tanque en cm" value="<?php echo $tan['ancho'] ?>">
+                                        <input type="text" class="form-control f" id="anchoTanque" name="anchoTanque" placeholder="Ingrese el ancho del tanque en cm" value="<?php echo $tan['ancho'] ?>">
+                                        <div class="invalid-feedback"></div>
                                     </div>
                                     <div class="form-group">
                                         <label for="profundidadTanque">Profundidad del tanque (cm)</label>
-                                        <input type="text" class="form-control" id="profundidadTanque" name="profundidadTanque" placeholder="Ingrese la profundidad del tanque en cm" value="<?php echo $tan['profundo'] ?>">
+                                        <input type="text" class="form-control f" id="profundidadTanque" name="profundidadTanque" placeholder="Ingrese la profundidad del tanque en cm" value="<?php echo $tan['profundo'] ?>">
+                                        <div class="invalid-feedback"></div>
                                     </div>
+                                </div>
+
+                                <div class="col-md-6 col-lg-6 ms-auto me-auto">
+                                    <?php
+
+                                    print_r(
+                                        '
+                                        <div class="form-group">
+                                            <label for="estadoTanque">Estado tanque</label>
+                                            <select class="form-select form-control" id="estadoTanque" name="estadoTanque" value="<?php echo $tan["id_estado_tanque"] ?>" required>
+                                                <option value="">Seleccione...</option>
+                                        '
+                                    );
+
+                                    while ($estadoT = pg_fetch_assoc($estadoTanque)) {
+
+                                        if ($estadoT["id_estado_tanque"] == $tan["id_estado_tanque"]) {
+                                            $selected = "selected";
+                                        } else {
+                                            $selected = "";
+                                        }
+
+                                        echo '<option value="' . $estadoT["id_estado_tanque"] . '" ' . "$selected" . '> ' . $estadoT["nombre"] . '</option>';
+                                    }
+                                    print_r(
+                                        '.
+                                            </select>
+                                            <div class="invalid-feedback"></div>
+                                        </div>
+                                    '
+                                    );
+
+                                    ?>
                                 </div>
                             </div>
                         </div>
                         <div class="card-action text-center">
-                            <button type="submit" class="btn btn-success">Crear</button>
-                            <a class="btn btn-danger" href="<?php echo getUrl("Tanque", "Tanque", "list"); ?>">Cancelar</a>
+                            <button type="submit" class="btn btn-primary">Actualizar</button>
+                            <a class="btn btn-danger" href="<?php echo getUrl("Tanque", "Tanque", "listar"); ?>">Cancelar</a>
                         </div>
                     </form>
                 <?php
@@ -113,4 +154,8 @@ include_once '../view/partials/header.php';
             </div>
         </div>
     </div>
+    <script src="js/form-validations.js"></script>
+    <script>
+        initFormValidation('formu');
+    </script>
 </body>

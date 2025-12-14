@@ -17,7 +17,7 @@ include_once '../view/partials/header.php';
                 <i class="icon-arrow-right"></i>
             </li>
             <li class="nav-item">
-                <a href="">Tanques</a>
+                <a href="<?php echo getUrl("Tanque", "Tanque", "listar"); ?>">Tanques</a>
             </li>
             <li class="separator">
                 <i class="icon-arrow-right"></i>
@@ -32,7 +32,7 @@ include_once '../view/partials/header.php';
     <div class="row">
         <div class="col-ms-12">
             <div class="card">
-                <form action="index.php?modulo=Tanque&controlador=Tanque&funcion=postCreate" method="post">
+                <form action="index.php?modulo=Tanque&controlador=Tanque&funcion=postCreate" id="formu" method="post">
                     <div class="card-header">
                         <div class="card-title">Formulario creacion de tanque</div>
                     </div>
@@ -85,11 +85,16 @@ include_once '../view/partials/header.php';
                         </div>
                     </div>
                     <div class="card-action text-center">
-                        <button type="submit" class="btn btn-success">Crear</button>
-                        <a class="btn btn-danger" href="<?php echo getUrl("Tanque", "Tanque", "list"); ?>">Cancelar</a>
+                        <button type="submit" class="btn btn-primary">Crear</button>
+                        <a class="btn btn-danger" href="<?php echo getUrl("Tanque", "Tanque", "listar"); ?>">Cancelar</a>
                     </div>
                 </form>
             </div>
         </div>
     </div>
+    <script src="js/form-validations.js"></script>
+    <script>
+        // initialize validation for this form
+        initFormValidation('formu');
+    </script>
 </body>

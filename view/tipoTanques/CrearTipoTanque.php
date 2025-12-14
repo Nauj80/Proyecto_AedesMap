@@ -32,7 +32,7 @@ include_once '../view/partials/header.php';
     <div class="row">
         <div class="col-ms-12">
             <div class="card">
-                <form action="index.php?modulo=TipoTanques&controlador=TipoTanques&funcion=postCreate" method="post">
+                <form action="index.php?modulo=TipoTanques&controlador=TipoTanques&funcion=postCreate" id="formu" method="post">
                     <div class="card-header">
                         <div class="card-title">Formulario creacion tipo de tanques</div>
                     </div>
@@ -42,19 +42,22 @@ include_once '../view/partials/header.php';
                                 <div class="form-group">
                                     <label for="nombreTipoTanque">Nombre</label>
                                     <input type="text" class="form-control" name="nombreTipoTanque" id="nombreTipoTanque" placeholder="Ingrese un nombre para el tipo de tanque" required>
+                                    <div class="invalid-feedback"></div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="card-action text-center">
-                        <button type="submit" class="btn btn-success">Crear</button>
+                        <button type="submit" class="btn btn-primary">Crear</button>
 
-                        <a class="btn btn-danger" href="<?php echo getUrl("TipoTanques", "TipoTanques", "list"); ?>">Cancelar</a>
+                        <a class="btn btn-danger" href="<?php echo getUrl("TipoTanques", "TipoTanques", "listar"); ?>">Cancelar</a>
                     </div>
                 </form>
             </div>
         </div>
     </div>
+    <script src="js/form-validations.js"></script>
+    <script>
+        initFormValidation('formu');
+    </script>
 </body>
-
-</html>

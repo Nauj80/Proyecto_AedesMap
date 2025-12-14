@@ -17,13 +17,13 @@ include_once '../view/partials/header.php';
                 <i class="icon-arrow-right"></i>
             </li>
             <li class="nav-item">
-                <a href="">Tipo de Tanque</a>
+                <a href="<?php echo getUrl("TipoTanques", "TipoTanques", "listar"); ?>">Tipo de Tanque</a>
             </li>
             <li class="separator">
                 <i class="icon-arrow-right"></i>
             </li>
             <li class="nav-item">
-                <a href="<?php echo getUrl("TipoTanque", "TipoTanque", "getDelete"); ?>">Eliminar Tipo de Tanque</a>
+                <a href="<?php echo getUrl("TipoTanques", "TipoTanques", "getDelete", array("id" => $_GET["id"])); ?>">Eliminar Tipo de Tanque</a>
             </li>
         </ul>
 
@@ -32,7 +32,7 @@ include_once '../view/partials/header.php';
     <div class="row">
         <div class="col-ms-12">
             <div class="card">
-                <form action="index.php?modulo=TipoTanques&controlador=TipoTanques&funcion=postDelete" method="post">
+                <form action="<?php echo getUrl("TipoTanques", "TipoTanques", "postDelete"); ?>" method="post">
                     <?php
                     while ($tt = pg_fetch_assoc($tipoTanque)) {
                     ?>
@@ -48,14 +48,14 @@ include_once '../view/partials/header.php';
                                     <div class="form-group">
                                         <label for="nombreTipoTanque">Nombre</label>
                                         <input type="text" class="form-control" name="id" value="<?php echo $tt['id_tipo_tanque'] ?>" hidden>
-                                        <input type="text" class="form-control" name="nombreTipoTanque" id="nombreTipoTanque" placeholder="Ingrese un nombre para el tipo de tanque" value="<?php echo $tt['nombre'] ?>">
+                                        <input type="text" class="form-control" name="nombreTipoTanque" id="nombreTipoTanque" placeholder="Ingrese un nombre para el tipo de tanque" value="<?php echo $tt['nombre'] ?>" disabled>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="card-action text-center">
                             <button class="btn btn-danger">Eliminar</button>
-                            <a class="btn btn-secundary" href="<?php echo getUrl("TipoTanques", "TipoTanques", "list"); ?>">Cancelar</a>
+                            <a class="btn btn-secundary" href="<?php echo getUrl("TipoTanques", "TipoTanques", "listar"); ?>">Cancelar</a>
                         </div>
                     <?php
                     }

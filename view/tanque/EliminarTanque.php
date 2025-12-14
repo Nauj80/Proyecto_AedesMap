@@ -17,13 +17,13 @@ include_once '../view/partials/header.php';
                 <i class="icon-arrow-right"></i>
             </li>
             <li class="nav-item">
-                <a href="">Tanques</a>
+                <a href="<?php echo getUrl("Tanque", "Tanque", "listar"); ?>">Tanques</a>
             </li>
             <li class="separator">
                 <i class="icon-arrow-right"></i>
             </li>
             <li class="nav-item">
-                <a href="<?php echo getUrl("Tanque", "Tanque", "getDelete"); ?>">Eliminar Tanque</a>
+                <a href="<?php echo getUrl("Tanque", "Tanque", "getDelete", array("id" => $_GET["id"])); ?>">Eliminar Tanque</a>
             </li>
         </ul>
 
@@ -36,7 +36,7 @@ include_once '../view/partials/header.php';
                 while ($tan = pg_fetch_assoc($Tanque)) {
 
                 ?>
-                    <form action="index.php?modulo=Tanque&controlador=Tanque&funcion=postDelete" method="post">
+                    <form action="<?php echo getUrl("Tanque", "Tanque", "postDelete"); ?>" method="post">
                         <div class="card-header">
                             <div class="card-title">Eliminar tanque</div>
                         </div>
@@ -107,7 +107,7 @@ include_once '../view/partials/header.php';
                         </div>
                         <div class="card-action text-center">
                             <button type="submit" class="btn btn-danger">Eliminar</button>
-                            <a class="btn btn-secundary" href="<?php echo getUrl("Tanque", "Tanque", "list"); ?>">Cancelar</a>
+                            <a class="btn btn-secundary" href="<?php echo getUrl("Tanque", "Tanque", "listar"); ?>">Cancelar</a>
                         </div>
                     </form>
                 <?php

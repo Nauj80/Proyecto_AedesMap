@@ -30,21 +30,21 @@ function getUrl($modulo, $controlador, $funcion, $parametros = false, $pagina = 
     return $url;
 }
 
+
 function jsonResponse($success, $message, $data = null)
 {
     // Asegurarnos de no enviar ninguna salida previa
     if (!headers_sent()) {
         header('Content-Type: application/json');
     }
-    echo json_encode([
+    echo json_encode(array(
         'success' => $success,
         'message' => $message,
         'data' => $data
-    ]);
+    ));
     // Terminar ejecución inmediatamente para evitar HTML adicional
     exit;
 }
-
 function resolve()
 {
 

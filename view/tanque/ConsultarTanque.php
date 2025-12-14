@@ -23,10 +23,40 @@ include_once '../view/partials/header.php';
                 <i class="icon-arrow-right"></i>
             </li>
             <li class="nav-item">
-                <a href="<?php echo getUrl("Tanque", "Tanque", "list"); ?>">Consultar tanque</a>
+                <a href="<?php echo getUrl("Tanque", "Tanque", "listar"); ?>">Consultar tanque</a>
             </li>
         </ul>
 
+    </div>
+
+    <div class="row justify-content-center">
+
+        <?php
+        while ($canE = pg_fetch_assoc($canEstados)) {
+
+
+            print_r(
+                '
+                <div class="col-6 col-sm-4 col-lg-2">
+            <div class="card">
+                <div class="card-body p-3 text-center">
+
+                    <div class="h1 m-0">
+                '
+            );
+            echo $canE["cantidad"];
+
+            print_r(
+                '
+                </div>
+                    <div class="text-muted">' . $canE["nombre"] . '</div>
+                </div>
+            </div>
+        </div>
+                '
+            );
+        }
+        ?>
     </div>
 
     <div class="row">
@@ -34,7 +64,7 @@ include_once '../view/partials/header.php';
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex align-items-center">
-                        <h4 class="card-title">Tanque</h4>
+                        <h4 class="card-title">Tanques</h4>
                         <a class="btn btn-primary btn-round ms-auto" href="<?php echo getUrl("Tanque", "Tanque", "getCreate"); ?>">
                             <i class="fa fa-plus"></i>
                             Crear tanque
@@ -60,7 +90,6 @@ include_once '../view/partials/header.php';
                                     <table id="add-row" class="display table table-striped table-hover dataTable" role="grid" aria-describedby="add-row_info">
                                         <thead>
                                             <tr role="row">
-                                                <th class="sorting_asc" tabindex="0" aria-controls="add-row" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 368.422px; cursor: pointer;" onclick="sortTable('t.id_tanque')">#</th>
                                                 <th class="sorting_asc" tabindex="0" aria-controls="add-row" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 368.422px; cursor: pointer;" onclick="sortTable('zoocriadero')">Zoocriadero</th>
                                                 <th class="sorting_asc" tabindex="0" aria-controls="add-row" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 368.422px; cursor: pointer;" onclick="sortTable('tipo_tanque')">Tipo de tanque</th>
                                                 <th class="sorting_asc" tabindex="0" aria-controls="add-row" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 368.422px; cursor: pointer;" onclick="sortTable('t.cantidad_peces')">Cantidad de peces</th>
@@ -73,7 +102,6 @@ include_once '../view/partials/header.php';
                                         </thead>
                                         <tfoot>
                                             <tr>
-                                                <th rowspan="1" colspan="1">#</th>
                                                 <th rowspan="1" colspan="1">Zoocriadero</th>
                                                 <th rowspan="1" colspan="1">Tipo de tanque</th>
                                                 <th rowspan="1" colspan="1">cantidad de peces</th>
@@ -89,11 +117,10 @@ include_once '../view/partials/header.php';
                                             <?php
 
                                             while ($Tanque = pg_fetch_assoc($Tanques)) {
-                                                $Tanque['id_tanque'] % 2 == 0 ? $colorTabla = "odd" : $colorTabla = "odd";
+
                                                 print_r(
                                                     '
-                                                    <tr role="row" class="' . $colorTabla . '">
-                                                        <td class="sorting_1">' . $Tanque["id_tanque"] . '</td>
+                                                    <tr role="row">
                                                         <td class="sorting_1">' . $Tanque["zoocriadero"] . '</td>
                                                         <td class="sorting_1">' . $Tanque["tipo_tanque"] . '</td>
                                                         <td class="sorting_1">' . $Tanque["cantidad_peces"] . '</td>
@@ -101,18 +128,18 @@ include_once '../view/partials/header.php';
                                                         <td class="sorting_1">' . $Tanque["alto"] . '</td>
                                                         <td class="sorting_1">' . $Tanque["profundo"] . '</td>
                                                         <td>' . $Tanque["estado"] . '</td>
-                                                        <td>
-                                                            <div class="form-button-action">
-                                                                <a type="button" class="btn btn-link btn-primary btn-lg" href=' . getUrl("Tanque", "Tanque", "getUpdate", array("id" => $Tanque['id_tanque'])) . '>
-                                                                    <i class="fa fa-edit"></i>
+                                                        <td class="text-center">
+                                                            <div class="form-button-action gap-3">
+                                                                <a type="button" class="btn btn-primary" href=' . getUrl("Tanque", "Tanque", "getUpdate", array("id" => $Tanque['id_tanque'])) . '>
+                                                                    Editar
                                                                 </a>
                                                                 '
                                                 );
                                                 if ($Tanque['id_estado_tanque'] == 1) {
 
                                                     print_r('
-                                                                <a type="button" class="btn btn-link btn-danger btn-lg" href=' . getUrl("Tanque", "Tanque", "getDelete", array("id" => $Tanque['id_tanque'])) . '>
-                                                                    <i class="fa fa-times"></i>
+                                                                <a type="button" class="btn btn-danger" href=' . getUrl("Tanque", "Tanque", "getDelete", array("id" => $Tanque['id_tanque'])) . '>
+                                                                    Inhabilitar
                                                                 </a>
                                                             </div>
                                                         </td>
@@ -120,10 +147,10 @@ include_once '../view/partials/header.php';
                                                     ');
                                                 } elseif ($Tanque['id_estado_tanque'] == 2) {
                                                     print_r('
-                                                                <form action="index.php?modulo=Tanque&controlador=Tanque&funcion=postUpdateStatus" method="post" style="display: inline;" class="btn-lg">
+                                                                <form action="index.php?modulo=Tanque&controlador=Tanque&funcion=postUpdateStatus" method="post" style="display: inline;">
                                                                     <input type="hidden" name="id" value="' . $Tanque['id_tanque'] . '">
-                                                                    <button type="submit" class="btn btn-link btn-success" style="border: none; background: none; padding: 0;">
-                                                                        <i class="fa fa-check"></i>
+                                                                    <button type="submit" class="btn btn-info">
+                                                                        Habilitar
                                                                     </button>
                                                                 </form>
                                                             </div>
@@ -133,7 +160,6 @@ include_once '../view/partials/header.php';
                                                 }
                                             }
                                             ?>
-
                                         </tbody>
                                     </table>
                                 </div>
@@ -149,7 +175,7 @@ include_once '../view/partials/header.php';
                                             // Botón Anterior
                                             if ($paginaActual > 1) {
                                                 $paginaAnterior = $paginaActual - 1;
-                                                echo '<li class="paginate_button page-item previous"><a href="' . getUrl("Tanque", "Tanque", "list") . '&length=' . $registrosPorPagina . '&page=' . $paginaAnterior . '" class="page-link">Anterior</a></li>';
+                                                echo '<li class="paginate_button page-item previous"><a href="' . getUrl("Tanque", "Tanque", "listar") . '&length=' . $registrosPorPagina . '&page=' . $paginaAnterior . '" class="page-link">Anterior</a></li>';
                                             } else {
                                                 echo '<li class="paginate_button page-item previous disabled"><a href="#" class="page-link">Anterior</a></li>';
                                             }
@@ -160,7 +186,7 @@ include_once '../view/partials/header.php';
                                                     echo '<li class="paginate_button page-item active"><a href="#" class="page-link">' . $i . '</a></li>';
                                                 } else {
                                                     $sortParams = isset($_GET['sort_column']) ? '&sort_column=' . $_GET['sort_column'] . '&sort_order=' . $_GET['sort_order'] : '';
-                                                    echo '<li class="paginate_button page-item"><a href="' . getUrl("Tanque", "Tanque", "list") . '&length=' . $registrosPorPagina . '&page=' . $i . $sortParams . '" class="page-link">' . $i . '</a></li>';
+                                                    echo '<li class="paginate_button page-item"><a href="' . getUrl("Tanque", "Tanque", "listar") . '&length=' . $registrosPorPagina . '&page=' . $i . $sortParams . '" class="page-link">' . $i . '</a></li>';
                                                 }
                                             }
 
@@ -168,7 +194,7 @@ include_once '../view/partials/header.php';
                                             if ($paginaActual < $totalPaginas) {
                                                 $paginaSiguiente = $paginaActual + 1;
                                                 $sortParams = isset($_GET['sort_column']) ? '&sort_column=' . $_GET['sort_column'] . '&sort_order=' . $_GET['sort_order'] : '';
-                                                echo '<li class="paginate_button page-item next"><a href="' . getUrl("Tanque", "Tanque", "list") . '&length=' . $registrosPorPagina . '&page=' . $paginaSiguiente . $sortParams . '" class="page-link">Siguiente</a></li>';
+                                                echo '<li class="paginate_button page-item next"><a href="' . getUrl("Tanque", "Tanque", "listar") . '&length=' . $registrosPorPagina . '&page=' . $paginaSiguiente . $sortParams . '" class="page-link">Siguiente</a></li>';
                                             } else {
                                                 echo '<li class="paginate_button page-item next disabled"><a href="#" class="page-link">Siguiente</a></li>';
                                             }
@@ -185,14 +211,13 @@ include_once '../view/partials/header.php';
     </div>
 </body>
 
-</html>
 
 <script>
     function cambiarRegistrosPorPagina(valor) {
         // Redirigir a la misma página con el nuevo parámetro de límite, manteniendo sort
         var sortColumn = '<?php echo isset($_GET['sort_column']) ? $_GET['sort_column'] : 'tt.nombre'; ?>';
         var sortOrder = '<?php echo isset($_GET['sort_order']) ? $_GET['sort_order'] : 'ASC'; ?>';
-        var baseUrl = '<?php echo getUrl("Tanque", "Tanque", "list"); ?>&length=' + valor + '&page=1';
+        var baseUrl = '<?php echo getUrl("Tanque", "Tanque", "listar"); ?>&length=' + valor + '&page=1';
         window.location.href = baseUrl + '&sort_column=' + encodeURIComponent(sortColumn) + '&sort_order=' + sortOrder;
     }
 
@@ -210,7 +235,7 @@ include_once '../view/partials/header.php';
         }
 
         // Redirigir con los parámetros de sort
-        var baseUrl = '<?php echo getUrl("Tanque", "Tanque", "list"); ?>&length=<?php echo $registrosPorPagina; ?>&page=1';
+        var baseUrl = '<?php echo getUrl("Tanque", "Tanque", "listar"); ?>&length=<?php echo $registrosPorPagina; ?>&page=1';
         window.location.href = baseUrl + '&sort_column=' + encodeURIComponent(column) + '&sort_order=' + currentSortOrder;
     }
 </script>
