@@ -29,7 +29,7 @@ if (empty($zooCria)) {  // Cambié a empty() para detectar null o array vacío
                         <?php
                         if (tieneAccion("Zoocriaderos", "Ver_detalle")) {
                             ?>
-                            <button id="verDetalle" type="button" class="btn btn-success btn-sm btn-ver-detalle" data-bs-toggle="modal"
+                            <button id="verDetalle" type="button" class="btn btn-primary btn-sm btn-ver-detalle" data-bs-toggle="modal"
                                 data-bs-target="#modalVerDetalle"
                                 data-url="<?= getUrl("Zoocriadero", "Zoocriadero", "verDetalle", array("id_zoocriadero" => $zoocriadero['id_zoocriadero']), "ajax"); ?>">
                                 Ver Detalle
@@ -38,7 +38,7 @@ if (empty($zooCria)) {  // Cambié a empty() para detectar null o array vacío
                         <?php
                         if (tieneAccion("Zoocriaderos", "Editar")) {
                             ?>
-                            <button type="button" class="btn btn-warning btn-sm btn-Editar" data-bs-toggle="modal"
+                            <button type="button" class="btn btn-info btn-sm btn-Editar" data-bs-toggle="modal"
                                 data-bs-target="#modalEditarZoocriadero"
                                 data-url="<?= getUrl("Zoocriadero", "Zoocriadero", "editar", array("id_zoocriadero" => $zoocriadero['id_zoocriadero']), "ajax"); ?>">
                                 Editar

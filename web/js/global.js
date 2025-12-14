@@ -3,7 +3,9 @@ $(document).ready(function() {
         let data = $(this).val();
         let url = $(this).data("url");
         // convertir a mayusculas la primera letra de cada palabra
+        data = data.trim();
         data = data.replace(/\b\w/g, function(l) { return l.toUpperCase() });
+        
 
         $.ajax({
             url: url,

@@ -19,18 +19,17 @@ if (isset($_SESSION['success'])) {
     unset($_SESSION['success']);
 }
 ?>
-<div class="container mt-4">
+<div class="container mt-2">
     <!-- Titulo del modulo -->
-    <div class="row mb-4">
+    <div class="row mb-1">
         <div class="col text-left">
-            <h2 class="font-monospace fw-bold fs-1"> Listado de Zoocriaderos <i class="fas fa-fish"></i></h2>
+            <h2 class="font-monospace fw-bold fs-1"> Listado de Zoocriaderos</h2>
         </div>
     </div>
-
     <div class="row mb-3">
-        <div class="col-md-4 mb-3">
-            <input type="text" class="form-control" placeholder="Buscar..." id="filtro"
-                data-url="<?php echo getUrl('Zoocriadero', 'Zoocriadero', 'filtro', false, 'ajax'); ?>">
+        <div class="col-md-5 mb-1">
+            <input type="text" class="form-control" placeholder="Nombre del Zoocriadero, Encargado, Barrio, Dirección"
+                id="filtro" data-url="<?php echo getUrl('Zoocriadero', 'Zoocriadero', 'filtro', false, 'ajax'); ?>">
         </div>
     </div>
 
@@ -47,7 +46,7 @@ if (isset($_SESSION['success'])) {
         <!-- Mostrar tabla solo si hay resultados -->
         <div class="table-responsive">
             <table class="table table-bordered table-striped">
-                <thead class="thead-dark">
+                <thead class="thead-custom" style="background-color: #1a87f4 !important;">
                     <tr>
                         <th>Nombre Zoocriadero</th>
                         <th>Encargado</th>
@@ -85,7 +84,7 @@ if (isset($_SESSION['success'])) {
                                         <?php
                                         if (tieneAccion("Zoocriaderos", "Ver_detalle")) {
                                             ?>
-                                            <button id="verDetalle" type="button" class="btn btn-success btn-sm btn-ver-detalle"
+                                            <button id="verDetalle" type="button" class="btn btn-primary btn-sm btn-ver-detalle"
                                                 data-bs-toggle="modal" data-bs-target="#modalVerDetalle"
                                                 data-url="<?= getUrl("Zoocriadero", "Zoocriadero", "verDetalle", array("id_zoocriadero" => $zoocriadero['id_zoocriadero']), "ajax"); ?>">
                                                 Ver Detalle
@@ -94,7 +93,7 @@ if (isset($_SESSION['success'])) {
                                         <?php
                                         if (tieneAccion("Zoocriaderos", "Editar")) {
                                             ?>
-                                            <button type="button" class="btn btn-warning btn-sm btn-Editar" data-bs-toggle="modal"
+                                            <button type="button" class="btn btn- btn-sm btn-info" data-bs-toggle="modal"
                                                 data-bs-target="#modalEditarZoocriadero"
                                                 data-url="<?= getUrl("Zoocriadero", "Zoocriadero", "editar", array("id_zoocriadero" => $zoocriadero['id_zoocriadero']), "ajax"); ?>">
                                                 Editar

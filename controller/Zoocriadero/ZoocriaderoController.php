@@ -275,5 +275,8 @@ class ZoocriaderoController
             error_log($e->getMessage());
         }
     }
+    public function tipoPermisos(){
+        
+    }
 }
 ?>

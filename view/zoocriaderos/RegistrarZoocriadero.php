@@ -2,7 +2,7 @@
     .form-container {
         background: transparent;
         padding: 30px;
-        margin: 20px auto;
+        margin: 0px auto;
         max-width: 1200px;
     }
 
@@ -152,9 +152,9 @@
 
 <div class="container">
     <div class="form-container">
-        <div class="row mb-4">
+        <div class="row mb-2">
             <div class="col text-center">
-                <h2 class="font-monospace fw-bold fs-1"> Registrar Zoocriadero <i class="fas fa-fish"></i></h2>
+                <h2 class="font-monospace fw-bold fs-1"> Registrar Zoocriadero</h2>
             </div>
         </div>
 
@@ -168,27 +168,27 @@
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <label for="nombreZoo" class="form-label">
-                            <i class="fas fa-tag"></i> Nombre del Zoocriadero *
+                            Nombre del Zoocriadero *
                         </label>
                         <input type="text" class="form-control" id="nombreZoo" name="nombreZoo" required minlength="3"
                             maxlength="100" placeholder="ej: Zoocriadero La Paz">
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="barrio" class="form-label">
-                            <i class="fas fa-map-marker-alt"></i> Barrio *
+                            Barrio *
                         </label>
                         <input type="text" class="form-control" id="barrio" name="barrio" required minlength="3"
                             maxlength="50" placeholder="ej:Los olivos">
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="comuna" class="form-label">
-                            <i class="fas fa-city"></i> Comuna *
+                            </i> Comuna *
                         </label>
                         <input type="text" class="form-control" id="comuna" name="comuna" value="Comuna 13" readonly>
                     </div>
                     <div class="col-12 mb-3">
                         <label class="form-label">
-                            <i class="fas fa-location-dot"></i> Dirección Completa *
+                            Dirección Completa *
                         </label>
                         <div class="row g-2">
                             <div class="col-md-2">
@@ -242,20 +242,20 @@
                         </div>
                         <div class="mt-1">
                             <small class="text-muted" id="ejemploDireccion">
-                                <i class="fas fa-info-circle"></i> Selecciona el tipo de vía
+                                </i> Selecciona el tipo de vía
                             </small>
                         </div>
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="telefono" class="form-label">
-                            <i class="fas fa-phone"></i> Teléfono *
+                            </i> Teléfono *
                         </label>
                         <input type="tel" class="form-control" id="telefono" name="telefono" required
                             pattern="[0-9]{10}" maxlength="10" placeholder="ej:3001234567">
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="correo" class="form-label">
-                            <i class="fas fa-envelope"></i> Correo Electrónico *
+                            Correo Electrónico *
                         </label>
                         <input type="email" class="form-control" id="correo" name="correo" required maxlength="100"
                             placeholder="ej:juanPerez@gmail.com">
@@ -263,7 +263,7 @@
                     <div class="col-12 mb-3">
                         <button type="button" class="btn btn-info w-100" data-bs-toggle="modal"
                             data-bs-target="#modalMapa">
-                            <i class="fas fa-map-location-dot"></i> Agregar Ubicación del Zoocriadero
+                            Agregar Ubicación del Zoocriadero
                         </button>
                     </div>
                 </div>
@@ -279,7 +279,7 @@
                     <!-- Documento -->
                     <div class="col-md-4 mb-3">
                         <label for="documentoEncargado" class="form-label">
-                            <i class="fas fa-id-card"></i> Documento *
+                            Documento *
                         </label>
                         <input type="text" class="form-control" id="documentoEncargado" name="documentoEncargado"
                             list="listaUsuarios" required minlength="6" maxlength="15">
@@ -296,7 +296,7 @@
                     <!-- Nombres -->
                     <div class="col-md-4 mb-3">
                         <label for="nombresEncargado" class="form-label">
-                            <i class="fas fa-user"></i> Nombres *
+                            Nombres *
                         </label>
                         <input type="text" class="form-control" id="nombresEncargado" name="nombresEncargado" readonly>
 
@@ -304,7 +304,7 @@
                     </div>
                     <div class="col-md-4 mb-3" hidden>
                         <label for="idEncargado" class="form-label">
-                            <i class="fas fa-user"></i> ID *
+                            ID *
                         </label>
                         <input type="text" hidden value="" name="idEncargado" id="idEncargado" required>
                     </div>
@@ -312,7 +312,7 @@
                     <!-- Apellidos -->
                     <div class="col-md-4 mb-3">
                         <label for="apellidosEncargado" class="form-label">
-                            <i class="fas fa-user"></i> Apellidos *
+                            Apellidos *
                         </label>
                         <input type="text" class="form-control" id="apellidosEncargado" name="apellidosEncargado"
                             readonly>
