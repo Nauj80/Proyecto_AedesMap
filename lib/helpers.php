@@ -80,8 +80,6 @@ function resolve()
     } else {
         echo "El modulo especificado no existe";
     }
-
-
 }
 
 ?>

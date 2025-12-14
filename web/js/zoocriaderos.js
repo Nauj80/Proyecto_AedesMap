@@ -68,6 +68,7 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
     });
+    
 
     // Tu código original para click (opcional, pero ahora redundante con show.bs.modal)
     // Lo dejo comentado; puedes removerlo si usas solo show.bs.modal

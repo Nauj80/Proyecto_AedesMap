@@ -220,16 +220,30 @@
                         </a>
                         <div class="collapse" id="rol">
                             <ul class="nav nav-collapse">
-                                <li>
-                                    <a href="maps/googlemaps.html">
-                                        <span class="sub-item">Google Maps</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="maps/jsvectormap.html">
-                                        <span class="sub-item">Jsvectormap</span>
-                                    </a>
-                                </li>
+                                <?php
+                                if (tienePermiso("Gestión de roles", "Consultar")) {
+
+                                    ?>
+                                    <li>
+                                        <a href="<?php echo getUrl("GestionRoles", "GestionRoles", "listar"); ?>">
+                                            <span class="sub-item">Consultar Roles</span>
+                                        </a>
+                                    </li>
+                                    <?php
+                                }
+                                ?>
+                                <?php
+                                if (tienePermiso("Gestión de roles", "Editar")) {
+
+                                    ?>
+                                    <li>
+                                        <a href="<?php echo getUrl("GestionRoles", "GestionRoles", "listar"); ?>">
+                                            <span class="sub-item">Permisos del rol</span>
+                                        </a>
+                                    </li>
+                                    <?php
+                                }
+                                ?>
                             </ul>
                         </div>
                     </li>

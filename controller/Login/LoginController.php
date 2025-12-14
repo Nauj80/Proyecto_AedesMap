@@ -96,7 +96,6 @@ class LoginController
             // Guardar permisos (módulo + acción)
             $_SESSION['permisos'][] = $modulo . ":" . $accion;
         }
-
     }
     private function contruirPermisos()
     {
