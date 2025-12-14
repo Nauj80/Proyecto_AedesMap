@@ -68,7 +68,7 @@
                     <div class="collapse" id="tipotanque">
                         <ul class="nav nav-collapse">
                             <li>
-                                <a href="<?php echo getUrl("TipoTanques", "TipoTanques", "list"); ?>">
+                                <a href="<?php echo getUrl("TipoTanques", "TipoTanques", "listar"); ?>">
                                     <span class="sub-item">Consultar Tipos de Tanque</span>
                                 </a>
                             </li>
@@ -89,7 +89,7 @@
                     <div class="collapse" id="tanques">
                         <ul class="nav nav-collapse">
                             <li>
-                                <a href="<?php echo getUrl("Tanque", "Tanque", "list"); ?>">
+                                <a href="<?php echo getUrl("Tanque", "Tanque", "listar"); ?>">
                                     <span class="sub-item">Consultar Tanques</span>
                                 </a>
                             </li>
