@@ -5,6 +5,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<meta http-equiv="Cache-Control" content="no-cache, must-revalidate" />
 	<meta http-equiv="Expires" content="Sat, 26 Jul 1997 05:00:00 GMT" />
+	<meta charset="UTF-8">
 	<title>ZooCriadero</title>
 	<meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
 	<link rel="icon" href="assets/img/kaiadmin/favicon.ico" type="image/x-icon" />

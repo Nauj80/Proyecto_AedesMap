@@ -371,7 +371,7 @@
                         <i class="fas fa-check-circle text-success" style="font-size: 3rem;"></i>
                     </div>
                     <p class="fs-6 text-muted mb-0">
-                        <?= $_SESSION['success'] ?? '' ?>
+                        <?php echo isset($_SESSION['success']) ? $_SESSION['success'] : ''; ?>
                     </p>
                 </div>
 
@@ -393,7 +393,7 @@
 
                 <div class="modal-header bg-danger text-white rounded-top-4 border-0">
                     <h5 class="modal-title fw-bold">
-                        <i class="fas fa-triangle-exclamation me-2"></i> Probelma al Registrar
+                        <i class="fas fa-triangle-exclamation me-2"></i> Problema al Registrar
                     </h5>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                 </div>
@@ -403,7 +403,7 @@
                         <i class="fas fa-xmark-circle text-danger" style="font-size: 3rem;"></i>
                     </div>
                     <p class="fs-6 text-muted mb-0">
-                        <?= $_SESSION['error'] ?? '' ?>
+                        <?php echo isset($_SESSION['error']) ? $_SESSION['error'] : ''; ?>
                     </p>
                 </div>
 

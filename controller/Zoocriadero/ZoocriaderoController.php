@@ -21,6 +21,8 @@ class ZoocriaderoController
         $sql = "SELECT zoocriaderos.*, usuarios.nombre AS nombre_usuario FROM zoocriaderos INNER JOIN usuarios ON zoocriaderos.id_usuario = usuarios.id_usuario WHERE (nombre_zoocriadero ILIKE '%$buscar%' OR direccion ILIKE '%$buscar%' OR usuarios.nombre ILIKE '%$buscar%' OR barrio ILIKE '%$buscar%')";
         $zoo = $objeto->select($sql);
         $zooCria = pg_fetch_all($zoo);
+        /*echo '<pre>';
+        echo var_dump($zooCria);*/
         include_once '../view/zoocriaderos/Filtro.php';
     }
 
@@ -39,10 +41,14 @@ class ZoocriaderoController
             $result = $objeto->select($sql);
             $zooCria = pg_fetch_assoc($result);
 
+            /*$_SESSION['console_log'][] = array(
+                'pagina' => 'Zoocriadero::filtro',
+                'data' => $zooCria
+            );*/
+
             include_once '../view/zoocriaderos/DetalleZoocriadero.php';
         }
     }
-
     public function editar()
     {
         $objeto = new ZoocriaderoModel();
@@ -72,28 +78,37 @@ class ZoocriaderoController
         $correo = $_POST['correo'];
 
         $sql = "UPDATE zoocriaderos SET 
-                        nombre_zoocriadero = '$nombre',
-                        direccion = '$direccion',
-                        barrio = '$barrio',
-                        telefono = '$telefono',
-                        correo = '$correo'
-                        WHERE id_zoocriadero = $id";
+                    nombre_zoocriadero = '$nombre',
+                    direccion = '$direccion',
+                    barrio = '$barrio',
+                    telefono = '$telefono',
+                    correo = '$correo'
+                    WHERE id_zoocriadero = $id";
 
         $result = $objeto->update($sql);
 
-        if (!$result) {
+        if ($result) {
+            // Éxito: devolver JSON
+            echo json_encode(array(
+                'success' => true,
+                'message' => 'Zoocriadero actualizado correctamente.'
+            ));
+        } else {
+            // Error: obtener el mensaje de PostgreSQL
             $error_msg = pg_last_error($objeto->getConnect());
-            if (strpos($error_msg, 'telefono') !== false && strpos($error_msg, 'llave duplicada') !== false) {
-                $_SESSION['error'] = 'Ya existe un zoocriadero con ese número de teléfono.';
-            } elseif (strpos($error_msg, 'correo') !== false && strpos($error_msg, 'llave duplicada') !== false) {
-                $_SESSION['error'] = 'Ya existe un zoocriadero con ese correo electrónico.';
-            } else {
-                $_SESSION['error'] = 'Error al actualizar el zoocriadero';
-            }
-        }
+            $custom_message = 'Error al actualizar el zoocriadero.';
 
-        // Redirigir de vuelta a la lista
-        redirect(getUrl("Zoocriadero", "Zoocriadero", "listar"));
+            if (strpos($error_msg, 'telefono') !== false && strpos($error_msg, 'llave duplicada') !== false) {
+                $custom_message = 'Ya existe un zoocriadero con ese número de teléfono.';
+            } elseif (strpos($error_msg, 'correo') !== false && strpos($error_msg, 'llave duplicada') !== false) {
+                $custom_message = 'Ya existe un zoocriadero con ese correo electrónico.';
+            }
+
+            echo json_encode(array(
+                'success' => false,
+                'message' => $custom_message
+            ));
+        }
     }
     public function inhabilitar()
     {
@@ -109,9 +124,15 @@ class ZoocriaderoController
 
             if ($result) {
                 $accion = $nuevo_estado == 1 ? 'habilitado' : 'inhabilitado';
-                echo json_encode(['success' => true, 'message' => "Zoocriadero $accion correctamente."]);
+                echo json_encode(array(
+                    'success' => true,
+                    'message' => 'Zoocriadero ' . $accion . ' correctamente.'
+                ));
             } else {
-                echo json_encode(['success' => false, 'message' => 'Error al cambiar el estado del zoocriadero.']);
+                echo json_encode(array(
+                    'success' => false,
+                    'message' => 'Error al cambiar el estado del zoocriadero.'
+                ));
             }
         }
     }
