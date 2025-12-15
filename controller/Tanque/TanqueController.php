@@ -2,14 +2,14 @@
 
 include_once '../model/Tanques/TanquesModel.php';
 include_once '../model/TipoTanques/TipoTanquesModel.php';
-include_once '../model/Zoocriaderos/ZoocriaderosModel.php';
+include_once '../model/Zoocriaderos/ZoocriaderoModel.php';
 
 class TanqueController
 {
     public function getCreate()
     {
 
-        $objZoocriadero = new ZoocriaderosModel();
+        $objZoocriadero = new ZoocriaderoModel();
         $sqlZoo = "SELECT * FROM zoocriaderos z WHERE z.id_estado_zoocriadero=1";
         $zoocriadero = $objZoocriadero->select($sqlZoo);
         $objTipoTanque = new TanquesModel();

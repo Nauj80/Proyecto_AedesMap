@@ -1,0 +1,167 @@
+MAP
+   NAME "cali"
+   SIZE 800 700
+   STATUS ON
+
+   EXTENT 1053867 860190 1068491 879411
+   SHAPEPATH "shapesCali"
+   IMAGECOLOR 255 255 255
+
+   FONTSET "misc/fonts/fonts.txt"
+   SYMBOLSET "misc/symbols/symbols.sym"
+
+   IMAGECOLOR 255 255 255
+   #UNITS dd
+
+   WEB
+     IMAGEPATH "C:/ms4w/tmp/ms_tmp/"
+     IMAGEURL "/ms_tmp/"
+   END 
+
+   LEGEND
+       STATUS ON
+       IMAGECOLOR 255 255 255
+       POSITION LL
+       KEYSIZE 30 30
+       KEYSPACING 10 10
+       LABEL
+            TYPE truetype
+       FONT "sans"
+       SIZE 9
+       COLOR 0 0 0
+   END
+   OUTLINECOLOR 0 0 0
+   TRANSPARENT ON
+   END
+
+   SCALEBAR
+      STYLE 0
+      STATUS EMBED
+      SIZE 250 4
+      COLOR 0 0 0
+      UNITS KILOMETERS
+      INTERVALS 5
+      TRANSPARENT OFF
+      POSITION LL
+      BACKGROUNDCOLOR 255 255 255
+      IMAGECOLOR 255 255 255
+      OUTLINECOLOR 211 211 211
+      LABEL
+          COLOR 0 0 0
+          SIZE TINY
+      END
+    END
+
+   LAYER
+     NAME "Cali"
+     STATUS ON
+     DATA "Cali3.shp"
+     TYPE POLYGON
+     CLASS
+       STYLE
+         COLOR 150 200 250
+         OUTLINECOLOR 0 0 0
+       END
+     END
+   END 
+
+
+LAYER
+     TRANSPARENCY 40
+     NAME "Comunas"
+     STATUS ON
+     DATA "ComunasC.shp"
+     LABELITEM "nombre"
+     TYPE POLYGON
+     CLASS
+       NAME "LABEL"
+       STYLE
+         COLOR 150 200 250
+         OUTLINECOLOR 0 0 0
+       END
+       LABEL
+            SIZE SMALL
+            COLOR 0 0 0
+        END
+     END
+   END  
+
+   LAYER
+   TRANSPARENCY 60
+     NAME "Barrios"
+     STATUS ON
+     DATA "BarriosC.shp"
+     LABELITEM "BARRIO"
+     TYPE POLYGON
+     CLASS
+       NAME "LABEL"
+       STYLE
+         COLOR 150 200 250
+         OUTLINECOLOR 0 0 0
+       END
+       LABEL
+            SIZE SMALL
+            COLOR 0 0 0
+        END
+     END
+   END  
+
+    
+
+LAYER
+TRANSPARENCY 70
+     NAME "Cali2"
+     STATUS ON
+     DATA "Cali2.shp"
+     TYPE POLYGON
+     CLASS
+       STYLE
+         COLOR 150 200 250
+         OUTLINECOLOR 0 0 0
+       END
+     END
+   END 
+
+   LAYER
+     TRANSPARENCY 80
+     NAME "Malla_Vial"
+     STATUS ON
+     DATA "mallaVialC.shp"
+     TYPE LINE
+     LABELITEM "nombre"
+     CLASS
+       NAME "CALI"
+       STYLE
+         COLOR 80 120 150
+         OUTLINECOLOR 0 0 0
+       END
+       LABEL
+            FONT "sans"
+            TYPE truetype
+            ENCODING "UTF-8"
+            SIZE 9
+            POSITION CC
+            ANGLE auto
+            PARTIALS TRUE
+            COLOR 0 0 0
+        END
+     END
+   END
+
+   LAYER
+     CONNECTIONTYPE postgis
+     NAME "Puntos"
+     STATUS ON
+     CONNECTION "host=localhost port=5432 dbname=prueba user=postgres password=1234"
+     DATA "geom FROM (SELECT * FROM puntos) AS puntos USING UNIQUE id USING SRID=4326"
+     TYPE POINT
+     CLASS
+       STYLE
+        SYMBOL star
+        SIZE 30
+         COLOR 0 34 255
+         OUTLINECOLOR 0 255 0
+       END
+     END
+   END  
+END

@@ -25,7 +25,7 @@
         <div class="sidebar-content">
             <ul class="nav nav-secondary">
                 <li class="nav-item active">
-                    <a data-bs-toggle="collapse" href="#mapa" class="collapsed" aria-expanded="false">
+                    <a href="<?= getUrl("Mapa", "Mapa", "listar") ?>">
                         <i class="fas fa-map-marked-alt"></i>
                         <p>Visualización del mapa</p>
                     </a>
@@ -86,13 +86,13 @@
                         <div class="collapse" id="tipotanque">
                             <ul class="nav nav-collapse">
                                 <li>
-                                    <a href="sidebar-style-2.html">
-                                        <span class="sub-item">Sidebar Style 2</span>
+                                    <a href="<?php echo getUrl("TipoTanques", "TipoTanques", "listar"); ?>">
+                                        <span class="sub-item">Consultar Tipos de Tanque</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="icon-menu.html">
-                                        <span class="sub-item">Icon Menu</span>
+                                    <a href="<?php echo getUrl("TipoTanques", "TipoTanques", "getCreate"); ?>">
+                                        <span class="sub-item">Crear Tipo de Tanque</span>
                                     </a>
                                 </li>
                             </ul>
@@ -114,13 +114,13 @@
                         <div class="collapse" id="tanques">
                             <ul class="nav nav-collapse">
                                 <li>
-                                    <a href="sidebar-style-2.html">
-                                        <span class="sub-item">Sidebar Style 2</span>
+                                    <a href="<?php echo getUrl("Tanque", "Tanque", "listar"); ?>">
+                                        <span class="sub-item">Consultar Tanques</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="icon-menu.html">
-                                        <span class="sub-item">Icon Menu</span>
+                                    <a href="<?php echo getUrl("Tanque", "Tanque", "getCreate"); ?>">
+                                        <span class="sub-item">Crear Tanques</span>
                                     </a>
                                 </li>
                             </ul>
