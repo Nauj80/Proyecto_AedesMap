@@ -164,7 +164,7 @@ TRANSPARENCY 70
        NAME "Zoocriaderos"
        STYLE
         SYMBOL zoo
-        SIZE 50
+        SIZE 40
          COLOR 0 34 255
          OUTLINECOLOR 0 255 0
        END

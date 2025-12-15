@@ -175,6 +175,10 @@ $urlLegend = $mapLegend->saveWebImage(MS_GIF, 0, 0, -1);
     }
 
 
+    .toolbarP>div {
+        opacity: 1 !important;
+        background-color: #7e79dfff !important;
+    }
 
     /* Responsive */
     @media (max-width: 960px) {
@@ -238,7 +242,13 @@ $urlLegend = $mapLegend->saveWebImage(MS_GIF, 0, 0, -1);
 
                     <form name="select_layers" class="col-2">
                         <p align="left">
-                            <input checked onclick="chgLayers()" type="checkbox" name="layer[0]" value="Cali">
+                            <input checked onclick="chgLayers()" type="checkbox" name="layer[5]" value="Puntos">
+                        </p>
+                        <p align="left">
+                            <input checked onclick="chgLayers()" type="checkbox" name="layer[4]" value="Malla_Vial">
+                        </p>
+                        <p align="left">
+                            <input checked onclick="chgLayers()" type="checkbox" name="layer[3]" value="Cali2">
                         </p>
                         <p align="left">
                             <input checked onclick="chgLayers()" type="checkbox" name="layer[1]" value="Barrios">
@@ -247,13 +257,7 @@ $urlLegend = $mapLegend->saveWebImage(MS_GIF, 0, 0, -1);
                             <input checked onclick="chgLayers()" type="checkbox" name="layer[2]" value="Comunas">
                         </p>
                         <p align="left">
-                            <input checked onclick="chgLayers()" type="checkbox" name="layer[3]" value="Cali2">
-                        </p>
-                        <p align="left">
-                            <input checked onclick="chgLayers()" type="checkbox" name="layer[4]" value="Malla_Vial">
-                        </p>
-                        <p align="left">
-                            <input checked onclick="chgLayers()" type="checkbox" name="layer[5]" value="Puntos">
+                            <input checked onclick="chgLayers()" type="checkbox" name="layer[0]" value="Cali">
                         </p>
                     </form>
                     <div id="leyendas" class="col-4" aria-label="Leyenda del mapa">
@@ -287,6 +291,7 @@ $urlLegend = $mapLegend->saveWebImage(MS_GIF, 0, 0, -1);
 
     myMap1.getToolbar(0).addMapTool(insertarZoo);
     myMap1.getToolbar(0).addMapTool(consultarZoo);
+
 
     myMap1.redraw();
     myMap2.redraw();
