@@ -1,9 +1,3 @@
-<?php
-include_once '../lib/helpers.php';
-include_once '../lib/helpersLogin.php';
-include_once '../view/partials/header.php';
-?>
-
     <div class="page-header">
         <h3 class="fw-bold mb-3">Eliminar usuario</h3>
     </div>
