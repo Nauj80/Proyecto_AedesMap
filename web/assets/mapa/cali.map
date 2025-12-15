@@ -163,8 +163,8 @@ TRANSPARENCY 70
      CLASS
        NAME "Zoocriaderos"
        STYLE
-        SYMBOL star
-        SIZE 30
+        SYMBOL zoo
+        SIZE 50
          COLOR 0 34 255
          OUTLINECOLOR 0 255 0
        END
