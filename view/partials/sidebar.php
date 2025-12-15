@@ -47,7 +47,7 @@
                     ?>
                         <div class="collapse" id="zoocriadero">
                             <ul class="nav nav-collapse">
-                                <?php if (tienePermiso("Zoocriaderos", "Crear")) { ?>
+                                <?php if (tienePermiso("Zoocriaderos", "Registrar")) { ?>
                                     <li>
                                         <a href="<?= getUrl("Zoocriadero", "Zoocriadero", "registrar") ?>">
                                             <span class="sub-item">Registrar Zoocriadero</span>
@@ -80,7 +80,7 @@
                         </a>
                         <div class="collapse" id="tipotanque">
                             <ul class="nav nav-collapse">
-                                <?php if (tienePermiso("Tipo de tanques", "Crear")) { ?>
+                                <?php if (tienePermiso("Tipo de tanques", "Registrar")) { ?>
                                     <li>
                                         <a href="<?php echo getUrl("TipoTanques", "TipoTanques", "getCreate"); ?>">
                                             <span class="sub-item">Crear Tipo de Tanque</span>
@@ -112,7 +112,7 @@
                         </a>
                         <div class="collapse" id="tanques">
                             <ul class="nav nav-collapse">
-                                <?php if (tienePermiso("Tanques", "Crear")) { ?>
+                                <?php if (tienePermiso("Tanques", "Registrar")) { ?>
                                     <li>
                                         <a href="<?php echo getUrl("Tanque", "Tanque", "getCreate"); ?>">
                                             <span class="sub-item">Crear Tanque</span>
@@ -144,7 +144,7 @@
                         </a>
                         <div class="collapse" id="tipoactividades">
                             <ul class="nav nav-collapse">
-                                <?php if (tienePermiso("Tipo de actividades", "Crear")) { ?>
+                                <?php if (tienePermiso("Tipo de actividades", "Registrar")) { ?>
                                     <li>
                                         <a href="<?php echo getUrl("TipoActividades", "TipoActividades", "create") ?>">
                                             <span class="sub-item">Registro de actividad</span>
@@ -176,7 +176,7 @@
                         </a>
                         <div class="collapse" id="actividades">
                             <ul class="nav nav-collapse">
-                                <?php if (tienePermiso("Actividades en tanques", "Crear")) { ?>
+                                <?php if (tienePermiso("Actividades en tanques", "Registrar")) { ?>
                                     <li>
                                         <a href="<?php echo getUrl("ActividadesSeguimiento", "Actividades", "create") ?>">
                                             <span class="sub-item">Registro de seguimiento</span>
@@ -208,7 +208,7 @@
                         </a>
                         <div class="collapse" id="usuarios">
                             <ul class="nav nav-collapse">
-                                <?php if (tienePermiso("Gestión de usuarios", "Crear")) { ?>
+                                <?php if (tienePermiso("Gestión de usuarios", "Registrar")) { ?>
                                     <li>
                                         <a href="maps/googlemaps.html">
                                             <span class="sub-item">Google Maps</span>
@@ -240,7 +240,7 @@
                         </a>
                         <div class="collapse" id="rol">
                             <ul class="nav nav-collapse">
-                                <?php if (tienePermiso("Gestión de roles", "Crear")) { ?>
+                                <?php if (tienePermiso("Gestión de roles", "Registrar")) { ?>
                                     <li>
                                         <a href="<?php echo getUrl("GestionRoles", "GestionRoles", "listar"); ?>">
                                             <span class="sub-item">Permisos del rol</span>
@@ -272,7 +272,7 @@
                         </a>
                         <div class="collapse" id="configuracion">
                             <ul class="nav nav-collapse">
-                                <?php if (tienePermiso("Configuración", "Crear")) { ?>
+                                <?php if (tienePermiso("Configuración", "Registrar")) { ?>
                                     <li>
                                         <a href="charts/charts.html">
                                             <span class="sub-item">Chart Js</span>
@@ -304,7 +304,7 @@
                         </a>
                         <div class="collapse" id="reportes">
                             <ul class="nav nav-collapse">
-                                <?php if (tienePermiso("Reportes", "Crear")) { ?>
+                                <?php if (tienePermiso("Reportes", "Registrar")) { ?>
                                     <li>
                                         <a href="charts/charts.html">
                                             <span class="sub-item">Chart Js</span>
