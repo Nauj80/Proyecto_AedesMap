@@ -149,7 +149,7 @@
             <button type="submit" class="btn btn-success btn-lg mb-2 mb-md-0 me-md-2">
                 <i class="fas fa-save me-2"></i> Registrar Seguimiento
             </button>
-            <a href="<?php echo getUrl("ActividadesSeguimiento","Actividades","list")?>" class="btn btn-secondary btn-lg ms-2">
+            <a href="<?php echo getUrl("ActividadesSeguimiento","Actividades","listar")?>" class="btn btn-secondary btn-lg ms-2">
                 <i class="fas fa-list me-2"></i> Ver Historial
             </a>
         </div>
