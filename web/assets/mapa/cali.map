@@ -58,6 +58,7 @@ MAP
      DATA "Cali3.shp"
      TYPE POLYGON
      CLASS
+       NAME "Cali"
        STYLE
          COLOR 150 200 250
          OUTLINECOLOR 0 0 0
@@ -75,6 +76,7 @@ LAYER
      TYPE POLYGON
      CLASS
        NAME "LABEL"
+       NAME "Comunas"
        STYLE
          COLOR 150 200 250
          OUTLINECOLOR 0 0 0
@@ -95,6 +97,7 @@ LAYER
      TYPE POLYGON
      CLASS
        NAME "LABEL"
+       NAME "Barrios"
        STYLE
          COLOR 150 200 250
          OUTLINECOLOR 0 0 0
@@ -115,6 +118,7 @@ TRANSPARENCY 70
      DATA "Cali2.shp"
      TYPE POLYGON
      CLASS
+       NAME "Manzanas"
        STYLE
          COLOR 150 200 250
          OUTLINECOLOR 0 0 0
@@ -131,6 +135,7 @@ TRANSPARENCY 70
      LABELITEM "nombre"
      CLASS
        NAME "CALI"
+       NAME "Malla vial"
        STYLE
          COLOR 80 120 150
          OUTLINECOLOR 0 0 0
@@ -152,10 +157,11 @@ TRANSPARENCY 70
      CONNECTIONTYPE postgis
      NAME "Puntos"
      STATUS ON
-     CONNECTION "host=localhost port=5432 dbname=prueba user=postgres password=1234"
-     DATA "geom FROM (SELECT * FROM puntos) AS puntos USING UNIQUE id USING SRID=4326"
+     CONNECTION "host=localhost port=5432 dbname=zoocriadero user=postgres password=1234"
+     DATA "coordenada FROM zoocriaderos AS puntos USING UNIQUE id_zoocriadero USING SRID=4326"
      TYPE POINT
      CLASS
+       NAME "Zoocriaderos"
        STYLE
         SYMBOL star
         SIZE 30

@@ -16,7 +16,9 @@
 //Object.prototype.objRef = null;
 
 var pixel_img = new Image();
-pixel_img.src = "misc/img/pixel.gif";
+// Base path for mscross assets (can be set from the page as window.MSCROSS_BASE)
+var MSCROSS_BASE = window.MSCROSS_BASE || "misc";
+pixel_img.src = MSCROSS_BASE + "/img/pixel.gif";
 var browser = new Browser();
 var dragObj = new Object();
 dragObj.zIndex = 0;
@@ -92,7 +94,7 @@ function msMap(DivTag, ControlType, p_protocol) {
     return _toolbars[p];
   };
   //var _iconLoading = 'img/button_loading.png';
-  var _iconLoading = "misc/img/load.gif";
+  var _iconLoading = MSCROSS_BASE + "/img/load.gif";
 
   // WMS.GetMap protocol specific
   var _wms_imageformat = "image/png";
@@ -2228,12 +2230,12 @@ function msToolbar(p_msMap, _control, _default) {
   var _msMap = p_msMap;
   var _tagMap = _msMap.getTagMap();
 
-  // Toolbar Default Icons...
-  var _iconFullExtentButton = "misc/img/en-todo-el-mundo.png";
-  var _iconZoomboxButton = "misc/img/ampliar.png";
-  var _iconPanButton = "misc/img/mano.png";
-  var _iconZoominButton = "misc/img/simbolo-de-aumento-de-zoom.png";
-  var _iconZoomoutButton = "misc/img/disminuir-el-zoom.png";
+  // Toolbar Default Icons (use MSCROSS_BASE to allow configurable public path)
+  var _iconFullExtentButton = MSCROSS_BASE + "/img/en-todo-el-mundo.png";
+  var _iconZoomboxButton = MSCROSS_BASE + "/img/ampliar.png";
+  var _iconPanButton = MSCROSS_BASE + "/img/mano.png";
+  var _iconZoominButton = MSCROSS_BASE + "/img/simbolo-de-aumento-de-zoom.png";
+  var _iconZoomoutButton = MSCROSS_BASE + "/img/disminuir-el-zoom.png";
 
   this.getTag = function () {
     return _tagToolbar;

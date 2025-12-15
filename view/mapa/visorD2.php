@@ -26,6 +26,7 @@ $urlLegend = $mapLegend->saveWebImage(MS_GIF, 0, 0, -1);
     <title>Visor D</title>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="<?php echo $MISC_URL ?>/img/dc.css">
+    <script type="text/javascript">window.MSCROSS_BASE = '<?php echo $MISC_URL ?>';</script>
     <script src="<?php echo $MISC_URL ?>/lib/mscross-1.1.9.js" type="text/javascript"></script>
 
     <style type="text/css">
@@ -97,7 +98,7 @@ $urlLegend = $mapLegend->saveWebImage(MS_GIF, 0, 0, -1);
         </div>
         <div class="col">
 
-            <div class="mscross" style="overflow:hidden; width: 750px; height:700px; -moz-user-select:none; position:relative;" id="dc_main">
+            <div class="mscross" style="overflow:hidden; width: 1200px; height:700px; -moz-user-select:none; position:relative;" id="dc_main">
                 <!-- Fallback: imagen renderizada por MapScript en servidor -->
                 <img src="<?php echo $urlImage ?>" alt="Mapa" style="width:100%;height:100%;object-fit:cover;" id="dc_fallback">
                 <div id="Layer1">
@@ -115,7 +116,7 @@ $urlLegend = $mapLegend->saveWebImage(MS_GIF, 0, 0, -1);
         myMap1.setCgi("<?php echo $MAPSERV_PATH; ?>");
         myMap1.setMapFile("<?php echo $MAPFILE_PATH; ?>");
         myMap1.setFullExtent(1050867.55, 1075491.88, 858820.55);
-        myMap1.setLayers("Cali Puntos");
+        myMap1.setLayers("Cali  Puntos  Barrios  Comunas  Cali2  Malla_vial");
 
         myMap2 = new msMap(document.getElementById("dc_main2"));
         myMap2.setActionNone();
@@ -124,9 +125,9 @@ $urlLegend = $mapLegend->saveWebImage(MS_GIF, 0, 0, -1);
         myMap2.setLayers("Cali");
         myMap1.setReferenceMap(myMap2);
 
-        var insertarZoo = new msTool("InsertarCoordenadas", insertZ, "<?php echo $MISC_URL ?>/img/marker-gold.png", queryI);
+        var insertarZoo = new msTool("InsertarCoordenadas", insertZ, "<?php echo $MISC_URL ?>/img/ubicacion.png", queryI);
 
-        var consultarZoo = new msTool("Obtener Informacion", consultarZ, "<?php echo $MISC_URL ?>/img/marker-blue.png", queryII);
+        var consultarZoo = new msTool("Obtener Informacion", consultarZ, "<?php echo $MISC_URL ?>/img/punto-de-informacion.png", queryII);
 
         myMap1.getToolbar(0).addMapTool(insertarZoo);
         myMap1.getToolbar(0).addMapTool(consultarZoo);
@@ -198,6 +199,8 @@ $urlLegend = $mapLegend->saveWebImage(MS_GIF, 0, 0, -1);
                     if (consulta1.readyState == 4) {
                         var result = consulta1.responseText;
                         alert(result);
+                        myMap1.redraw();
+                        
                     }
                 }
                 consulta1.send(null);

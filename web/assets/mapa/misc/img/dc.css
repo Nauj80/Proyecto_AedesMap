@@ -91,10 +91,10 @@ TD {
 	vertical-align: top;
 }
 
-SPAN
+/* SPAN
 {
   display: none;
-}
+} */
 
 .topmenu, .topmenu_set
 {
@@ -159,11 +159,11 @@ A:visited {COLOR: #115aa4;}
   background-image: url(logo_sm_144x35.jpg);
   background-repeat: no-repeat;
   background-position:  right center;
-  background-color: #ebf6fa;
+  /* background-color: #ebf6fa; */
 /*  border-bottom: 1px solid #7ea3bf; */
 /*  border-top:    1px solid #7ea3bf; */ /* xxx */
-  padding-left: 16px;
-  width: 144px;
+ /*  padding-left: 16px;
+  width: 144px; */
 /* 140px */
 }
 
