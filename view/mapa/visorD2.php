@@ -199,8 +199,7 @@ $urlLegend = $mapLegend->saveWebImage(MS_GIF, 0, 0, -1);
                     if (consulta1.readyState == 4) {
                         var result = consulta1.responseText;
                         alert(result);
-                        myMap1.redraw();
-                        
+                        window.location = window.location;
                     }
                 }
                 consulta1.send(null);

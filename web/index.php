@@ -22,7 +22,7 @@ echo "<div class='page-inner'>";
 if (isset($_GET['modulo'])) {
     resolve();
 } else {
-    include_once '../view/partials/content.php';
+    include_once '../view/Mapa/visorD2.php';
 }
 echo "</div>";
 echo "</div>";
