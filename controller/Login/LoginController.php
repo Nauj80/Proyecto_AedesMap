@@ -31,20 +31,20 @@ class LoginController
             $stored_hash = $usu['contrasena'];
 
             // Verificar usando bcrypt
-            if ($stored_hash === sha1(trim($usu_clave))) {
+            if (password_verify($usu_clave, $stored_hash)) {
                 $_SESSION['auth'] = "ok";
                 $this->contruirPermisos();
                 $this->permisos($id_rol);
-
-                $_SESSION['usuario'] = array(
+                $_SESSION['usuario'] = [
+                    'id' => $usu['id_usuario'],
                     'documento' => $usu['documento'],
                     'nombre' => $usu['nombre'],
                     'apellido' => $usu['apellido'],
                     'telefono' => $usu['telefono'],
                     'correo' => $usu['correo']
-                );
-
+                ];
                 redirect("index.php");
+                dd($_SESSION['usuario']['documento']);
                 return;
             }
         }
@@ -96,12 +96,14 @@ class LoginController
             // Guardar permisos (módulo + acción)
             $_SESSION['permisos'][] = $modulo . ":" . $accion;
         }
+
     }
     private function contruirPermisos()
     {
-        $_SESSION['modulos'] = array();
-        $_SESSION['acciones'] = array();
-        $_SESSION['permisos'] = array();
+        $_SESSION['modulos'] = [];
+        $_SESSION['acciones'] = [];
+        $_SESSION['permisos'] = [];
+
     }
 }
 ?>

@@ -1,0 +1,102 @@
+<?php
+include_once 'modales/verDetalle.php';
+include_once 'modales/formEditar.php';
+include_once 'modales/inhabilitar.php';
+?>
+
+<div class="mt-3 container">
+    <div class="display-4 mb-4 border-bottom pb-2">
+        Historial de Seguimientos por Tanque 🗓️
+    </div>
+    
+    <div class="table-responsive mt-5">
+
+        <?php if (isset($_SESSION['success_message'])): /* ... Mensajes de éxito ... */ endif; ?>
+        <?php if (isset($_SESSION['error'])): /* ... Mensajes de error ... */ endif; ?>
+
+        <div class="row mb-3">
+            <div class="col-md-4 mb-3">
+                <input type="text" class="form-control" placeholder="Buscar..." id="filtro"
+                    data-url="<?php echo getUrl("ActividadesSeguimiento", "Actividades", "filtro", false, pagina: "ajax"); ?>">
+            </div>
+        </div>
+
+        <table class="table table-stripper table-hover">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Fecha</th>
+                    <th>Zoocriadero</th>
+                    <th>Tipo tanque</th>
+                    <th>Tanque</th>
+                    <th>Auxiliar</th>
+                    <?php
+                        // Muestra la columna "Acciones" si tiene AL MENOS UN permiso
+                        if (tieneAccion("Actividades en tanques", "Editar") || tieneAccion("Actividades en tanques", "Ver_detalle") || tieneAccion("Actividades en tanques", "Inhabilitar") || tieneAccion("Actividades en tanques", "Habilitar")) {
+                            ?>
+                            <th>Acciones</th>
+                            <?php
+                        }
+                    ?>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                    $modulo = "Actividades en tanques"; // Definimos el módulo
+                    foreach($seguimientos as $seguimiento){
+                        echo "<tr>";
+                            echo "<td>".$seguimiento['id_seguimiento']."</td>";
+                            echo "<td>".$seguimiento['fecha']."</td>";
+                            echo "<td>".$seguimiento['nombre_zoocriadero']."</td>";
+                            echo "<td>".$seguimiento['nombre_tipo_tanque']."</td>";
+                            echo "<td>".$seguimiento['nombre_tanque']."</td>";
+                            echo "<td>".$seguimiento['nombre_responsable']." ".$seguimiento['apellido_responsable']."</td>";
+                            
+                            // Solo mostrar la columna TD si tiene algún permiso
+                            if (tieneAccion($modulo, "Editar") || tieneAccion($modulo, "Ver_detalle") || tieneAccion($modulo, "Inhabilitar") || tieneAccion($modulo, "Habilitar")) {
+                                echo "<td>";
+                                    echo "<div class='d-flex flex-wrap gap-1'>";
+                                        
+                                        // Botón Editar
+                                        if (tieneAccion($modulo, "Editar")) {
+                                            echo "<button type='button' class='btn btn-primary btn-sm btn-editar-seguimiento' 
+                                                data-url='".getUrl("ActividadesSeguimiento","Actividades","Editar",array("id"=>$seguimiento['id_seguimiento']), "ajax")."'>
+                                                Editar
+                                            </button>";
+                                        }
+                                        
+                                        // Botón Detalle
+                                        if (tieneAccion($modulo, "Ver_detalle")) {
+                                            echo "<button type='button' class='btn btn-info btn-sm btn-ver-seguimiento' 
+                                                data-url='".getUrl("ActividadesSeguimiento","Actividades","detalle",array("id"=>$seguimiento['id_seguimiento']), "ajax")."'>
+                                                Detalle
+                                            </button>";
+                                        }
+                                        
+                                        if ($seguimiento['id_estado'] == 1) {
+                                            // Botón Inhabilitar
+                                            if (tieneAccion($modulo, "Inhabilitar")) {
+                                                echo "<button type='button' 
+                                                    class='btn btn-danger btn-sm' 
+                                                    data-bs-toggle='modal' 
+                                                    data-bs-target='#modalInhabilitarSeguimiento' 
+                                                    data-id='" . $seguimiento['id_seguimiento'] . "'>
+                                                    Inhabilitar
+                                                </button>";
+                                            }
+                                        } elseif ($seguimiento['id_estado'] == 2){
+                                            // Botón Habilitar
+                                            if (tieneAccion($modulo, "Habilitar")) {
+                                                echo "<a href='".getUrl("ActividadesSeguimiento","Actividades","updateStatus",array("id"=>$seguimiento['id_seguimiento']))."' class='btn btn-success btn-sm'>Habilitar</a>";
+                                            }
+                                        }
+                                    echo "</div>";
+                                echo "</td>";
+                            }
+                        echo "</tr>";
+                    }
+                ?>
+            </tbody>
+        </table>
+    </div>
+</div>

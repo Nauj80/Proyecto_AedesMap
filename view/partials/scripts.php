@@ -34,6 +34,8 @@
 
 <!-- Kaiadmin DEMO methods, don't include it in your project! -->
 <script src="assets/js/setting-demo.js"></script>
+<script src='js/actividades.js'></script>
+<script src='js/seguimiento.js'></script>
 <script src="js/zoocriaderos.js"></script>
 <script src="js/global.js"></script>
 <script src="assets/js/demo.js"></script>
