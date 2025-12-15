@@ -84,19 +84,19 @@ if (isset($_SESSION['success'])) {
                                         <?php
                                         if (tieneAccion("Zoocriaderos", "Ver_detalle")) {
                                             ?>
-                                            <button id="verDetalle" type="button" class="btn btn-primary btn-sm btn-ver-detalle"
+                                            <?php
+                                            if (tieneAccion("Zoocriaderos", "Editar")) {
+                                                ?>
+                                                <button type="button" class="btn btn- btn-sm btn-primary" data-bs-toggle="modal"
+                                                    data-bs-target="#modalEditarZoocriadero"
+                                                    data-url="<?= getUrl("Zoocriadero", "Zoocriadero", "editar", array("id_zoocriadero" => $zoocriadero['id_zoocriadero']), "ajax"); ?>">
+                                                    Editar
+                                                </button>
+                                            <?php } ?>
+                                            <button id="verDetalle" type="button" class="btn btn-info btn-sm btn-ver-detalle"
                                                 data-bs-toggle="modal" data-bs-target="#modalVerDetalle"
                                                 data-url="<?= getUrl("Zoocriadero", "Zoocriadero", "verDetalle", array("id_zoocriadero" => $zoocriadero['id_zoocriadero']), "ajax"); ?>">
                                                 Ver Detalle
-                                            </button>
-                                        <?php } ?>
-                                        <?php
-                                        if (tieneAccion("Zoocriaderos", "Editar")) {
-                                            ?>
-                                            <button type="button" class="btn btn- btn-sm btn-info" data-bs-toggle="modal"
-                                                data-bs-target="#modalEditarZoocriadero"
-                                                data-url="<?= getUrl("Zoocriadero", "Zoocriadero", "editar", array("id_zoocriadero" => $zoocriadero['id_zoocriadero']), "ajax"); ?>">
-                                                Editar
                                             </button>
                                         <?php } ?>
                                         <?php

@@ -1,5 +1,5 @@
 <?php if ($zooCria): ?>
-    <div class="row">
+    <div class="row bg-blue">
         <div class="col-md-6 mb-3">
             <label class="form-label">Nombre del Zoocriadero</label>
             <input type="text" name="nombre_zoocriadero" class="form-control" value="<?= $zooCria['nombre_zoocriadero'] ?>"
