@@ -41,7 +41,6 @@ $(document).ready(function () {
         })
 
     });
-    
 
     $(document).on("change", "#id_zoocriadero", function () {
 
@@ -65,8 +64,4 @@ $(document).ready(function () {
     $(document).on("change", "#id_tanque", function () {
         precargarCantidadTanque($(this));
     });
-
-
-    
-
 });

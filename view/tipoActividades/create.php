@@ -6,15 +6,27 @@
     <form class="form-validable" action="<?php echo getUrl("TipoActividades","TipoActividades","postCreate")?>" method="post">
         
         <div class="row g-4 justify-content-center"> 
-            
-            <div class="col-12 col-lg-8">  
-                <div class="form-floating">
-                    <input type="text" name="nombre" id="nombre" class='form-control' placeholder="Nombre de la actividad" required data-tipo="text" 
-                    value="">
-                    <label for="nombre"><span class="text-danger">*</span> Nombre de la actividad</label>
-                    <div id="nombreFeedback" class="invalid-feedback">
-                    El campo es requerido.
+            <div class="col-12 col-lg-8">
+                <?php if (isset($_SESSION['error'])): ?>
+                    <div class="alert alert-danger alert-dismissible fade show d-flex align-items-start" role="alert">
+                        
+                        <div> 
+                            <?php
+                            // El mensaje de error se muestra aquí
+                            echo $_SESSION['error'];
+                            unset($_SESSION['error']); // Limpiamos la variable de sesión
+                            ?>
+                        </div>
+                        
+                        <button type="button" class="btn-close ms-4" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
+                <?php endif; ?>
+            
+                <label for="nombre"><span class="text-black">*</span> Nombre de la actividad</label>
+                <input type="text" name="nombre" id="nombre" class='form-control' placeholder="(Ej: Limpieza)" required data-tipo="text" 
+                value="">
+                <div id="nombreFeedback" class="invalid-feedback">
+                    El campo es requerido.
                 </div>
             </div>
         </div> 

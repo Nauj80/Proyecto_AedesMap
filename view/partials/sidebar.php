@@ -19,8 +19,8 @@
             </button>
 
         </div>
-        <!-- End Logo Header -->	
-    </div>	
+        <!-- End Logo Header -->
+    </div>
     <div class="sidebar-wrapper scrollbar scrollbar-inner">
         <div class="sidebar-content">
             <ul class="nav nav-secondary">
@@ -36,6 +36,9 @@
                     </span>
                     <h4 class="text-section">Módulos</h4>
                 </li>
+                <?php
+                if (tieneModulo("Zoocriaderos")) {
+                ?>
                 <li class="nav-item">
                     <a data-bs-toggle="collapse" href="#zoocriadero">
                         <i class="fas fa-building"></i>
@@ -44,29 +47,30 @@
                     </a>
                     <div class="collapse" id="zoocriadero">
                         <ul class="nav nav-collapse">
-                            <li>
-                                <a href="components/avatars.html">
-                                    <span class="sub-item">Avatars</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="components/buttons.html">
-                                    <span class="sub-item">Buttons</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="components/gridsystem.html">
-                                    <span class="sub-item">Grid System</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="components/panels.html">
-                                    <span class="sub-item">Panels</span>
-                                </a>
-                            </li>
+                            <?php if (tienePermiso("Zoocriaderos", "Registrar")) { ?>
+                                <li>
+                                    <a href="components/avatars.html">
+                                        <span class="sub-item">Registrar Zoocriadero</span>
+                                    </a>
+                                </li>
+                            <?php } ?>
+                            <?php if (tienePermiso("Zoocriaderos", "Consultar")) { ?>
+                                <li>
+                                    <a href="<?php echo getUrl("Zoocriadero", "Zoocriadero", "listar"); ?>">
+                                        <span class="sub-item">Consultar Zoocriaderos</span>
+                                    </a>
+                                </li>
+                            <?php } ?>
                         </ul>
                     </div>
                 </li>
+                <?php
+                } 
+                ?>
+
+                <?php
+                if (tieneModulo("Tipo de tanques")) {
+                ?>
                 <li class="nav-item">
                     <a data-bs-toggle="collapse" href="#tipotanque">
                         <i class="fas fa-th-large"></i>
@@ -75,19 +79,30 @@
                     </a>
                     <div class="collapse" id="tipotanque">
                         <ul class="nav nav-collapse">
-                            <li>
-                                <a href="sidebar-style-2.html">
-                                    <span class="sub-item">Sidebar Style 2</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="icon-menu.html">
-                                    <span class="sub-item">Icon Menu</span>
-                                </a>
-                            </li>
+                            <?php if (tienePermiso("Tipo de tanques", "Registrar")) { ?>
+                                <li>
+                                    <a href="sidebar-style-2.html">
+                                        <span class="sub-item">Sidebar Style 2</span>
+                                    </a>
+                                </li>
+                            <?php } ?>
+                            <?php if (tienePermiso("Tipo de tanques", "Consultar")) { ?>
+                                <li>
+                                    <a href="icon-menu.html">
+                                        <span class="sub-item">Icon Menu</span>
+                                    </a>
+                                </li>
+                            <?php } ?>
                         </ul>
                     </div>
                 </li>
+                <?php
+                }
+                ?>
+
+                <?php
+                if (tieneModulo("Tanques")) {
+                ?>
                 <li class="nav-item">
                     <a data-bs-toggle="collapse" href="#tanques">
                         <i class="fas fa-fish"></i>
@@ -96,19 +111,30 @@
                     </a>
                     <div class="collapse" id="tanques">
                         <ul class="nav nav-collapse">
-                            <li>
-                                <a href="sidebar-style-2.html">
-                                    <span class="sub-item">Sidebar Style 2</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="icon-menu.html">
-                                    <span class="sub-item">Icon Menu</span>
-                                </a>
-                            </li>
+                            <?php if (tienePermiso("Tanques", "Registrar")) { ?>
+                                <li>
+                                    <a href="sidebar-style-2.html">
+                                        <span class="sub-item">Sidebar Style 2</span>
+                                    </a>
+                                </li>
+                            <?php } ?>
+                            <?php if (tienePermiso("Tanques", "Consultar")) { ?>
+                                <li>
+                                    <a href="icon-menu.html">
+                                        <span class="sub-item">Icon Menu</span>
+                                    </a>
+                                </li>
+                            <?php } ?>
                         </ul>
                     </div>
                 </li>
+                <?php
+                }
+                ?>
+
+                <?php
+                if (tieneModulo("Tipo de actividades")) {
+                ?>
                 <li class="nav-item">
                     <a data-bs-toggle="collapse" href="#tipoactividades">
                         <i class="fas fa-list-alt"></i>
@@ -117,41 +143,62 @@
                     </a>
                     <div class="collapse" id="tipoactividades">
                         <ul class="nav nav-collapse">
-                            <li>
-                                <a href="<?php echo getUrl("TipoActividades","TipoActividades","create")?>">
-                                    <span class="sub-item">Registro de actividad</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="<?php echo getUrl("TipoActividades","TipoActividades","list")?>">
-                                    <span class="sub-item">Lista de actividades</span>
-                                </a>
-                            </li>
+                            <?php if (tienePermiso("Tipo de actividades", "Registrar")) { ?>
+                                <li>
+                                    <a href="<?php echo getUrl("TipoActividades","TipoActividades","create")?>">
+                                        <span class="sub-item">Registro de actividad</span>
+                                    </a>
+                                </li>
+                            <?php } ?>
+                            <?php if (tienePermiso("Tipo de actividades", "Consultar")) { ?>
+                                <li>
+                                    <a href="<?php echo getUrl("TipoActividades","TipoActividades","list")?>">
+                                        <span class="sub-item">Lista de actividades</span>
+                                    </a>
+                                </li>
+                            <?php } ?>
                         </ul>
                     </div>
                 </li>
+                <?php
+                }
+                ?>
+
+                <?php
+                if (tieneModulo("Actividades en tanques")) {
+                ?>
                 <li class="nav-item">
                     <a data-bs-toggle="collapse" href="#actividades">
                         <i class="fas fa-pen-square"></i>
                         <p>Actividades en tanques</p>
                         <span class="caret"></span>
                     </a>
-                    
                     <div class="collapse" id="actividades">
                         <ul class="nav nav-collapse">
-                            <li>
-                                 <a href="<?php echo getUrl("ActividadesSeguimiento","Actividades","create")?>">
-                                    <span class="sub-item">Registro de seguimiento</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="<?php echo getUrl("ActividadesSeguimiento","Actividades","list")?>">
-                                    <span class="sub-item">Lista de seguimientos</span>
-                                </a>
-                            </li>
+                            <?php if (tienePermiso("Actividades en tanques", "Registrar")) { ?>
+                                <li>
+                                    <a href="<?php echo getUrl("ActividadesSeguimiento","Actividades","create")?>">
+                                        <span class="sub-item">Registro de seguimiento</span>
+                                    </a>
+                                </li>
+                            <?php } ?>
+                            <?php if (tienePermiso("Actividades en tanques", "Consultar")) { ?>
+                                <li>
+                                    <a href="<?php echo getUrl("ActividadesSeguimiento","Actividades","list")?>">
+                                        <span class="sub-item">Lista de seguimientos</span>
+                                    </a>
+                                </li>
+                            <?php } ?>
                         </ul>
                     </div>
                 </li>
+                <?php
+                }
+                ?>
+
+                <?php
+                if (tieneModulo("Gestión de usuarios")) {
+                ?>
                 <li class="nav-item">
                     <a data-bs-toggle="collapse" href="#usuarios">
                         <i class="fas fa-user"></i>
@@ -160,19 +207,30 @@
                     </a>
                     <div class="collapse" id="usuarios">
                         <ul class="nav nav-collapse">
-                            <li>
-                                <a href="maps/googlemaps.html">
-                                    <span class="sub-item">Google Maps</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="maps/jsvectormap.html">
-                                    <span class="sub-item">Jsvectormap</span>
-                                </a>
-                            </li>
+                            <?php if (tienePermiso("Gestión de usuarios", "Registrar")) { ?>
+                                <li>
+                                    <a href="maps/googlemaps.html">
+                                        <span class="sub-item">Google Maps</span>
+                                    </a>
+                                </li>
+                            <?php } ?>
+                            <?php if (tienePermiso("Gestión de usuarios", "Consultar")) { ?>
+                                <li>
+                                    <a href="maps/jsvectormap.html">
+                                        <span class="sub-item">Jsvectormap</span>
+                                    </a>
+                                </li>
+                            <?php } ?>
                         </ul>
                     </div>
                 </li>
+                <?php
+                }
+                ?>
+
+                <?php
+                if (tieneModulo("Gestión de roles")) {
+                ?>
                 <li class="nav-item">
                     <a data-bs-toggle="collapse" href="#rol">
                         <i class="fas fa-users-cog"></i>
@@ -181,19 +239,30 @@
                     </a>
                     <div class="collapse" id="rol">
                         <ul class="nav nav-collapse">
-                            <li>
-                                <a href="maps/googlemaps.html">
-                                    <span class="sub-item">Google Maps</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="maps/jsvectormap.html">
-                                    <span class="sub-item">Jsvectormap</span>
-                                </a>
-                            </li>
+                            <?php if (tienePermiso("Gestión de roles", "Registrar")) { ?>
+                                <li>
+                                    <a href="maps/googlemaps.html">
+                                        <span class="sub-item">Google Maps</span>
+                                    </a>
+                                </li>
+                            <?php } ?>
+                            <?php if (tienePermiso("Gestión de roles", "Consultar")) { ?>
+                                <li>
+                                    <a href="maps/jsvectormap.html">
+                                        <span class="sub-item">Jsvectormap</span>
+                                    </a>
+                                </li>
+                            <?php } ?>
                         </ul>
                     </div>
                 </li>
+                <?php
+                }
+                ?>
+
+                <?php
+                if (tieneModulo("Configuración")) {
+                ?>
                 <li class="nav-item">
                     <a data-bs-toggle="collapse" href="#configuracion">
                         <i class="fas fa-cog"></i>
@@ -202,19 +271,30 @@
                     </a>
                     <div class="collapse" id="configuracion">
                         <ul class="nav nav-collapse">
-                            <li>
-                                <a href="charts/charts.html">
-                                    <span class="sub-item">Chart Js</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="charts/sparkline.html">
-                                    <span class="sub-item">Sparkline</span>
-                                </a>
-                            </li>
+                            <?php if (tienePermiso("Configuración", "Registrar")) { ?>
+                                <li>
+                                    <a href="charts/charts.html">
+                                        <span class="sub-item">Chart Js</span>
+                                    </a>
+                                </li>
+                            <?php } ?>
+                            <?php if (tienePermiso("Configuración", "Consultar")) { ?>
+                                <li>
+                                    <a href="charts/sparkline.html">
+                                        <span class="sub-item">Sparkline</span>
+                                    </a>
+                                </li>
+                            <?php } ?>
                         </ul>
                     </div>
                 </li>
+                <?php
+                }
+                ?>
+
+                <?php
+                if (tieneModulo("Reportes")) {
+                ?>
                 <li class="nav-item">
                     <a data-bs-toggle="collapse" href="#reportes">
                         <i class="fas fa-newspaper"></i>
@@ -223,21 +303,28 @@
                     </a>
                     <div class="collapse" id="reportes">
                         <ul class="nav nav-collapse">
-                            <li>
-                                <a href="charts/charts.html">
-                                    <span class="sub-item">Chart Js</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="charts/sparkline.html">
-                                    <span class="sub-item">Sparkline</span>
-                                </a>
-                            </li>
+                            <?php if (tienePermiso("Reportes", "Registrar")) { ?>
+                                <li>
+                                    <a href="charts/charts.html">
+                                        <span class="sub-item">Chart Js</span>
+                                    </a>
+                                </li>
+                            <?php } ?>
+                            <?php if (tienePermiso("Reportes", "Consultar")) { ?>
+                                <li>
+                                    <a href="charts/sparkline.html">
+                                        <span class="sub-item">Sparkline</span>
+                                    </a>
+                                </li>
+                            <?php } ?>
                         </ul>
                     </div>
                 </li>
+                <?php
+                }
+                ?>
                 <li class="nav-item">
-                    <a data-bs-toggle="collapse" href="info.php">
+                    <a href="<?php echo getUrl("SobreAedesMap", "SobreAedesMap", "verInfo"); ?>"> 
                         <i class="fas fa-info"></i>
                         <p>Sobre AedesMap</p>
                     </a>
