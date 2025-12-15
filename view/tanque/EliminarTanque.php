@@ -42,11 +42,16 @@ include_once '../view/partials/header.php';
                         </div>
                         <div class="card-body">
                             <div class="alert alert-danger" role="alert">
-                                ¿Seguro que desea eliminar este tanque?
+                                ¿Seguro que desea eliminar el Tanque: <strong> <?php echo $tan['nombre'] ?></strong> ?
                             </div>
                             <div class="row">
                                 <div class="col-md-6 col-lg-6">
                                     <input type="hidden" name="id" value="<?php echo $tan["id_tanque"] ?>">
+                                    <div class="form-group">
+                                        <label for="nombreTanque">Nombre</label>
+                                        <input type="text" class="form-control t" id="nombreTanque" name="nombreTanque" placeholder="Ingrese un nombre para el tanque" value="<?php echo $tan['nombre'] ?>" disabled>
+                                        <div class="invalid-feedback"></div>
+                                    </div>
                                     <div class="form-group">
                                         <label for="zoocriadero">Zoocriadero</label>
                                         <select class="form-select form-control" id="zoocriadero" name="zoocriadero" value="<?php echo $tan["id_zoocriadero"] ?>" disabled>
@@ -101,6 +106,27 @@ include_once '../view/partials/header.php';
                                     <div class="form-group">
                                         <label for="profundidadTanque">Profundidad del tanque (cm)</label>
                                         <input type="text" class="form-control" id="profundidadTanque" name="profundidadTanque" placeholder="Ingrese la profundidad del tanque en cm" value="<?php echo $tan['profundo'] ?>" readonly>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="estadoTanque">Estado tanque</label>
+                                        <select class="form-select form-control" id="estadoTanque" name="estadoTanque" value="<?php echo $tan["id_estado_tanque"] ?>" disabled>
+                                            <option value="">Seleccione...</option>
+                                            <?php
+
+                                            while ($estadoT = pg_fetch_assoc($estadoTanque)) {
+
+                                                if ($estadoT["id_estado_tanque"] == $tan["id_estado_tanque"]) {
+                                                    $selected = "selected";
+                                                } else {
+                                                    $selected = "";
+                                                }
+
+                                                echo '<option value="' . $estadoT["id_estado_tanque"] . '" ' . "$selected" . '> ' . $estadoT["nombre"] . '</option>';
+                                            }
+
+                                            ?>
+                                        </select>
+                                        <div class="invalid-feedback"></div>
                                     </div>
                                 </div>
                             </div>

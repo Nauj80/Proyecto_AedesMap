@@ -32,7 +32,7 @@ include_once '../view/partials/header.php';
     <div class="row">
         <div class="col-ms-12">
             <div class="card">
-                <form action="index.php?modulo=Tanque&controlador=Tanque&funcion=postCreate" id="formu" method="post">
+                <form action="<?php echo getUrl("Tanque", "Tanque", "postCreate"); ?>" id="formu" method="post">
                     <div class="card-header">
                         <div class="card-title">Formulario creacion de tanque</div>
                     </div>
@@ -40,7 +40,12 @@ include_once '../view/partials/header.php';
                         <div class="row">
                             <div class="col-md-6 col-lg-6">
                                 <div class="form-group">
-                                    <label for="zoocriadero">Zoocriadero *</label>
+                                    <label for="nombreTanque" class="required">Nombre</label>
+                                    <input type="text" class="form-control t" id="nombreTanque" name="nombreTanque" placeholder="Ingrese un nombre para el tanque" required>
+                                    <div class="invalid-feedback"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="zoocriadero" class="required">Zoocriadero</label>
                                     <select class="form-select form-control" id="zoocriadero" name="zoocriadero" required>
                                         <option value="">Seleccione...</option>
                                         <?php
@@ -50,9 +55,10 @@ include_once '../view/partials/header.php';
                                         }
                                         ?>
                                     </select>
+                                    <div class="invalid-feedback"></div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="tipoTanque">Tipo de tanque *</label>
+                                    <label for="tipoTanque" class="required">Tipo de tanque</label>
                                     <select class="form-select form-control" id="tipoTanque" name="tipoTanque" required>
                                         <option value="">Seleccione...</option>
                                         <?php
@@ -62,24 +68,29 @@ include_once '../view/partials/header.php';
                                         }
                                         ?>
                                     </select>
+                                    <div class="invalid-feedback"></div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="cantidadPeces">Cantidad de peces *</label>
-                                    <input type="number" class="form-control" id="cantidadPeces" name="cantidadPeces" placeholder="Ingrese la cantidad de peces">
+                                    <label for="cantidadPeces" class="required">Cantidad de peces</label>
+                                    <input type="text" class="form-control n" id="cantidadPeces" name="cantidadPeces" placeholder="Ingrese la cantidad de peces">
+                                    <div class="invalid-feedback"></div>
                                 </div>
                             </div>
                             <div class="col-md-6 col-lg-6">
                                 <div class="form-group">
-                                    <label for="altoTanque">Altura del tanque (cm) *</label>
-                                    <input type="number" class="form-control" id="altoTanque" name="altoTanque" placeholder="Ingrese la altura del tanque en cm">
+                                    <label for="altoTanque" class="required">Altura del tanque (cm)</label>
+                                    <input type="text" class="form-control f" id="altoTanque" name="altoTanque" placeholder="Ingrese la altura del tanque en cm">
+                                    <div class="invalid-feedback"></div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="anchoTanque">Ancho del tanque (cm) *</label>
-                                    <input type="number" class="form-control" id="anchoTanque" name="anchoTanque" placeholder="Ingrese el ancho del tanque en cm">
+                                    <label for="anchoTanque" class="required">Ancho del tanque (cm)</label>
+                                    <input type="text" class="form-control f" id="anchoTanque" name="anchoTanque" placeholder="Ingrese el ancho del tanque en cm">
+                                    <div class="invalid-feedback"></div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="profundidadTanque">Profundidad del tanque (cm) *</label>
-                                    <input type="number" class="form-control" id="profundidadTanque" name="profundidadTanque" placeholder="Ingrese la profundidad del tanque en cm">
+                                    <label for="profundidadTanque" class="required">Profundidad del tanque (cm)</label>
+                                    <input type="text" class="form-control f" id="profundidadTanque" name="profundidadTanque" placeholder="Ingrese la profundidad del tanque en cm">
+                                    <div class="invalid-feedback"></div>
                                 </div>
                             </div>
                         </div>

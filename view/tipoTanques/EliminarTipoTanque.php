@@ -65,5 +65,3 @@ include_once '../view/partials/header.php';
         </div>
     </div>
 </body>
-
-</html>
