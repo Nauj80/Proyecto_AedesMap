@@ -196,8 +196,6 @@ include_once '../view/partials/header.php';
     </div>
 </body>
 
-</html>
-
 <script>
     function cambiarRegistrosPorPagina(valor) {
         // Redirigir a la misma página con el nuevo parámetro de límite, manteniendo sort

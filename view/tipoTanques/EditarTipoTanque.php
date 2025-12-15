@@ -42,21 +42,21 @@ include_once '../view/partials/header.php';
                         </div>
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-md-6 ms-auto me-auto">
+                                <div class="col-md-6 ">
                                     <div class="form-group">
-                                        <label for="nombreTipoTanque">Nombre *</label>
+                                        <label for="nombreTipoTanque" class="required">Nombre</label>
                                         <input type="text" class="form-control" name="id" value="<?php echo $tt['id_tipo_tanque'] ?>" hidden>
                                         <input type="text" class="form-control t" name="nombreTipoTanque" id="nombreTipoTanque" placeholder="Ingrese un nombre para el tipo de tanque" value="<?php echo $tt['nombre'] ?>" required>
                                         <div class="invalid-feedback"></div>
                                     </div>
                                 </div>
-                                <div class="col-md-6 ms-auto me-auto">
+                                <div class="col-md-6">
                                     <?php
 
                                     print_r(
                                         '
                                         <div class="form-group">
-                                            <label for="estadoTipoTanque">Estado tipo de tanque *</label>
+                                            <label for="estadoTipoTanque" class="required">Estado tipo de tanque</label>
                                             <select class="form-select form-control" id="estadoTipoTanque" name="estadoTipoTanque" value="<?php echo $tan["id_estado_tanque"] ?>" required>
                                                 <option value="">Seleccione...</option>
                                         '

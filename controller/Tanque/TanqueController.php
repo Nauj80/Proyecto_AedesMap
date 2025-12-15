@@ -22,6 +22,7 @@ class TanqueController
     public function postCreate()
     {
         $objeto = new TanquesModel();
+        $nombre = $_GET['nombreTanque'];
         $zoocriadero = $_POST['zoocriadero'];
         $tipoTanque = $_POST['tipoTanque'];
         $cantidadPeces = $_POST['cantidadPeces'];
@@ -31,7 +32,7 @@ class TanqueController
 
         $id = $objeto->autoIncrement("tanques", "id_tanque");
 
-        $sql = "INSERT INTO tanques VALUES ($id, $zoocriadero, $tipoTanque, $cantidadPeces, $anchoTanque, $altoTanque, $profundidadTanque, 1)";
+        $sql = "INSERT INTO tanques VALUES ($id, $zoocriadero, $tipoTanque, $cantidadPeces,'$nombre', $anchoTanque, $altoTanque, $profundidadTanque, 1)";
 
         $ejecutar = $objeto->insert($sql);
 
@@ -61,7 +62,7 @@ class TanqueController
         $sortOrder = isset($_GET['sort_order']) && strtoupper($_GET['sort_order']) === 'DESC' ? 'DESC' : 'ASC';
 
         // Validar que solo sean columnas permitidas
-        $allowedColumns = array('zoocriadero', 'tipo_tanque');
+        $allowedColumns = array('zoocriadero', 'nombre', 'tipo_tanque');
         if (!in_array($sortColumn, $allowedColumns)) {
             $sortColumn = 't.id_tanque';
         }
@@ -117,6 +118,7 @@ class TanqueController
         $obj = new TanquesModel();
 
         $id = $_POST['id'];
+        $nombre = $_POST['nombreTanque'];
         $zoocriadero = $_POST['zoocriadero'];
         $tipoTanque = $_POST['tipoTanque'];
         $cantidadPeces = $_POST['cantidadPeces'];
@@ -126,7 +128,7 @@ class TanqueController
         $estadoTanque = $_POST['estadoTanque'];
 
 
-        $sql = "UPDATE tanques SET id_zoocriadero = $zoocriadero, id_tipo_tanque = $tipoTanque, cantidad_peces = $cantidadPeces, ancho = $anchoTanque, alto = $altoTanque, profundo = $profundidadTanque, id_estado_tanque = $estadoTanque WHERE id_tanque = $id";
+        $sql = "UPDATE tanques SET id_zoocriadero = $zoocriadero, id_tipo_tanque = $tipoTanque, cantidad_peces = $cantidadPeces, nombre = '$nombre', ancho = $anchoTanque, alto = $altoTanque, profundo = $profundidadTanque, id_estado_tanque = $estadoTanque WHERE id_tanque = $id";
 
         $ejecutar = $obj->update($sql);
 
@@ -148,6 +150,9 @@ class TanqueController
 
         $sql = "SELECT * FROM tipo_tanque";
         $tipoTanque = $objeto->select($sql);
+
+        $sql = "SELECT * FROM estado_tanque";
+        $estadoTanque = $objeto->select($sql);
 
         include_once '../view/tanque/EliminarTanque.php';
     }

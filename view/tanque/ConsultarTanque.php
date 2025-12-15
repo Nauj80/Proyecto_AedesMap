@@ -91,6 +91,7 @@ include_once '../view/partials/header.php';
                                         <thead>
                                             <tr role="row">
                                                 <th class="sorting_asc" tabindex="0" aria-controls="add-row" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 368.422px; cursor: pointer;" onclick="sortTable('zoocriadero')">Zoocriadero</th>
+                                                <th class="sorting_asc" tabindex="0" aria-controls="add-row" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 368.422px; cursor: pointer;" onclick="sortTable('nombre_tanque')">Nombre del tanque</th>
                                                 <th class="sorting_asc" tabindex="0" aria-controls="add-row" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 368.422px; cursor: pointer;" onclick="sortTable('tipo_tanque')">Tipo de tanque</th>
                                                 <th class="sorting_asc" tabindex="0" aria-controls="add-row" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 368.422px; cursor: pointer;" onclick="sortTable('t.cantidad_peces')">Cantidad de peces</th>
                                                 <th class="sorting_asc" tabindex="0" aria-controls="add-row" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 368.422px; cursor: pointer;" onclick="sortTable('t.ancho')">Ancho</th>
@@ -103,6 +104,7 @@ include_once '../view/partials/header.php';
                                         <tfoot>
                                             <tr>
                                                 <th rowspan="1" colspan="1">Zoocriadero</th>
+                                                <th rowspan="1" colspan="1">Nombre del tanque</th>
                                                 <th rowspan="1" colspan="1">Tipo de tanque</th>
                                                 <th rowspan="1" colspan="1">cantidad de peces</th>
                                                 <th rowspan="1" colspan="1">ancho</th>
@@ -122,6 +124,7 @@ include_once '../view/partials/header.php';
                                                     '
                                                     <tr role="row">
                                                         <td class="sorting_1">' . $Tanque["zoocriadero"] . '</td>
+                                                        <td class="sorting_1">' . $Tanque["nombre"] . '</td>
                                                         <td class="sorting_1">' . $Tanque["tipo_tanque"] . '</td>
                                                         <td class="sorting_1">' . $Tanque["cantidad_peces"] . '</td>
                                                         <td class="sorting_1">' . $Tanque["ancho"] . '</td>

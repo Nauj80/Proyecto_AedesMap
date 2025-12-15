@@ -32,7 +32,7 @@ include_once '../view/partials/header.php';
     <div class="row">
         <div class="col-ms-12">
             <div class="card">
-                <form action="index.php?modulo=TipoTanques&controlador=TipoTanques&funcion=postCreate" id="formu" method="post">
+                <form action="<?php echo getUrl("TipoTanques", "TipoTanques", "postCreate"); ?>" id="formu" method="post">
                     <div class="card-header">
                         <div class="card-title">Formulario creacion tipo de tanques</div>
                     </div>
@@ -40,7 +40,7 @@ include_once '../view/partials/header.php';
                         <div class="row">
                             <div class="col-md-4 ms-auto me-auto">
                                 <div class="form-group">
-                                    <label for="nombreTipoTanque">Nombre *</label>
+                                    <label for="nombreTipoTanque" class="required">Nombre</label>
                                     <input type="text" class="form-control" name="nombreTipoTanque" id="nombreTipoTanque" placeholder="Ingrese un nombre para el tipo de tanque" required>
                                     <div class="invalid-feedback"></div>
                                 </div>
