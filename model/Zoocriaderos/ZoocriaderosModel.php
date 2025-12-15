@@ -1,4 +1,4 @@
 <?php
 include_once '../model/MasterModel.php';
 
-class TanquesModel extends MasterModel {}
+class ZoocriaderosModel extends MasterModel {}

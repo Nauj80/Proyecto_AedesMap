@@ -46,19 +46,27 @@
                         <ul class="nav nav-collapse">
                             <li>
                                 <a href="components/avatars.html">
-                                    <span class="sub-item">Registrar Zoocriadero</span>
+                                    <span class="sub-item">Avatars</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="<?php echo getUrl("Zoocriadero", "Zoocriadero", "listar"); ?>">
-
-                                    <span class="sub-item">Consultar Zoocriaderos</span>
+                                <a href="components/buttons.html">
+                                    <span class="sub-item">Buttons</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="components/gridsystem.html">
+                                    <span class="sub-item">Grid System</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="components/panels.html">
+                                    <span class="sub-item">Panels</span>
                                 </a>
                             </li>
                         </ul>
                     </div>
                 </li>
-                
                 <li class="nav-item">
                     <a data-bs-toggle="collapse" href="#tipotanque">
                         <i class="fas fa-th-large"></i>
@@ -68,7 +76,7 @@
                     <div class="collapse" id="tipotanque">
                         <ul class="nav nav-collapse">
                             <li>
-                                <a href="<?php echo getUrl("TipoTanques", "TipoTanques", "list"); ?>">
+                                <a href="<?php echo getUrl("TipoTanques", "TipoTanques", "listar"); ?>">
                                     <span class="sub-item">Consultar Tipos de Tanque</span>
                                 </a>
                             </li>
@@ -89,7 +97,7 @@
                     <div class="collapse" id="tanques">
                         <ul class="nav nav-collapse">
                             <li>
-                                <a href="<?php echo getUrl("Tanque", "Tanque", "list"); ?>">
+                                <a href="<?php echo getUrl("Tanque", "Tanque", "listar"); ?>">
                                     <span class="sub-item">Consultar Tanques</span>
                                 </a>
                             </li>
@@ -200,25 +208,40 @@
                             </li>
                         </ul>
                     </div>
-                </li>
+             </li>
                 <li class="nav-item">
                     <a data-bs-toggle="collapse" href="#reportes">
-                        <i class="fas fa-newspaper"></i>
+                        <i class="fas fa-chart-bar"></i>
                         <p>Reportes</p>
                         <span class="caret"></span>
                     </a>
                     <div class="collapse" id="reportes">
                         <ul class="nav nav-collapse">
+
                             <li>
-                                <a href="charts/charts.html">
-                                    <span class="sub-item">Chart Js</span>
+                                <a href="<?php echo getUrl('reportes', 'reportes', 'index'); ?>">
+                                    <span class="sub-item">
+                                        Seguimiento Zoocriaderos
+                                    </span>
                                 </a>
                             </li>
+
                             <li>
-                                <a href="charts/sparkline.html">
-                                    <span class="sub-item">Sparkline</span>
+                                <a href="#">
+                                    <span class="sub-item">
+                                        Nacidos vs Muertos por Tanque
+                                    </span>
                                 </a>
                             </li>
+
+                            <li>
+                                <a href="#">
+                                    <span class="sub-item">
+                                        Tanques por Zoocriadero
+                                    </span>
+                                </a>
+                            </li>
+
                         </ul>
                     </div>
                 </li>
