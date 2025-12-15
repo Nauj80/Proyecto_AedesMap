@@ -210,15 +210,15 @@
                             <ul class="nav nav-collapse">
                                 <?php if (tienePermiso("Gestión de usuarios", "Registrar")) { ?>
                                     <li>
-                                        <a href="maps/googlemaps.html">
-                                            <span class="sub-item">Google Maps</span>
+                                        <a href="<?php echo getUrl("GestionUsuarios","GestionUsuarios","listar")?>">
+                                            <span class="sub-item">Consultar Usuarios</span>
                                         </a>
                                     </li>
                                 <?php } ?>
                                 <?php if (tienePermiso("Gestión de usuarios", "Consultar")) { ?>
                                     <li>
-                                        <a href="maps/jsvectormap.html">
-                                            <span class="sub-item">Jsvectormap</span>
+                                        <a href="<?php echo getUrl("GestionUsuarios","GestionUsuarios","getCreate")?>">
+                                            <span class="sub-item">Registrar Usuario</span>
                                         </a>
                                     </li>
                                 <?php } ?>
