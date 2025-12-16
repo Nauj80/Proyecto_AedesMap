@@ -33,9 +33,10 @@ class ZoocriaderoController
         if (isset($_GET['id_zoocriadero'])) {
             $id = $_GET['id_zoocriadero'];
 
-            $sql = "SELECT zoocriaderos.*, usuarios.nombre AS nombre_usuario 
+            $sql = "SELECT zoocriaderos.*, usuarios.nombre AS nombre_usuario, usuarios.apellido AS apellido_usuario, estado_zoocriadero.nombre AS estado_text
                 FROM zoocriaderos 
                 INNER JOIN usuarios ON zoocriaderos.id_usuario = usuarios.id_usuario 
+		INNER JOIN estado_zoocriadero ON zoocriaderos.id_estado_zoocriadero = estado_zoocriadero.id_estado_zoocriadero 
                 WHERE id_zoocriadero = $id";
 
             $result = $objeto->select($sql);
@@ -114,26 +115,38 @@ class ZoocriaderoController
     {
         $objeto = new ZoocriaderoModel();
 
-        if (isset($_GET['id_zoocriadero']) && isset($_GET['estado'])) {
-            $id = $_GET['id_zoocriadero'];
-            $estado_actual = $_GET['estado'];
-            $nuevo_estado = $estado_actual == 1 ? 2 : 1; // 1=activo, 2=inactivo
+        if (isset($_POST['id_zoocriadero'])) {
+            $id = $_POST['id_zoocriadero'];
+            $estado_actual = $_POST['estado'];
+            $nuevo_estado = $estado_actual == 1 ? 2 : 1;
 
             $sql = "UPDATE zoocriaderos SET id_estado_zoocriadero = $nuevo_estado WHERE id_zoocriadero = $id";
             $result = $objeto->update($sql);
 
-            if ($result) {
-                $accion = $nuevo_estado == 1 ? 'habilitado' : 'inhabilitado';
-                echo json_encode(array(
-                    'success' => true,
-                    'message' => 'Zoocriadero ' . $accion . ' correctamente.'
-                ));
-            } else {
-                echo json_encode(array(
-                    'success' => false,
-                    'message' => 'Error al cambiar el estado del zoocriadero.'
-                ));
+            if($result){
+                $_SESSION['success'] = "Zoocriadero Inhabilitado con exito";
+            }else{
+                $_SESSION['error'] = "No se logro inhabilitar el zoocriadero";
             }
+           redirect(getUrl("Zoocriadero","Zoocriadero","listar"));
+        }
+    }
+    public function getInhabilitar()
+    {
+        $objeto = new ZoocriaderoModel();
+
+        if (isset($_GET['id_zoocriadero'])) {
+            $id = $_GET['id_zoocriadero'];
+
+            $sql = "UPDATE zoocriaderos SET id_estado_zoocriadero = 1 WHERE id_zoocriadero = $id";
+            $result = $objeto->update($sql);
+
+            if($result){
+                $_SESSION['success'] = "Zoocriadero Habilitado con exito";
+            }else{
+                $_SESSION['error'] = "No se logro Habilitar el zoocriadero";
+            }
+           redirect(getUrl("Zoocriadero","Zoocriadero","listar"));
         }
     }
     public function registrar()

@@ -130,7 +130,7 @@ TRANSPARENCY 70
      TRANSPARENCY 80
      NAME "Malla_Vial"
      STATUS ON
-     DATA "mallaVialC.shp"
+     DATA "mallaVial.shp"
      TYPE LINE
      LABELITEM "nombre"
      CLASS
