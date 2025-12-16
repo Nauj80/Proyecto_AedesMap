@@ -319,6 +319,8 @@ function enviarFormularioAjax(formulario) {
             },
           });
         } else {
+          // Log full server response for debugging (includes db_error if provided)
+          console.error('Server error response:', data);
           Swal.fire({
             icon: "error",
             title: "Error",
