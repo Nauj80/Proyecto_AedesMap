@@ -45,6 +45,14 @@ class GestionUsuariosController
             jsonResponse(false, 'El teléfono debe contener solo dígitos');
         }
 
+        // Validar que el documento no exceda el rango de INTEGER en la BD
+        // INTEGER SIGNED máximo: 2147483647 (10 dígitos). Si se detecta un número mayor,
+        // devolvemos un mensaje claro y sugerimos cambiar la columna a BIGINT o VARCHAR.
+        //Cambiado a validación de 10 dígitos para número de documento
+        if (strlen($documento) > 10 || (strlen($documento) == 10 && $documento > '2147483647')) {
+            jsonResponse(false, 'El documento excede el valor máximo permitido (10 dígitos))');
+        }
+
         // Verificar unicidad de documento, correo y telefono
         $exDoc = $obj->getByDocumento($documento);
         if ($exDoc && pg_num_rows($exDoc) > 0) {
@@ -84,7 +92,12 @@ class GestionUsuariosController
         if ($insert) {
             jsonResponse(true, 'Usuario creado correctamente', array('redirect' => getUrl('GestionUsuarios', 'GestionUsuarios', 'listar')));
         } else {
-            jsonResponse(false, 'No se pudo crear el usuario');
+            // Devolver mensaje de error del servidor para depuración y mostrar mensaje amigable
+            $dbErr = pg_last_error($obj->getConnect());
+            if (stripos($dbErr, 'fuera de rango') !== false || stripos($dbErr, 'out of range') !== false) {
+                jsonResponse(false, 'No se pudo crear el usuario: el documento excede el máximo permitido por INTEGER en la BD. Cambie la columna `documento` a BIGINT o VARCHAR. SQL sugerido: ALTER TABLE usuarios ALTER COLUMN documento TYPE BIGINT USING documento::bigint;');
+            }
+            jsonResponse(false, 'No se pudo crear el usuario', array('db_error' => $dbErr));
         }
     }
 
@@ -125,6 +138,11 @@ class GestionUsuariosController
         }
         if (!ctype_digit($telefono)) {
             jsonResponse(false, 'El teléfono debe contener solo dígitos');
+        }
+
+        // Validar que el documento no exceda el rango de INTEGER en la BD
+        if (strlen($documento) > 10 || (strlen($documento) == 10 && $documento > '2147483647')) {
+            jsonResponse(false, 'El documento excede el valor máximo permitido por el tipo INTEGER en la base de datos. Cambie la columna `documento` a BIGINT o VARCHAR. SQL sugerido: ALTER TABLE usuarios ALTER COLUMN documento TYPE BIGINT USING documento::bigint;');
         }
 
         // Validar unicidad documento, correo y telefono (excluyendo al propio registro)
@@ -168,9 +186,13 @@ class GestionUsuariosController
         $update = $obj->updateById($id, $data);
 
         if ($update) {
-            jsonResponse(true, 'Usuario actualizado correctamente', array('redirect' => getUrl('GestionUsuarios', 'GestionUsuarios', 'list')));
+            jsonResponse(true, 'Usuario actualizado correctamente', array('redirect' => getUrl('GestionUsuarios', 'GestionUsuarios', 'listar')));
         } else {
-            jsonResponse(false, 'No se pudo actualizar el usuario');
+            $dbErr = pg_last_error($obj->getConnect());
+            if (stripos($dbErr, 'fuera de rango') !== false || stripos($dbErr, 'out of range') !== false) {
+                jsonResponse(false, 'No se pudo actualizar el usuario: el documento excede el máximo permitido por INTEGER en la BD. Cambie la columna `documento` a BIGINT o VARCHAR. SQL sugerido: ALTER TABLE usuarios ALTER COLUMN documento TYPE BIGINT USING documento::bigint;');
+            }
+            jsonResponse(false, 'No se pudo actualizar el usuario', array('db_error' => $dbErr));
         }
     }
 
@@ -226,12 +248,12 @@ class GestionUsuariosController
         $res = $obj->setEstado($id, 2);
 
         if ($res) {
-            jsonResponse(true, 'Usuario inhabilitado correctamente', array('redirect' => getUrl('GestionUsuarios', 'GestionUsuarios', 'list')));
+            jsonResponse(true, 'Usuario inhabilitado correctamente', array('redirect' => getUrl('GestionUsuarios', 'GestionUsuarios', 'listar')));
         } else {
             // como fallback intentar borrado físico
             $del = $obj->delete($id);
             if ($del) {
-                jsonResponse(true, 'Usuario eliminado correctamente', array('redirect' => getUrl('GestionUsuarios', 'GestionUsuarios', 'list')));
+                jsonResponse(true, 'Usuario eliminado correctamente', array('redirect' => getUrl('GestionUsuarios', 'GestionUsuarios', 'listar')));
             } else {
                 jsonResponse(false, 'No se pudo eliminar o inhabilitar el usuario');
             }
