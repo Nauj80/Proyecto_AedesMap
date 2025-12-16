@@ -139,6 +139,9 @@ class ZoocriaderoController
     public function registrar()
     {
         $objeto = new ZoocriaderoModel();
+
+        $dir1 = $_GET['x'];
+        $dir2 = $_GET['y'];
         $sqlTipoTanque = "SELECT * FROM tipo_tanque WHERE id_estado_tipo_tanque = 1";
         $tipoTanque = $objeto->select($sqlTipoTanque);
         $tiposTanque = pg_fetch_all($tipoTanque);
@@ -154,14 +157,15 @@ class ZoocriaderoController
         $objeto = new ZoocriaderoModel();
 
         try {
+            
             $nombre = $_POST['nombre'];
             $barrio = $_POST['barrio'];
             $comuna = $_POST['comuna'];
             $direccion = $_POST['direccion'];
             $telefono = $_POST['telefono'];
             $correo = $_POST['correo'];
-            $latitud = (float) $_POST['latitud'];
-            $longitud = (float) $_POST['longitud'];
+            $latitud = $_SESSION["x"];
+            $longitud = $_SESSION["y"];
 
             $id_encargado = (int) $_POST['id_encargado'];
             $doc_encargado = $_POST['documento_encargado'];
@@ -201,10 +205,7 @@ class ZoocriaderoController
                     '$barrio',
                     '$correo',
                     1,
-                    ST_SetSRID(
-                        ST_MakePoint($longitud, $latitud),
-                        4326
-                    )
+                    ST_SetSRID(GeometryFromText('POINT(" . $latitud . " " . $longitud . ")'), 4326)
                 )
                 RETURNING id_zoocriadero
             ";
@@ -263,7 +264,6 @@ class ZoocriaderoController
             pg_query($objeto->getConnect(), "COMMIT");
 
             $_SESSION['success'] = 'Zoocriadero y tanques registrados correctamente';
-
         } catch (Exception $e) {
 
             // =========================
@@ -274,9 +274,9 @@ class ZoocriaderoController
             $_SESSION['error'] = 'Ocurrió un error al registrar el zoocriadero, por favor intente de nuevo';
             error_log($e->getMessage());
         }
+        unset($_SESSION['x']);
+        unset($_SESSION['y']);
+
     }
-    public function tipoPermisos(){
-        
-    }
+    public function tipoPermisos() {}
 }
-?>

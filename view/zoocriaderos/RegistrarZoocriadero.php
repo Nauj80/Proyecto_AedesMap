@@ -1,3 +1,12 @@
+<?php
+
+session_start();
+
+$_SESSION["x"] = $_GET["x"];
+$_SESSION["y"] = $_GET["y"];
+
+?>
+
 <style>
     .form-container {
         background: transparent;
@@ -260,11 +269,19 @@
                         <input type="email" class="form-control" id="correo" name="correo" required maxlength="100"
                             placeholder="ej:juanPerez@gmail.com">
                     </div>
-                    <div class="col-12 mb-3">
-                        <button type="button" class="btn btn-info w-100" data-bs-toggle="modal"
-                            data-bs-target="#modalMapa">
-                            Agregar Ubicación del Zoocriadero
-                        </button>
+                    <div class="col-md-6 mb-3">
+                        <label for="latitud" class="form-label">
+                            <i class="fas fa-map-pin"></i> Latitud
+                        </label>
+                        <input type="text" class="form-control" id="latitud" value="<?php echo $dir1; ?>"
+                            readonly>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="longitud" class="form-label">
+                            <i class="fas fa-map-pin"></i> Longitud
+                        </label>
+                        <input type="text" class="form-control" id="longitud"
+                            value="<?php echo $dir2; ?>" readonly>
                     </div>
                 </div>
             </div>
@@ -366,20 +383,23 @@
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                 </div>
 
-                <div class="modal-body text-center px-4 py-4">
-                    <div class="mb-3">
-                        <i class="fas fa-check-circle text-success" style="font-size: 3rem;"></i>
-                    </div>
-                    <p class="fs-6 text-muted mb-0">
-                        <?php echo isset($_SESSION['success']) ? $_SESSION['success'] : ''; ?>
-                    </p>
-                </div>
+                <form data-url="<?php echo getUrl("Mapa", "Mapa", "listar") ?>">
+                    <div class="modal-body text-center px-4 py-4">
 
-                <div class="modal-footer border-0 justify-content-center pb-4">
-                    <button type="button" class="btn btn-success px-4 rounded-pill" data-bs-dismiss="modal">
-                        Aceptar
-                    </button>
-                </div>
+                        <div class="mb-3">
+                            <i class="fas fa-check-circle text-success" style="font-size: 3rem;"></i>
+                        </div>
+                        <p class="fs-6 text-muted mb-0">
+                            <?php echo isset($_SESSION['success']) ? $_SESSION['success'] : ''; ?>
+                        </p>
+                    </div>
+
+                    <div class="modal-footer border-0 justify-content-center pb-4">
+                        <button type="submit" class="btn btn-success px-4 rounded-pill" data-bs-dismiss="modal">
+                            Aceptar
+                        </button>
+                    </div>
+                </form>
 
             </div>
         </div>
@@ -429,7 +449,7 @@
             }, 1000); // 2000 ms = 2 segundos
         });
     </script>
-    <?php
+<?php
     unset($_SESSION['success']);
 } ?>
 
@@ -444,63 +464,17 @@
             }, 1000); // 2 segundos
         });
     </script>
-    <?php
+<?php
     unset($_SESSION['error']);
 } ?>
-
-<!-- Modal Mapa -->
-<div class="modal fade" id="modalMapa" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-info-adicional">
-        <div class="modal-content">
-            <div class="modal-header"
-                style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
-                <h5 class="modal-title">
-                    <i class="fas fa-map-location-dot"></i> Ubicación del Zoocriadero
-                </h5>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
-                    aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-md-6 mb-3">
-                        <label for="latitud" class="form-label">
-                            <i class="fas fa-map-pin"></i> Latitud
-                        </label>
-                        <input type="text" class="form-control" id="latitud" name="latitud" placeholder="Ej: 9.451647"
-                            readonly>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <label for="longitud" class="form-label">
-                            <i class="fas fa-map-pin"></i> Longitud
-                        </label>
-                        <input type="text" class="form-control" id="longitud" name="longitud"
-                            placeholder="Ej: -16.531985" readonly>
-                    </div>
-                </div>
-
-                <div id="mapaUbicacion"
-                    style="width: 100%; height: 400px; border-radius: 8px; border: 2px solid #e9ecef;"></div>
-
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                    <i class="fas fa-times"></i> Cancelar
-                </button>
-                <button type="button" class="btn btn-success" id="btnGuardarUbicacion">
-                    <i class="fas fa-check"></i> Guardar Ubicación
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
 
 <script>
     let numeroTanques = 0;
     let mapa = null;
     let marcador = null;
     let ubicacionSeleccionada = {
-        lat: +(Math.random() * 20).toFixed(5),          // 0 a 20
-        lng: -+(Math.random() * 70).toFixed(6)          // -0 a -20
+        lat: +(Math.random() * 20).toFixed(5), // 0 a 20
+        lng: - +(Math.random() * 70).toFixed(6) // -0 a -20
     };
 
     // Actualizar vista previa de dirección en tiempo real
@@ -545,7 +519,7 @@
     }
 
     // Event listeners para actualizar vista previa
-    document.getElementById('tipoVia').addEventListener('change', function () {
+    document.getElementById('tipoVia').addEventListener('change', function() {
         actualizarVistaPrevia();
         actualizarEjemplos();
     });
@@ -555,14 +529,14 @@
     document.getElementById('adicional').addEventListener('input', actualizarVistaPrevia);
 
     // Botón sumar tanque
-    document.getElementById('btnSumar').addEventListener('click', function () {
+    document.getElementById('btnSumar').addEventListener('click', function() {
         numeroTanques++;
         actualizarContador();
         agregarTanque();
     });
 
     // Botón restar tanque
-    document.getElementById('btnRestar').addEventListener('click', function () {
+    document.getElementById('btnRestar').addEventListener('click', function() {
         if (numeroTanques > 0) {
             eliminarUltimoTanque();
             numeroTanques--;
@@ -699,7 +673,7 @@
     }
 
     // Submit formulario zoocriadero
-    document.getElementById('formZoocriadero').addEventListener('submit', function (e) {
+    document.getElementById('formZoocriadero').addEventListener('submit', function(e) {
         e.preventDefault();
 
         let url = $(this).data('url');
@@ -769,7 +743,7 @@
                 // Tanques como JSON string
                 tanques: JSON.stringify(datos.tanques)
             },
-            success: function () {
+            success: function() {
                 window.location.href = "<?= getUrl('Zoocriadero', 'Zoocriadero', 'registrar'); ?>";
             }
         });
@@ -782,7 +756,7 @@
     const inputApellidos = document.getElementById('apellidosEncargado');
     const inputIdEncargado = document.getElementById('idEncargado');
 
-    inputDocumento.addEventListener('input', function () {
+    inputDocumento.addEventListener('input', function() {
         const documento = this.value.trim();
         const usuario = usuarios.find(u => u.documento == documento);
 
@@ -797,5 +771,4 @@
             inputIdEncargado.value = '';
         }
     });
-
 </script>
