@@ -46,8 +46,8 @@ a#francobollo
   top: 0;
   display: block;
   height: 80px;
-  width: 80px;
-  background: url(logo_sm_144x35.jpg) top left no-repeat;
+  width: 80px;/* 
+  background: url(logo_sm_144x35.jpg) top left no-repeat; */
   text-indent: -999em;
   text-decoration: none;
   z-index: 100;
@@ -75,7 +75,7 @@ LAYER {
 
 A {TEXT-DECORATION: none}
 
-BODY
+/* BODY
 {
   background-color: white;
   #background-color:#EBEBEB;
@@ -85,7 +85,7 @@ BODY
   margin-left: 0px;
   margin-right: 0px;
   border: none;
-}
+} */
 
 TD {
 	vertical-align: top;
@@ -156,7 +156,7 @@ A:visited {COLOR: #115aa4;}
 
 .logo
 {
-  background-image: url(logo_sm_144x35.jpg);
+ /*  background-image: url(logo_sm_144x35.jpg); */
   background-repeat: no-repeat;
   background-position:  right center;
   /* background-color: #ebf6fa; */

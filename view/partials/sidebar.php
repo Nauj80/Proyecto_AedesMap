@@ -249,7 +249,7 @@
                                 <?php } ?>
                                 <?php if (tienePermiso("Gestión de roles", "Consultar")) { ?>
                                     <li>
-                                        <a href="<?php echo getUrl("GestionRoles", "GestionRoles", "listar"); ?>">
+                                        <a href="<?php echo getUrl("GestionRoles", "GestionRoles", "editar"); ?>">
                                             <span class="sub-item">Consultar Roles</span>
                                         </a>
                                     </li>

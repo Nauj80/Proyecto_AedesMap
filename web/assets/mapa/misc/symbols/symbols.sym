@@ -90,3 +90,9 @@ SYMBOL
 	TYPE PIXMAP
 	IMAGE 'lupa.png'
 END
+
+SYMBOL
+    NAME "zoo"
+    TYPE PIXMAP
+    IMAGE "pez.png"
+END

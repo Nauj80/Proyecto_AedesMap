@@ -2226,6 +2226,11 @@ function msTool(p_title, p_event_button, p_icon, p_event_map) {
 // msToolbar class prototype
 function msToolbar(p_msMap, _control, _default) {
   var _tagToolbar = document.createElement("div");
+
+  // agregarle clase a _tagToolbar
+
+  _tagToolbar.classList.add("toolbarP");
+
   var _toolbarArray = new Array();
   var _msMap = p_msMap;
   var _tagMap = _msMap.getTagMap();
