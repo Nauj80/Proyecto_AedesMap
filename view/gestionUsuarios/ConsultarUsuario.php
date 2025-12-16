@@ -53,7 +53,7 @@
                                         '<td>' . $u['telefono'] . '</td>' .
                                         '<td>' . $u['correo'] . '</td>' .
                                         '<td>' . ($u['rol']) . '</td>' .
-                                        '<td>' . ($u['id_estado_usuario']) . '</td>' .
+                                        '<td>' . ($u['estado']) . '</td>' .
                                         '<td>' .
                                         '<div class="d-flex gap-2 user-action-buttons">' .
                                             '<button type="button" class="btn btn-edit" data-id="' . $u['id_usuario'] . '" data-href="' . getUrl('GestionUsuarios', 'GestionUsuarios', 'getUpdate', array('id' => $u['id_usuario'])) . '" style="background:#1976d2;color:#fff;border:0;padding:10px 22px;border-radius:8px;font-weight:700;min-width:140px;text-align:center;display:inline-block;text-decoration:none;font-size:16px;box-shadow:0 8px 20px rgba(25,118,210,0.12)" aria-label="Editar">Editar</button>' .
