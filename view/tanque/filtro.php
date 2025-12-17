@@ -45,8 +45,8 @@ if (empty($busqueda)) {  // Cambié a empty() para detectar null o array vacío
                             <?php
                             if (tieneAccion("Tanques", "Habilitar")) {
                             ?>
-                                <form class="form-habilitar" action="<?php echo getUrl("Tanque", "Tanque", "postUpdateStatus") ?>" method="post" style="display: inline;">
-                                    <input type="hidden" name="id" value="<?php echo $tanque['id_tanque'] ?>">
+                                <form class="form-habilitar" action="<?php echo getUrl("Tanque", "Tanque", "postUpdateStatus") ?>" method="post">
+                                    <input type="hidden" name="id_tanque" value="<?php echo $tanque['id_tanque'] ?>">
                                     <button type="submit" class="btn btn-info">
                                         Habilitar
                                     </button>
@@ -64,31 +64,3 @@ if (empty($busqueda)) {  // Cambié a empty() para detectar null o array vacío
 <?php
 }
 ?>
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Para los formularios de HABILITAR
-    const formsHabilitar = document.querySelectorAll('.form-habilitar');
-    formsHabilitar.forEach(form => {
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
-            const url = this.action;
-            const formData = new FormData(this);
-
-            fetch(url, {
-                    method: 'POST',
-                    body: formData
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success && data.data.redirect) {
-                        window.location.href = data.data.redirect;
-                    } else {
-                        alert(data.message || 'Ocurrió un error.');
-                    }
-                })
-                .catch(error => console.error('Error:', error));
-        });
-    });
-});
-</script>

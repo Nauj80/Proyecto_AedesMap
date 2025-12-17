@@ -214,7 +214,10 @@ class TanqueController
     public function postUpdateStatus()
     {
         $objeto = new TanquesModel();
-        $id = $_POST['id_tanque'];
+        // Se busca el id del tanque en 'id_tanque' o 'id' para compatibilidad
+        $id = isset($_POST['id_tanque']) ? $_POST['id_tanque'] : (isset($_POST['id']) ? $_POST['id'] : null);
+
+        if (!$id) jsonResponse(false, "No se proporcionó el ID del tanque.");
         $sql = "UPDATE tanques SET id_estado_tanque = 1 where id_tanque = $id";
         $tipoTanque = $objeto->update($sql);
         if ($tipoTanque) {
