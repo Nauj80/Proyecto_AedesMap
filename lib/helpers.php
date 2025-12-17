@@ -35,6 +35,7 @@ function dd($var)
 
 function getUrl($modulo, $controlador, $funcion, $parametros = false, $pagina = false)
 {
+    $_SESSION['controller'] = $controlador;
 
     if ($pagina == false) {
         $pagina = "index";
@@ -57,7 +58,6 @@ function resolve()
     $modulo = ucwords($_GET['modulo']); // modulo-> carpeta dentro del controlador
     $controlador = ucwords($_GET['controlador']); // controlador -> archivo controller dentro del modulo
     $funcion = $_GET['funcion']; // funcion -> metodo dentro de la clase del controlador
-
     if (is_dir("../controller/" . $modulo)) {
         if (is_file("../controller/" . $modulo . "/" . $controlador . "Controller.php")) {
 
@@ -68,6 +68,7 @@ function resolve()
             $objClase = new $controlador();
 
             if (method_exists($objClase, $funcion)) {
+                // Se establece la sesión ANTES de llamar a la función que renderiza la vista.
                 $objClase->$funcion();
             } else {
                 echo "La funcion especificada no existe";
