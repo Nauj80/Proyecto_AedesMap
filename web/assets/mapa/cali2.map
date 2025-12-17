@@ -47,22 +47,7 @@ MAP
     END
    END
 
-   LAYER
-     CONNECTIONTYPE postgis
-     NAME "Puntos"
-     STATUS ON
-     CONNECTION "user=postgres password=1234 dbname=prueba host=localhost port=5432"
-     DATA "geom from puntos using unique id using SRID=4326"
-     TYPE POINT
-     CLASS
-      STYLE
-        SYMBOL star
-        SIZE 30
-        COLOR 255 0 255
-        OUTLINECOLOR 0 0 0
-      END
-     END
-    END
+   
 
    LAYER
     NAME "Malla_Vial"

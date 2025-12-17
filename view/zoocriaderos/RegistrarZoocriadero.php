@@ -145,6 +145,7 @@ $_SESSION["y"] = $_GET["y"];
         border-radius: 5px;
     }
 
+
     .info-item i {
         color: #667eea;
         margin-right: 10px;
@@ -156,6 +157,7 @@ $_SESSION["y"] = $_GET["y"];
             max-width: 95%;
         }
     }
+
 </style>
 
 
@@ -163,7 +165,7 @@ $_SESSION["y"] = $_GET["y"];
     <div class="form-container">
         <div class="row mb-2">
             <div class="col text-center">
-                <h2 class="font-monospace fw-bold fs-1"> Registrar Zoocriadero</h2>
+                <h2 class="font-monospace fw-bold fs-1" id="tituloRe"> Registrar Zoocriadero</h2>
             </div>
         </div>
 
@@ -189,11 +191,23 @@ $_SESSION["y"] = $_GET["y"];
                         <input type="text" class="form-control" id="barrio" name="barrio" required minlength="3"
                             maxlength="50" placeholder="ej:Los olivos">
                     </div>
-                    <div class="col-md-6 mb-3">
+                    <div class="col-md-3 mb-3">
                         <label for="comuna" class="form-label">
                             </i> Comuna *
                         </label>
-                        <input type="text" class="form-control" id="comuna" name="comuna" value="Comuna 13" readonly>
+                        <select class="form-select"  id="comuna" name="comuna" required>
+                                    <option value="">Seleccione...</option>
+                                    
+                                    <?php
+                                    
+                                    for ($i=1; $i <=22 ; $i++) { 
+                                        
+                                        echo "<option value='Comuna ". $i."'>Comuna ".$i."</option>";
+                                       
+                                    }
+                                    ?>
+                                </select>
+                        <!-- <input type="text" class="form-control" id="comuna" name="comuna" value="Comuna 13" readonly> -->
                     </div>
                     <div class="col-12 mb-3">
                         <label class="form-label">
@@ -298,8 +312,8 @@ $_SESSION["y"] = $_GET["y"];
                         <label for="documentoEncargado" class="form-label">
                             Documento *
                         </label>
-                        <input type="text" class="form-control" id="documentoEncargado" name="documentoEncargado"
-                            list="listaUsuarios" required minlength="6" maxlength="15">
+                        <input type="text" class="form-control" id="documentoEncargado" name="documentoEncargado" 
+                            list="listaUsuarios" required minlength="9" maxlength="10" pattern="[0-9]{9,10}">
 
                         <datalist id="listaUsuarios">
                             <?php foreach ($usuarios as $u): ?>

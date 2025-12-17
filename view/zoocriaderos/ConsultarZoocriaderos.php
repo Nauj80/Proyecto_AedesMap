@@ -1,6 +1,7 @@
 <?php
 include_once 'modales/verDetalle.php';
 include_once 'modales/editar.php';
+include_once 'modales/inhabilitar.php';
 
 // Mostrar error si existe
 if (isset($_SESSION['error'])) {
@@ -51,9 +52,6 @@ if (isset($_SESSION['success'])) {
                         <th>Nombre Zoocriadero</th>
                         <th>Encargado</th>
                         <th>Dirección</th>
-                        <th>Telefono</th>
-                        <th>Barrio</th>
-                        <th>Correo</th>
                         <?php
                         // Verificar si tiene alguna acción para mostrar la columna
                         if (tieneAccion("Zoocriaderos", "Ver_detalle") || tieneAccion("Zoocriaderos", "Editar") || tieneAccion("Zoocriaderos", "Inhabilitar")) {
@@ -70,11 +68,8 @@ if (isset($_SESSION['success'])) {
                         ?>
                         <tr>
                             <td><?= $zoocriadero['nombre_zoocriadero'] ?></td>
-                            <td><?= $zoocriadero['nombre_usuario'] ?></td>
+                            <td><?= $zoocriadero['nombre_usuario']." ".$zoocriadero['apellido_usuario'] ?></td>
                             <td><?= $zoocriadero['direccion'] ?></td>
-                            <td><?= $zoocriadero['telefono'] ?></td>
-                            <td><?= $zoocriadero['barrio'] ?></td>
-                            <td><?= $zoocriadero['correo'] ?></td>
                             <?php
                             // Verificar si tiene alguna acción para mostrar las botones
                             if (tieneAccion("Zoocriaderos", "Ver_detalle") || tieneAccion("Zoocriaderos", "Editar") || tieneAccion("Zoocriaderos", "Inhabilitar")) {
@@ -84,29 +79,35 @@ if (isset($_SESSION['success'])) {
                                         <?php
                                         if (tieneAccion("Zoocriaderos", "Ver_detalle")) {
                                             ?>
-                                            <button id="verDetalle" type="button" class="btn btn-primary btn-sm btn-ver-detalle"
+                                            <?php
+                                            if (tieneAccion("Zoocriaderos", "Editar")) {
+                                                ?>
+                                                <button type="button" class="btn btn- btn-md btn-primary" data-bs-toggle="modal"
+                                                    data-bs-target="#modalEditarZoocriadero"
+                                                    data-url="<?= getUrl("Zoocriadero", "Zoocriadero", "editar", array("id_zoocriadero" => $zoocriadero['id_zoocriadero']), "ajax"); ?>">
+                                                    Editar
+                                                </button>
+                                            <?php } ?>
+                                            <button id="verDetalle" type="button" class="btn btn-info btn-md btn-ver-detalle"
                                                 data-bs-toggle="modal" data-bs-target="#modalVerDetalle"
                                                 data-url="<?= getUrl("Zoocriadero", "Zoocriadero", "verDetalle", array("id_zoocriadero" => $zoocriadero['id_zoocriadero']), "ajax"); ?>">
                                                 Ver Detalle
                                             </button>
                                         <?php } ?>
                                         <?php
-                                        if (tieneAccion("Zoocriaderos", "Editar")) {
-                                            ?>
-                                            <button type="button" class="btn btn- btn-sm btn-info" data-bs-toggle="modal"
-                                                data-bs-target="#modalEditarZoocriadero"
-                                                data-url="<?= getUrl("Zoocriadero", "Zoocriadero", "editar", array("id_zoocriadero" => $zoocriadero['id_zoocriadero']), "ajax"); ?>">
-                                                Editar
-                                            </button>
-                                        <?php } ?>
-                                        <?php
                                         if (tieneAccion("Zoocriaderos", "Inhabilitar")) {
                                             $texto = $zoocriadero['id_estado_zoocriadero'] == 1 ? 'Inhabilitar' : 'Habilitar';
-                                            ?>
-                                            <a href="#" class="btn btn-danger btn-sm"
-                                                onclick="inhabilitar(<?= $zoocriadero['id_zoocriadero'] ?>, <?= $zoocriadero['id_estado_zoocriadero'] ?>); return false;">
-                                                <?= $texto ?>
-                                            </a>
+                                            if($texto == "Inhabilitar"){
+                                                ?>
+                                                <button type="button" class="btn btn-danger btn-md"
+                                                    data-id="<?php echo $zoocriadero['id_zoocriadero']?>"
+                                                    data-estado="<?php echo $zoocriadero['id_estado_zoocriadero']?>"      
+                                                    data-bs-toggle="modal" data-bs-target="#modalInhabilitarZoo">
+                                                    <?php echo $texto ?>
+                                                </button>
+                                            <?php }else{ ?>
+                                                <a type="button" class="btn btn-success btn-md" href="<?php echo getUrl("Zoocriadero","Zoocriadero","getInhabilitar", array("id_zoocriadero" => $zoocriadero['id_zoocriadero'])); ?>"><?php echo $texto ?></a>
+                                          <?php  } ?>
                                             <?php
                                         } ?>
                                     </div>

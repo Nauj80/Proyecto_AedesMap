@@ -19,9 +19,6 @@
 <!-- Datatables -->
 <script src="assets/js/plugin/datatables/datatables.min.js"></script>
 
-<!-- Bootstrap Notify -->
-<script src="assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js"></script>
-
 <!-- jQuery Vector Maps -->
 <script src="assets/js/plugin/jsvectormap/jsvectormap.min.js"></script>
 <script src="assets/js/plugin/jsvectormap/world.js"></script>
@@ -34,6 +31,7 @@
 
 <!-- Kaiadmin DEMO methods, don't include it in your project! -->
 <script src="assets/js/setting-demo.js"></script>
+<script src='js/validations.js'></script>
 <script src='js/actividades.js'></script>
 <script src='js/seguimiento.js'></script>
 <script src="js/zoocriaderos.js"></script>

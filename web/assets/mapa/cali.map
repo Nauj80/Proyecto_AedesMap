@@ -157,7 +157,7 @@ TRANSPARENCY 70
      CONNECTIONTYPE postgis
      NAME "Puntos"
      STATUS ON
-     CONNECTION "host=localhost port=5432 dbname=zoocriadero user=postgres password=1234"
+     CONNECTION "host=localhost port=5432 dbname=zoocriadero user=postgres password=12345"
      DATA "coordenada FROM zoocriaderos AS puntos USING UNIQUE id_zoocriadero USING SRID=4326"
      TYPE POINT
      CLASS
