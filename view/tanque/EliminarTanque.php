@@ -35,8 +35,8 @@ include_once '../view/partials/header.php';
                 <?php
                 while ($tan = pg_fetch_assoc($Tanque)) {
 
-                ?>
-                    <form action="<?php echo getUrl("Tanque", "Tanque", "postDelete"); ?>" method="post">
+                ?> 
+                    <form id="form-eliminar" action="<?php echo getUrl("Tanque", "Tanque", "postDelete"); ?>" method="post">
                         <div class="card-header">
                             <div class="card-title">Eliminar tanque</div>
                         </div>
@@ -46,7 +46,7 @@ include_once '../view/partials/header.php';
                             </div>
                             <div class="row">
                                 <div class="col-md-6 col-lg-6">
-                                    <input type="hidden" name="id" value="<?php echo $tan["id_tanque"] ?>">
+                                    <input type="hidden" name="id_tanque" value="<?php echo $tan["id_tanque"] ?>">
                                     <div class="form-group">
                                         <label for="nombreTanque">Nombre</label>
                                         <input type="text" class="form-control t" id="nombreTanque" name="nombreTanque" placeholder="Ingrese un nombre para el tanque" value="<?php echo $tan['nombre'] ?>" disabled>
@@ -96,16 +96,16 @@ include_once '../view/partials/header.php';
                                 </div>
                                 <div class="col-md-6 col-lg-6">
                                     <div class="form-group">
-                                        <label for="altoTanque">Altura del tanque (cm)</label>
-                                        <input type="text" class="form-control" id="altoTanque" name="altoTanque" placeholder="Ingrese la altura del tanque en cm" value="<?php echo $tan['alto'] ?>" readonly>
+                                        <label for="largoTanque">Largo del tanque (m)</label>
+                                        <input type="text" class="form-control" id="largoTanque" name="largoTanque" placeholder="Ingrese el largo del tanque en m" value="<?php echo $tan['largo'] ?>" readonly>
                                     </div>
                                     <div class="form-group">
-                                        <label for="anchoTanque">Ancho del tanque (cm)</label>
-                                        <input type="text" class="form-control" id="anchoTanque" name="anchoTanque" placeholder="Ingrese el ancho del tanque en cm" value="<?php echo $tan['ancho'] ?>" readonly>
+                                        <label for="anchoTanque">Ancho del tanque (m)</label>
+                                        <input type="text" class="form-control" id="anchoTanque" name="anchoTanque" placeholder="Ingrese el ancho del tanque en m" value="<?php echo $tan['ancho'] ?>" readonly>
                                     </div>
                                     <div class="form-group">
-                                        <label for="profundidadTanque">Profundidad del tanque (cm)</label>
-                                        <input type="text" class="form-control" id="profundidadTanque" name="profundidadTanque" placeholder="Ingrese la profundidad del tanque en cm" value="<?php echo $tan['profundo'] ?>" readonly>
+                                        <label for="profundidadTanque">Profundidad del tanque (m)</label>
+                                        <input type="text" class="form-control" id="profundidadTanque" name="profundidadTanque" placeholder="Ingrese la profundidad del tanque en m" value="<?php echo $tan['profundo'] ?>" readonly>
                                     </div>
                                     <div class="form-group">
                                         <label for="estadoTanque">Estado tanque</label>
@@ -133,7 +133,7 @@ include_once '../view/partials/header.php';
                         </div>
                         <div class="card-action text-center">
                             <button type="submit" class="btn btn-danger">Eliminar</button>
-                            <a class="btn btn-secundary" href="<?php echo getUrl("Tanque", "Tanque", "listar"); ?>">Cancelar</a>
+                            <a class="btn" href="<?php echo getUrl("Tanque", "Tanque", "listar"); ?>">Cancelar</a>
                         </div>
                     </form>
                 <?php
@@ -142,4 +142,27 @@ include_once '../view/partials/header.php';
             </div>
         </div>
     </div>
+    <script>
+        document.getElementById('form-eliminar').addEventListener('submit', function(e) {
+            e.preventDefault(); // Evita el envío tradicional del formulario
+
+            const form = e.target;
+            const url = form.action;
+            const formData = new FormData(form);
+
+            fetch(url, {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success && data.data.redirect) {
+                    window.location.href = data.data.redirect; // Redirige si la respuesta es exitosa
+                } else {
+                    alert(data.message || 'Ocurrió un error al intentar eliminar.');
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        });
+    </script>
 </body>

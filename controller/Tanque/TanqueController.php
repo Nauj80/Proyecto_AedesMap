@@ -22,25 +22,64 @@ class TanqueController
     public function postCreate()
     {
         $objeto = new TanquesModel();
-        $nombre = $_GET['nombreTanque'];
+        $nombre = $_POST['nombreTanque'];
         $zoocriadero = $_POST['zoocriadero'];
         $tipoTanque = $_POST['tipoTanque'];
         $cantidadPeces = $_POST['cantidadPeces'];
-        $altoTanque = $_POST['altoTanque'];
+        $largoTanque = $_POST['largoTanque'];
         $anchoTanque = $_POST['anchoTanque'];
         $profundidadTanque = $_POST['profundidadTanque'];
 
-        $id = $objeto->autoIncrement("tanques", "id_tanque");
+        // Validar si ya existe un tanque con el mismo nombre en el mismo zoocriadero
+        $sql_check = "SELECT COUNT(*) AS total FROM tanques WHERE nombre = '$nombre' AND id_zoocriadero = $zoocriadero";
+        $result_check = $objeto->select($sql_check);
+        $row_check = pg_fetch_assoc($result_check);
 
-        $sql = "INSERT INTO tanques VALUES ($id, $zoocriadero, $tipoTanque, $cantidadPeces,'$nombre', $anchoTanque, $altoTanque, $profundidadTanque, 1)";
-
-        $ejecutar = $objeto->insert($sql);
-
-        if ($ejecutar) {
-            jsonResponse(true, "Tanque creado correctamente", array('redirect' => getUrl("Tanque", "Tanque", "listar")));
+        if ($row_check['total'] > 0) {
+            jsonResponse(false, "Ya existe un tanque con este nombre en el zoocriadero seleccionado.");
         } else {
-            jsonResponse(false, "No se pudo registrar el tanque");
+            $id = $objeto->autoIncrement("tanques", "id_tanque");
+
+            $sql = "INSERT INTO tanques VALUES ($id, $zoocriadero, $tipoTanque, $cantidadPeces,'$nombre', $anchoTanque, $largoTanque, $profundidadTanque, 1)";
+
+            $ejecutar = $objeto->insert($sql);
+
+            if ($ejecutar) {
+                jsonResponse(true, "Tanque creado correctamente", array('redirect' => getUrl("Tanque", "Tanque", "listar")));
+            } else {
+                jsonResponse(false, "No se pudo registrar el tanque");
+            }
         }
+    }
+
+    public function filtro()
+    {
+        $objeto = new TanquesModel();
+        $buscar = $_GET['buscar'];
+
+        $sql = "SELECT 
+                    tanques.*,
+                    zoocriaderos.nombre_zoocriadero AS zoocriadero,
+                    tipo_tanque.nombre AS tipo_tanque,
+                    estado_tanque.nombre AS estado
+                FROM tanques
+                INNER JOIN zoocriaderos 
+                    ON tanques.id_zoocriadero = zoocriaderos.id_zoocriadero
+                INNER JOIN tipo_tanque 
+                    ON tanques.id_tipo_tanque = tipo_tanque.id_tipo_tanque
+                INNER JOIN estado_tanque 
+                    ON tanques.id_estado_tanque = estado_tanque.id_estado_tanque
+                WHERE (
+                    zoocriaderos.nombre_zoocriadero ILIKE '%$buscar%' OR
+                    tanques.nombre ILIKE '%$buscar%' OR
+                    tipo_tanque.nombre ILIKE '%$buscar%' OR
+                    estado_tanque.nombre ILIKE '%$buscar%'
+                );
+                ";
+        $busq = $objeto->select($sql);
+        $busqueda = pg_fetch_all($busq);
+
+        include_once '../view/Tanque/Filtro.php';
     }
 
     public function listar()
@@ -117,18 +156,18 @@ class TanqueController
     {
         $obj = new TanquesModel();
 
-        $id = $_POST['id'];
+        $id = $_POST['id_tanque'];
         $nombre = $_POST['nombreTanque'];
         $zoocriadero = $_POST['zoocriadero'];
         $tipoTanque = $_POST['tipoTanque'];
         $cantidadPeces = $_POST['cantidadPeces'];
-        $altoTanque = $_POST['altoTanque'];
+        $largoTanque = $_POST['largoTanque'];
         $anchoTanque = $_POST['anchoTanque'];
         $profundidadTanque = $_POST['profundidadTanque'];
         $estadoTanque = $_POST['estadoTanque'];
 
 
-        $sql = "UPDATE tanques SET id_zoocriadero = $zoocriadero, id_tipo_tanque = $tipoTanque, cantidad_peces = $cantidadPeces, nombre = '$nombre', ancho = $anchoTanque, alto = $altoTanque, profundo = $profundidadTanque, id_estado_tanque = $estadoTanque WHERE id_tanque = $id";
+        $sql = "UPDATE tanques SET id_zoocriadero = $zoocriadero, id_tipo_tanque = $tipoTanque, cantidad_peces = $cantidadPeces, nombre = '$nombre', ancho = $anchoTanque, alto = $largoTanque, profundo = $profundidadTanque, id_estado_tanque = $estadoTanque WHERE id_tanque = $id";
 
         $ejecutar = $obj->update($sql);
 
@@ -160,7 +199,7 @@ class TanqueController
     public function postDelete()
     {
         $objeto = new TanquesModel();
-        $id = $_POST['id'];
+        $id = $_POST['id_tanque'];
 
         $sql = "UPDATE tanques SET id_estado_tanque = 2 WHERE id_tanque = $id";
         $tipoTanque = $objeto->update($sql);
@@ -175,7 +214,10 @@ class TanqueController
     public function postUpdateStatus()
     {
         $objeto = new TanquesModel();
-        $id = $_POST['id'];
+        // Se busca el id del tanque en 'id_tanque' o 'id' para compatibilidad
+        $id = isset($_POST['id_tanque']) ? $_POST['id_tanque'] : (isset($_POST['id']) ? $_POST['id'] : null);
+
+        if (!$id) jsonResponse(false, "No se proporcionó el ID del tanque.");
         $sql = "UPDATE tanques SET id_estado_tanque = 1 where id_tanque = $id";
         $tipoTanque = $objeto->update($sql);
         if ($tipoTanque) {

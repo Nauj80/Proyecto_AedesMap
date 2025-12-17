@@ -138,7 +138,7 @@ class TipoTanquesController
     public function postUpdateStatus()
     {
         $objeto = new TipoTanquesModel();
-        $id = $_POST['id'];
+        $id = $_POST['id_tipo_tanque'];
         $sql = "UPDATE tipo_tanque SET id_estado_tipo_tanque = 1 where id_tipo_tanque = $id";
         $tipoTanque = $objeto->update($sql);
         if ($tipoTanque) {
