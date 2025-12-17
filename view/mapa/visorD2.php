@@ -346,16 +346,10 @@ $urlLegend = $mapLegend->saveWebImage(MS_GIF, 0, 0, -1);
 
     function queryI(event, map, x, y, xx, yy) {
         if (seleccionado) {
-            alert("Coordenadas mapa: x:" + x + " y " + y + " reales: x " + xx + " y " + yy);
-            var consulta1 = objetoAjaX();
-            consulta1.open("GET", "<?php echo $PROJECT_ROOT_URL ?>/view/mapa/Insertar_punto.php?x=" + xx + "&y=" + yy, true);
-            consulta1.onreadystatechange = function() {
-                if (consulta1.readyState == 4) {
-                    alert(consulta1.responseText);
-                    window.location.reload();
-                }
-            };
-            consulta1.send(null);
+           
+            const urlRegistro = "<?php echo getUrl('Zoocriadero', 'Zoocriadero', 'registrar', array('x' => '')); ?>" + xx + "&y=" + yy;
+            // Redirigimos al usuario a la página de registro.
+            window.location.href = urlRegistro;
             seleccionado = false;
             map.getTagMap().style.cursor = "default";
         }

@@ -90,10 +90,10 @@ class LoginController
             if (!in_array($modulo, $_SESSION['modulos'])) {
                 $_SESSION['modulos'][] = $modulo;
             }
-
+            
             // Guardar acción por módulo
             $_SESSION['acciones'][$modulo][] = $accion;
-
+            
             // Guardar permisos (módulo + acción)
             $_SESSION['permisos'][] = $modulo . ":" . $accion;
         }

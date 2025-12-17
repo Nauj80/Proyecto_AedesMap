@@ -24,7 +24,7 @@
     <div class="sidebar-wrapper scrollbar scrollbar-inner">
         <div class="sidebar-content">
             <ul class="nav nav-secondary">
-                <li class="nav-item active">
+                <li class="nav-item">
                     <a href="<?php echo getUrl("Mapa", "Mapa", "listar")?>">
                         <i class="fas fa-map-marked-alt"></i>
                         <p>Visualización del mapa</p>
