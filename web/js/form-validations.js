@@ -146,10 +146,10 @@
               window.location.replace(json.data.redirect);
               return;
             }
-            // Si hay un mensaje de error del servidor, mostrarlo
+            /*  // Si hay un mensaje de error del servidor, mostrarlo
             if (json && !json.success && json.message) {
               alert(json.message);
-            }
+            } */
           }
           if (res.text) {
             const text = res.text;
@@ -163,7 +163,15 @@
         })
         .catch(function (error) {
           console.error("Error en el envío:", error);
-          alert("Hubo un error al procesar la solicitud");
+          // Código sugerido para form-validations.js
+          if (campo.value === "") {
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: "Hubo un error al procesar la solicitud",
+            });
+            return false;
+          }
         });
     });
   }

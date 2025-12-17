@@ -25,7 +25,7 @@
         <div class="sidebar-content">
             <ul class="nav nav-secondary">
                 <li class="nav-item active">
-                    <a data-bs-toggle="collapse" href="#mapa" class="collapsed" aria-expanded="false">
+                    <a  href="<?php echo getUrl("Mapa", "Mapa", "listar")?>">
                         <i class="fas fa-map-marked-alt"></i>
                         <p>Visualización del mapa</p>
                     </a>
@@ -67,48 +67,70 @@
                         </ul>
                     </div>
                 </li>
-                <li class="nav-item">
-                    <a data-bs-toggle="collapse" href="#tipotanque">
-                        <i class="fas fa-th-large"></i>
-                        <p>Tipo de tanques</p>
-                        <span class="caret"></span>
-                    </a>
-                    <div class="collapse" id="tipotanque">
-                        <ul class="nav nav-collapse">
-                            <li>
-                                <a href="<?php echo getUrl("TipoTanques", "TipoTanques", "listar"); ?>">
-                                    <span class="sub-item">Consultar Tipos de Tanque</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="<?php echo getUrl("TipoTanques", "TipoTanques", "getCreate"); ?>">
-                                    <span class="sub-item">Crear Tipo de Tanque</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <a data-bs-toggle="collapse" href="#tanques">
-                        <i class="fas fa-fish"></i>
-                        <p>Tanques</p>
-                        <span class="caret"></span>
-                    </a>
-                    <div class="collapse" id="tanques">
-                        <ul class="nav nav-collapse">
-                            <li>
-                                <a href="<?php echo getUrl("Tanque", "Tanque", "listar"); ?>">
-                                    <span class="sub-item">Consultar Tanques</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="<?php echo getUrl("Tanque", "Tanque", "getCreate"); ?>">
-                                    <span class="sub-item">Crear Tanques</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
+                
+                <?php
+                if (tieneModulo("Tipo de tanques")) {
+                ?>
+                    <li class="nav-item">
+                        <a data-bs-toggle="collapse" href="#tipotanque">
+                            <i class="fas fa-th-large"></i>
+                            <p>Tipo de tanques</p>
+                            <span class="caret"></span>
+                        </a>
+                        <div class="collapse" id="tipotanque">
+                            <ul class="nav nav-collapse">
+                                <?php if (tienePermiso("Tipo de tanques", "Registrar")) { ?>
+                                    <li>
+                                        <a href="<?php echo getUrl("TipoTanques", "TipoTanques", "getCreate"); ?>">
+                                            <span class="sub-item">Crear Tipo de Tanque</span>
+                                        </a>
+                                    </li>
+                                <?php } ?>
+                                <?php if (tienePermiso("Tipo de tanques", "Consultar")) { ?>
+                                    <li>
+                                        <a href="<?php echo getUrl("TipoTanques", "TipoTanques", "listar"); ?>">
+                                            <span class="sub-item">Consultar Tipos de Tanque</span>
+                                        </a>
+                                    </li>
+                                <?php } ?>
+                            </ul>
+                        </div>
+                    </li>
+                <?php
+                }
+                ?>
+
+                <?php
+                if (tieneModulo("Tanques")) {
+                ?>
+                    <li class="nav-item">
+                        <a data-bs-toggle="collapse" href="#tanques">
+                            <i class="fas fa-fish"></i>
+                            <p>Tanques</p>
+                            <span class="caret"></span>
+                        </a>
+                        <div class="collapse" id="tanques">
+                            <ul class="nav nav-collapse">
+                                <?php if (tienePermiso("Tanques", "Registrar")) { ?>
+                                    <li>
+                                        <a href="<?php echo getUrl("Tanque", "Tanque", "getCreate"); ?>">
+                                            <span class="sub-item">Crear Tanque</span>
+                                        </a>
+                                    </li>
+                                <?php } ?>
+                                <?php if (tienePermiso("Tanques", "Consultar")) { ?>
+                                    <li>
+                                        <a href="<?php echo getUrl("Tanque", "Tanque", "listar"); ?>">
+                                            <span class="sub-item">Consultar Tanques</span>
+                                        </a>
+                                    </li>
+                                <?php } ?>
+                            </ul>
+                        </div>
+                    </li>
+                <?php
+                }
+                ?>
                 <li class="nav-item">
                     <a data-bs-toggle="collapse" href="#tipoactividades">
                         <i class="fas fa-list-alt"></i>
