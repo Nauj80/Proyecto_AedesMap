@@ -170,7 +170,7 @@ include_once '../view/partials/header.php';
                                                                 <form class="form-habilitar" action="');
                                                             echo getUrl("Tanque", "Tanque", "postUpdateStatus");
                                                             print_r('"
-                                                                method="post" style="display: inline;">
+                                                                method="post">
                                                                     <input type="hidden" name="id_tanque" value="' . $Tanque['id_tanque'] . '">
                                                                     <button type="submit" class="btn btn-info">
                                                                         Habilitar
@@ -267,28 +267,33 @@ include_once '../view/partials/header.php';
     }
 
     document.addEventListener('DOMContentLoaded', function() {
-        // Para los formularios de HABILITAR
-        const formsHabilitar = document.querySelectorAll('.form-habilitar');
-        formsHabilitar.forEach(form => {
-            form.addEventListener('submit', function(e) {
-                e.preventDefault();
-                const url = this.action;
-                const formData = new FormData(this);
-
+        // Se usa delegación de eventos en la tabla para manejar los formularios de habilitar,
+        // tanto los iniciales como los que se cargan con el filtro.
+        const tableBody = document.querySelector('#add-row tbody');
+    
+        tableBody.addEventListener('submit', function(e) {
+            // Nos aseguramos de que el evento provenga de un formulario de habilitación
+            if (e.target.matches('.form-habilitar')) {
+                e.preventDefault(); // Prevenimos el envío tradicional
+    
+                const form = e.target;
+                const url = form.action;
+                const formData = new FormData(form);
+    
                 fetch(url, {
-                        method: 'POST',
-                        body: formData
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.success && data.data.redirect) {
-                            window.location.href = data.data.redirect;
-                        } else {
-                            alert(data.message || 'Ocurrió un error.');
-                        }
-                    })
-                    .catch(error => console.error('Error:', error));
-            });
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success && data.data.redirect) {
+                        window.location.href = data.data.redirect; // Redireccionamos
+                    } else {
+                        alert(data.message || 'Ocurrió un error.');
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+            }
         });
 
         // Para los enlaces de INHABILITAR
