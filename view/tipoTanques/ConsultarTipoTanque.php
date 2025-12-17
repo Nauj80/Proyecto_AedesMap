@@ -107,6 +107,7 @@ include_once '../view/partials/header.php';
                                             <?php
 
                                             while ($tipoTanque = pg_fetch_assoc($tipoTanques)) {
+                                                
                                                 print_r(
                                                     '
                                                     <tr role="row">
@@ -114,33 +115,50 @@ include_once '../view/partials/header.php';
                                                         <td>' . $tipoTanque["estado"] . '</td>
                                                         <td class="text-center">
                                                             <div class="form-button-action gap-3">
-                                                                <a type="button" class="btn btn-primary" href=' . getUrl("TipoTanques", "TipoTanques", "getUpdate", array("id" => $tipoTanque['id_tipo_tanque'])) . '>
+                                                            '
+                                                );
+
+                                                if (tieneAccion("Tipo de tanques", "Editar")) {
+                                                    print_r(
+                                                        '
+                                                                <a class="btn btn-primary" href=' . getUrl("TipoTanques", "TipoTanques", "getUpdate", array("id" => $tipoTanque['id_tipo_tanque'])) . '>
                                                                     Editar
                                                                 </a>
                                                                 '
-                                                );
-                                                if ($tipoTanque['id_estado_tipo_tanque'] == 1) {
+                                                    );
 
-                                                    print_r('
-                                                                <a type="button" class="btn btn-danger" href=' . getUrl("TipoTanques", "TipoTanques", "getDelete", array("id" => $tipoTanque['id_tipo_tanque'])) . '>
+                                                    if ($tipoTanque['id_estado_tipo_tanque'] == 1) {
+                                                        if (tieneAccion("Tipo de tanques", "Inhabilitar")) {
+
+                                                            print_r('
+                                                                    <a class="btn btn-danger btn-inhabilitar" href=' . getUrl("TipoTanques", "TipoTanques", "getDelete", array("id" => $tipoTanque['id_tipo_tanque'])) . '>
                                                                     Inhabilitar
-                                                                </a>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    ');
-                                                } elseif ($tipoTanque['id_estado_tipo_tanque'] == 2) {
-                                                    print_r('
-                                                                <form action="index.php?modulo=TipoTanques&controlador=TipoTanques&funcion=postUpdateStatus" method="post" style="display: inline;" >
-                                                                    <input type="hidden" name="id" value="' . $tipoTanque['id_tipo_tanque'] . '">
+                                                                    </a>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        ');
+                                                        }
+                                                    } elseif ($tipoTanque['id_estado_tipo_tanque'] == 2) {
+                                                        if (tieneAccion("Tipo de tanques", "Habilitar")) {
+                                                            print_r('
+                                                                <form class="form-habilitar" action="');
+                                                            echo getUrl("TipoTanques", "TipoTanques", "postUpdateStatus");
+                                                            print_r('"
+                                                                method="post">
+                                                                    <input type="hidden" name="id_tipo_tanque" value="' . $tipoTanque['id_tipo_tanque'] . '">
                                                                     <button type="submit" class="btn btn-info">
                                                                         Habilitar
                                                                     </button>
                                                                 </form>
+                                                                ');
+                                                        }
+                                                        print_r('
                                                             </div>
                                                         </td>
                                                     </tr>
                                                     ');
+                                                    }
                                                 }
                                             }
                                             ?>
@@ -222,4 +240,36 @@ include_once '../view/partials/header.php';
         var baseUrl = '<?php echo getUrl("TipoTanques", "TipoTanques", "listar"); ?>&length=<?php echo $registrosPorPagina; ?>&page=1';
         window.location.href = baseUrl + '&sort_column=' + encodeURIComponent(column) + '&sort_order=' + currentSortOrder;
     }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        // Se usa delegación de eventos en la tabla para manejar los formularios.
+        const tableBody = document.querySelector('#add-row tbody');
+
+        if (tableBody) {
+            tableBody.addEventListener('submit', function(e) {
+                // Nos aseguramos de que el evento provenga de un formulario de habilitación
+                if (e.target.matches('.form-habilitar')) {
+                    e.preventDefault(); // Prevenimos el envío tradicional
+
+                    const form = e.target;
+                    const url = form.action;
+                    const formData = new FormData(form);
+
+                    fetch(url, {
+                            method: 'POST',
+                            body: formData
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success && data.data && data.data.redirect) {
+                                window.location.href = data.data.redirect; // Redireccionamos
+                            } else {
+                                alert(data.message || 'Ocurrió un error.');
+                            }
+                        })
+                        .catch(error => console.error('Error:', error));
+                }
+            });
+        }
+    });
 </script>
