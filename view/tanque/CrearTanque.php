@@ -79,7 +79,7 @@ include_once '../view/partials/header.php';
                             <div class="col-md-6 col-lg-6">
                                 <div class="form-group">
                                     <label for="largoTanque" class="required">Largo del tanque (m)</label>
-                                    <input type="text" class="form-control f" id="largoTanque" name="largoTanque" placeholder="Ingrese la altura del tanque en m">
+                                    <input type="text" class="form-control f" id="largoTanque" name="largoTanque" placeholder="Ingrese el largo del tanque en m">
                                     <div class="invalid-feedback"></div>
                                 </div>
                                 <div class="form-group">

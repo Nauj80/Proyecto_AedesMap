@@ -98,18 +98,18 @@ include_once '../view/partials/header.php';
                                 </div>
                                 <div class="col-md-6 col-lg-6">
                                     <div class="form-group">
-                                        <label for="largoTanque" class="required">Altura del tanque (cm)</label>
-                                        <input type="text" class="form-control f" id="largoTanque" name="largoTanque" placeholder="Ingrese la altura del tanque en cm" value="<?php echo $tan['alto'] ?>">
+                                        <label for="largoTanque" class="required">Altura del tanque (m)</label>
+                                        <input type="text" class="form-control f" id="largoTanque" name="largoTanque" placeholder="Ingrese el largo del tanque en m" value="<?php echo $tan['alto'] ?>">
                                         <div class="invalid-feedback"></div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="anchoTanque" class="required">Ancho del tanque (cm)</label>
-                                        <input type="text" class="form-control f" id="anchoTanque" name="anchoTanque" placeholder="Ingrese el ancho del tanque en cm" value="<?php echo $tan['ancho'] ?>">
+                                        <label for="anchoTanque" class="required">Ancho del tanque (m)</label>
+                                        <input type="text" class="form-control f" id="anchoTanque" name="anchoTanque" placeholder="Ingrese el ancho del tanque en m" value="<?php echo $tan['ancho'] ?>">
                                         <div class="invalid-feedback"></div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="profundidadTanque" class="required">Profundidad del tanque (cm)</label>
-                                        <input type="text" class="form-control f" id="profundidadTanque" name="profundidadTanque" placeholder="Ingrese la profundidad del tanque en cm" value="<?php echo $tan['profundo'] ?>">
+                                        <label for="profundidadTanque" class="required">Profundidad del tanque (m)</label>
+                                        <input type="text" class="form-control f" id="profundidadTanque" name="profundidadTanque" placeholder="Ingrese la profundidad del tanque en m" value="<?php echo $tan['profundo'] ?>">
                                         <div class="invalid-feedback"></div>
                                     </div>
 
