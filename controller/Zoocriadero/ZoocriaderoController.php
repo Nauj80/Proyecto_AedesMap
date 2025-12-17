@@ -277,7 +277,6 @@ class ZoocriaderoController
         unset($_SESSION['x']);
         unset($_SESSION['y']);
 
-        include_once '../web/index.php';
     }
     public function tipoPermisos() {}
 }
