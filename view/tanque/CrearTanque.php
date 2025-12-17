@@ -78,17 +78,17 @@ include_once '../view/partials/header.php';
                             </div>
                             <div class="col-md-6 col-lg-6">
                                 <div class="form-group">
-                                    <label for="altoTanque" class="required">Altura del tanque (cm)</label>
-                                    <input type="text" class="form-control f" id="altoTanque" name="altoTanque" placeholder="Ingrese la altura del tanque en cm">
+                                    <label for="largoTanque" class="required">Largo del tanque (m)</label>
+                                    <input type="text" class="form-control f" id="largoTanque" name="largoTanque" placeholder="Ingrese la altura del tanque en m">
                                     <div class="invalid-feedback"></div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="anchoTanque" class="required">Ancho del tanque (cm)</label>
+                                    <label for="anchoTanque" class="required">Ancho del tanque (m)</label>
                                     <input type="text" class="form-control f" id="anchoTanque" name="anchoTanque" placeholder="Ingrese el ancho del tanque en cm">
                                     <div class="invalid-feedback"></div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="profundidadTanque" class="required">Profundidad del tanque (cm)</label>
+                                    <label for="profundidadTanque" class="required">Profundidad del tanque (m)</label>
                                     <input type="text" class="form-control f" id="profundidadTanque" name="profundidadTanque" placeholder="Ingrese la profundidad del tanque en cm">
                                     <div class="invalid-feedback"></div>
                                 </div>

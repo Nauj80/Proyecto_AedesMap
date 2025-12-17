@@ -45,7 +45,7 @@ include_once '../view/partials/header.php';
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-6 col-lg-6">
-                                    <input type="hidden" name="id" value="<?php echo $tan["id_tanque"] ?>">
+                                    <input type="hidden" name="id_tanque" value="<?php echo $tan["id_tanque"] ?>">
                                     <div class="form-group">
                                         <label for="nombreTanque" class="required">Nombre</label>
                                         <input type="text" class="form-control t" id="nombreTanque" name="nombreTanque" placeholder="Ingrese un nombre para el tanque" value="<?php echo $tan['nombre'] ?>" required>
@@ -98,8 +98,8 @@ include_once '../view/partials/header.php';
                                 </div>
                                 <div class="col-md-6 col-lg-6">
                                     <div class="form-group">
-                                        <label for="altoTanque" class="required">Altura del tanque (cm)</label>
-                                        <input type="text" class="form-control f" id="altoTanque" name="altoTanque" placeholder="Ingrese la altura del tanque en cm" value="<?php echo $tan['alto'] ?>">
+                                        <label for="largoTanque" class="required">Altura del tanque (cm)</label>
+                                        <input type="text" class="form-control f" id="largoTanque" name="largoTanque" placeholder="Ingrese la altura del tanque en cm" value="<?php echo $tan['alto'] ?>">
                                         <div class="invalid-feedback"></div>
                                     </div>
                                     <div class="form-group">

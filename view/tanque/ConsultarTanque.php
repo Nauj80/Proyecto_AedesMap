@@ -59,6 +59,13 @@ include_once '../view/partials/header.php';
         ?>
     </div>
 
+    <div class="row mb-3">
+        <div class="col-md-5 mb-1">
+            <input type="text" class="form-control" placeholder="Nombre del Zoocriadero, Nombre del tanque o tipo de tanque"
+                id="filtro" data-url="<?php echo getUrl('Tanque', 'Tanque', 'filtro', false, 'ajax'); ?>">
+        </div>
+    </div>
+
     <div class="row">
         <div class="col-md-12">
             <div class="card">
@@ -95,7 +102,7 @@ include_once '../view/partials/header.php';
                                                 <th class="sorting_asc" tabindex="0" aria-controls="add-row" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 368.422px; cursor: pointer;" onclick="sortTable('tipo_tanque')">Tipo de tanque</th>
                                                 <th class="sorting_asc" tabindex="0" aria-controls="add-row" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 368.422px; cursor: pointer;" onclick="sortTable('t.cantidad_peces')">Cantidad de peces</th>
                                                 <th class="sorting_asc" tabindex="0" aria-controls="add-row" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 368.422px; cursor: pointer;" onclick="sortTable('t.ancho')">Ancho</th>
-                                                <th class="sorting_asc" tabindex="0" aria-controls="add-row" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 368.422px; cursor: pointer;" onclick="sortTable('t.alto')">Altura</th>
+                                                <th class="sorting_asc" tabindex="0" aria-controls="add-row" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 368.422px; cursor: pointer;" onclick="sortTable('t.largo')">Largo</th>
                                                 <th class="sorting_asc" tabindex="0" aria-controls="add-row" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 368.422px; cursor: pointer;" onclick="sortTable('t.profundo')">Profundidad</th>
                                                 <th class="sorting" tabindex="0" aria-controls="add-row" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 527.906px; cursor: pointer;" onclick="sortTable('et.nombre')">Estado</th>
                                                 <th style="width: 120.688px;" class="sorting" tabindex="0" aria-controls="add-row" rowspan="1" colspan="1" aria-label="Action: activate to sort column ascending">Acciones</th>
@@ -106,10 +113,10 @@ include_once '../view/partials/header.php';
                                                 <th rowspan="1" colspan="1">Zoocriadero</th>
                                                 <th rowspan="1" colspan="1">Nombre del tanque</th>
                                                 <th rowspan="1" colspan="1">Tipo de tanque</th>
-                                                <th rowspan="1" colspan="1">cantidad de peces</th>
-                                                <th rowspan="1" colspan="1">ancho</th>
-                                                <th rowspan="1" colspan="1">alto</th>
-                                                <th rowspan="1" colspan="1">profundidad</th>
+                                                <th rowspan="1" colspan="1">Cantidad de peces</th>
+                                                <th rowspan="1" colspan="1">Ancho</th>
+                                                <th rowspan="1" colspan="1">Largo</th>
+                                                <th rowspan="1" colspan="1">Profundidad</th>
                                                 <th rowspan="1" colspan="1">Estado</th>
                                                 <th rowspan="1" colspan="1">Acciones</th>
                                             </tr>
@@ -127,39 +134,56 @@ include_once '../view/partials/header.php';
                                                         <td class="sorting_1">' . $Tanque["nombre"] . '</td>
                                                         <td class="sorting_1">' . $Tanque["tipo_tanque"] . '</td>
                                                         <td class="sorting_1">' . $Tanque["cantidad_peces"] . '</td>
-                                                        <td class="sorting_1">' . $Tanque["ancho"] . '</td>
-                                                        <td class="sorting_1">' . $Tanque["alto"] . '</td>
-                                                        <td class="sorting_1">' . $Tanque["profundo"] . '</td>
+                                                        <td class="sorting_1">' . $Tanque["ancho"] . 'm</td>
+                                                        <td class="sorting_1">' . $Tanque["alto"] . 'm</td>
+                                                        <td class="sorting_1">' . $Tanque["profundo"] . 'm</td>
                                                         <td>' . $Tanque["estado"] . '</td>
                                                         <td class="text-center">
                                                             <div class="form-button-action gap-3">
-                                                                <a type="button" class="btn btn-primary" href=' . getUrl("Tanque", "Tanque", "getUpdate", array("id" => $Tanque['id_tanque'])) . '>
+                                                            '
+                                                );
+
+                                                if (tieneAccion("Tanques", "Editar")) {
+                                                    print_r(
+                                                        '
+                                                                <a class="btn btn-primary" href=' . getUrl("Tanque", "Tanque", "getUpdate", array("id" => $Tanque['id_tanque'])) . '>
                                                                     Editar
                                                                 </a>
                                                                 '
-                                                );
-                                                if ($Tanque['id_estado_tanque'] == 1) {
+                                                    );
 
-                                                    print_r('
-                                                                <a type="button" class="btn btn-danger" href=' . getUrl("Tanque", "Tanque", "getDelete", array("id" => $Tanque['id_tanque'])) . '>
+                                                    if ($Tanque['id_estado_tanque'] == 1) {
+                                                        if (tieneAccion("Tanques", "Inhabilitar")) {
+
+                                                            print_r('
+                                                                    <a class="btn btn-danger btn-inhabilitar" href=' . getUrl("Tanque", "Tanque", "getDelete", array("id" => $Tanque['id_tanque'])) . '>
                                                                     Inhabilitar
-                                                                </a>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    ');
-                                                } elseif ($Tanque['id_estado_tanque'] == 2) {
-                                                    print_r('
-                                                                <form action="index.php?modulo=Tanque&controlador=Tanque&funcion=postUpdateStatus" method="post" style="display: inline;">
-                                                                    <input type="hidden" name="id" value="' . $Tanque['id_tanque'] . '">
+                                                                    </a>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        ');
+                                                        }
+                                                    } elseif ($Tanque['id_estado_tanque'] == 2) {
+                                                        if (tieneAccion("Tanques", "Habilitar")) {
+                                                            print_r('
+                                                                <form class="form-habilitar" action="');
+                                                            echo getUrl("Tanque", "Tanque", "postUpdateStatus");
+                                                            print_r('"
+                                                                method="post" style="display: inline;">
+                                                                    <input type="hidden" name="id_tanque" value="' . $Tanque['id_tanque'] . '">
                                                                     <button type="submit" class="btn btn-info">
                                                                         Habilitar
                                                                     </button>
                                                                 </form>
+                                                                ');
+                                                        }
+                                                        print_r('
                                                             </div>
                                                         </td>
                                                     </tr>
                                                     ');
+                                                    }
                                                 }
                                             }
                                             ?>
@@ -241,4 +265,34 @@ include_once '../view/partials/header.php';
         var baseUrl = '<?php echo getUrl("Tanque", "Tanque", "listar"); ?>&length=<?php echo $registrosPorPagina; ?>&page=1';
         window.location.href = baseUrl + '&sort_column=' + encodeURIComponent(column) + '&sort_order=' + currentSortOrder;
     }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        // Para los formularios de HABILITAR
+        const formsHabilitar = document.querySelectorAll('.form-habilitar');
+        formsHabilitar.forEach(form => {
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const url = this.action;
+                const formData = new FormData(this);
+
+                fetch(url, {
+                        method: 'POST',
+                        body: formData
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success && data.data.redirect) {
+                            window.location.href = data.data.redirect;
+                        } else {
+                            alert(data.message || 'Ocurrió un error.');
+                        }
+                    })
+                    .catch(error => console.error('Error:', error));
+            });
+        });
+
+        // Para los enlaces de INHABILITAR
+        // Nota: Esto asume que el flujo de inhabilitación pasa por una página de confirmación.
+        // Si se quisiera hacer con un solo clic (con confirmación JS), el enfoque sería similar al de habilitar.
+    });
 </script>
