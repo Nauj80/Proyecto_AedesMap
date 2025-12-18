@@ -8,7 +8,7 @@
 
     <div class="row mb-3">
         <div class="col-md-4 mb-3">
-            <input type="text" class="form-control" placeholder="Buscar..." id="filtro"
+            <input type="text" class="form-control" placeholder="id_rol o Nombre del rol" id="filtro"
                 data-url="<?php echo getUrl('GestionRoles', 'GestionRoles', 'filtro', false, 'ajax'); ?>">
         </div>
     </div>
@@ -45,7 +45,7 @@
                                     <?php
                                     if (tienePermiso("Gestión de roles", "Editar")) {
                                         ?>
-                                        <a type="button" class="btn btn-info btn-sm btn-Editar"
+                                        <a type="button" class="btn btn-info btn-md btn-Editar"
                                             href="<?= getUrl("GestionRoles", "GestionRoles", "editar", array("id_rol" => $rol['id_rol'])); ?>">
                                             Editar
                                         </a>
@@ -61,3 +61,33 @@
         </div>
     <?php } ?>
 </div>
+<!-- modal para mostrar la actualizacion exitosa de permisos -->
+<?php
+if (isset($_SESSION['success'])) {
+    ?>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var myModal = new bootstrap.Modal(document.getElementById('modalActualizacion'));
+            myModal.show();
+        });
+    </script>
+    <?php
+    unset($_SESSION['success']);
+}
+?>
+<div class="modal fade" id="modalActualizacion" tabindex="-1" aria-labelledby="modalActualizacionLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-sm modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-info text-white">
+                <h5 class="modal-title" id="modalActualizacionLabel">Actualización de Permisos</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="cuerpoMensaje">
+                Permisos actualizados correctamente.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>

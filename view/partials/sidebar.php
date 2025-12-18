@@ -36,7 +36,7 @@
             ?>
             <ul class="nav nav-secondary">
                 <li class="nav-item <?php echo ($controller === 'Mapa') ? 'active' : ''; ?>">
-                    <a  href="<?php echo getUrl("Mapa", "Mapa", "listar")?>">
+                    <a href="<?php echo getUrl("Mapa", "Mapa", "listar") ?>">
                         <i class="fas fa-map-marked-alt"></i>
                         <p>Visualización del mapa</p>
                     </a>
@@ -47,15 +47,16 @@
                     </span>
                     <h4 class="text-section">Módulos</h4>
                 </li>
-                <li class="nav-item <?php echo ($controller === 'Zoocriadero') ? 'active' : ''; ?>">
-                    <a data-bs-toggle="collapse" href="#zoocriadero">
-                        <i class="fas fa-building"></i>
-                        <p>Zoocriaderos</p>
-                        <span class="caret"></span>
-                    </a>
-                    <?php
-                    if (tieneModulo("Zoocriaderos")) {
+                <?php
+                // EL IF DEBE EMPEZAR AQUÍ
+                if (tieneModulo("Zoocriaderos") && tienePermiso("Zoocriaderos", "Consultar") || tienePermiso("Zoocriaderos", "Registrar")) {
                     ?>
+                    <li class="nav-item <?php echo ($controller === 'Zoocriadero') ? 'active' : ''; ?>">
+                        <a data-bs-toggle="collapse" href="#zoocriadero">
+                            <i class="fas fa-building"></i>
+                            <p>Zoocriaderos</p>
+                            <span class="caret"></span>
+                        </a>
                         <div class="collapse <?php echo ($controller === 'Zoocriadero') ? 'show' : ''; ?>" id="zoocriadero">
                             <ul class="nav nav-collapse">
                                 <?php if (tienePermiso("Zoocriaderos", "Registrar")) { ?>
@@ -68,21 +69,20 @@
                                 <?php if (tienePermiso("Zoocriaderos", "Consultar")) { ?>
                                     <li>
                                         <a href="<?php echo getUrl("Zoocriadero", "Zoocriadero", "listar"); ?>">
-
                                             <span class="sub-item">Consultar Zoocriaderos</span>
                                         </a>
                                     </li>
                                 <?php } ?>
                             </ul>
                         </div>
+                    </li>
                     <?php
-                    }
-                    ?>
-                </li>
+                } // EL IF TERMINA AQUÍ
+                ?>
 
                 <?php
                 if (tieneModulo("Tipo de tanques")) {
-                ?>
+                    ?>
                     <li class="nav-item <?php echo ($controller === 'TipoTanques') ? 'active' : ''; ?>">
                         <a data-bs-toggle="collapse" href="#tipotanque">
                             <i class="fas fa-th-large"></i>
@@ -108,13 +108,13 @@
                             </ul>
                         </div>
                     </li>
-                <?php
+                    <?php
                 }
                 ?>
 
                 <?php
                 if (tieneModulo("Tanques")) {
-                ?>
+                    ?>
                     <li class="nav-item <?php echo ($controller === 'Tanque') ? 'active' : ''; ?>">
                         <a data-bs-toggle="collapse" href="#tanques">
                             <i class="fas fa-fish"></i>
@@ -140,20 +140,21 @@
                             </ul>
                         </div>
                     </li>
-                <?php
+                    <?php
                 }
                 ?>
 
                 <?php
                 if (tieneModulo("Tipo de actividades")) {
-                ?>
+                    ?>
                     <li class="nav-item <?php echo ($controller === 'TipoActividades') ? 'active' : ''; ?>">
                         <a data-bs-toggle="collapse" href="#tipoactividades">
                             <i class="fas fa-list-alt"></i>
                             <p>Tipos de actividades</p>
                             <span class="caret"></span>
                         </a>
-                        <div class="collapse <?php echo ($controller === 'TipoActividades') ? 'show' : ''; ?>" id="tipoactividades">
+                        <div class="collapse <?php echo ($controller === 'TipoActividades') ? 'show' : ''; ?>"
+                            id="tipoactividades">
                             <ul class="nav nav-collapse">
                                 <?php if (tienePermiso("Tipo de actividades", "Registrar")) { ?>
                                     <li>
@@ -172,20 +173,21 @@
                             </ul>
                         </div>
                     </li>
-                <?php
+                    <?php
                 }
                 ?>
 
                 <?php
                 if (tieneModulo("Actividades en tanques")) {
-                ?>
+                    ?>
                     <li class="nav-item <?php echo ($controller === 'ActividadesSeguimiento') ? 'active' : ''; ?>">
                         <a data-bs-toggle="collapse" href="#actividades">
                             <i class="fas fa-pen-square"></i>
                             <p>Actividades en tanques</p>
                             <span class="caret"></span>
                         </a>
-                        <div class="collapse <?php echo ($controller === 'ActividadesSeguimiento') ? 'show' : ''; ?>" id="actividades">
+                        <div class="collapse <?php echo ($controller === 'ActividadesSeguimiento') ? 'show' : ''; ?>"
+                            id="actividades">
                             <ul class="nav nav-collapse">
                                 <?php if (tienePermiso("Actividades en tanques", "Registrar")) { ?>
                                     <li>
@@ -204,20 +206,21 @@
                             </ul>
                         </div>
                     </li>
-                <?php
+                    <?php
                 }
                 ?>
 
                 <?php
                 if (tieneModulo("Gestión de usuarios")) {
-                ?>
+                    ?>
                     <li class="nav-item <?php echo ($controller === 'GestionUsuarios') ? 'active' : ''; ?>">
                         <a data-bs-toggle="collapse" href="#usuarios">
                             <i class="fas fa-user"></i>
                             <p>Gestión de usuarios</p>
                             <span class="caret"></span>
                         </a>
-                        <div class="collapse <?php echo ($controller === 'GestionUsuarios') ? 'show' : ''; ?>" id="usuarios">
+                        <div class="collapse <?php echo ($controller === 'GestionUsuarios') ? 'show' : ''; ?>"
+                            id="usuarios">
                             <ul class="nav nav-collapse">
                                 <?php if (tienePermiso("Gestión de usuarios", "Registrar")) { ?>
                                     <li>
@@ -236,13 +239,13 @@
                             </ul>
                         </div>
                     </li>
-                <?php
+                    <?php
                 }
                 ?>
 
                 <?php
                 if (tieneModulo("Gestión de roles")) {
-                ?>
+                    ?>
                     <li class="nav-item <?php echo ($controller === 'GestionRoles') ? 'active' : ''; ?>">
                         <a data-bs-toggle="collapse" href="#rol">
                             <i class="fas fa-users-cog"></i>
@@ -268,20 +271,21 @@
                             </ul>
                         </div>
                     </li>
-                <?php
+                    <?php
                 }
                 ?>
 
                 <?php
                 if (tieneModulo("Configuración")) {
-                ?>
+                    ?>
                     <li class="nav-item <?php echo ($controller === 'Configuracion') ? 'active' : ''; ?>">
                         <a data-bs-toggle="collapse" href="#configuracion">
                             <i class="fas fa-cog"></i>
                             <p>Configuración</p>
                             <span class="caret"></span>
                         </a>
-                        <div class="collapse <?php echo ($controller === 'Configuracion') ? 'show' : ''; ?>" id="configuracion">
+                        <div class="collapse <?php echo ($controller === 'Configuracion') ? 'show' : ''; ?>"
+                            id="configuracion">
                             <ul class="nav nav-collapse">
                                 <?php if (tienePermiso("Configuración", "Registrar")) { ?>
                                     <li>
@@ -300,13 +304,13 @@
                             </ul>
                         </div>
                     </li>
-                <?php
+                    <?php
                 }
                 ?>
 
                 <?php
                 if (tieneModulo("Reportes")) {
-                ?>
+                    ?>
                     <li class="nav-item <?php echo ($controller === 'Reportes') ? 'active' : ''; ?>">
                         <a data-bs-toggle="collapse" href="#reportes">
                             <i class="fas fa-newspaper"></i>
@@ -332,7 +336,7 @@
                             </ul>
                         </div>
                     </li>
-                <?php
+                    <?php
                 }
                 ?>
                 <li class="nav-item <?php echo ($controller === 'SobreAedesMap') ? 'active' : ''; ?>">

@@ -95,3 +95,29 @@ function jsonResponse($success, $message, $data = null)
     // Terminar ejecución inmediatamente para evitar HTML adicional
     exit;
 }
+function recargarPermisos($id_rol_editado)
+{
+    // 1. Seguridad: Solo recargar si es MI propio rol
+    // Asumo que $_SESSION['id_rol'] existe. Si usas otro nombre, cámbialo aquí.
+    if (isset($_SESSION['id_rol']) && $_SESSION['id_rol'] == $id_rol_editado) {
+
+        // 2. Buscar e incluir el LoginController
+        // Usamos la misma lógica de rutas que tu función 'resolve'
+        $rutaLogin = "../controller/LoginController.php";
+
+        // Si no está en la raíz de controller, quizás está en una carpeta Login
+        if (!file_exists($rutaLogin)) {
+            $rutaLogin = "../controller/Login/LoginController.php";
+        }
+
+        if (file_exists($rutaLogin)) {
+            require_once($rutaLogin);
+
+            // 3. Llamar a las funciones estáticas
+            // Asegúrate de haber puesto 'public static' en LoginController como hablamos antes
+            LoginController::contruirPermisos();
+            LoginController::permisos($id_rol_editado);
+            //LoginController::recargarPermisos();
+        }
+    }
+}
