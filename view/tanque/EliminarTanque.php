@@ -38,11 +38,11 @@ include_once '../view/partials/header.php';
                 ?> 
                     <form id="form-eliminar" action="<?php echo getUrl("Tanque", "Tanque", "postDelete"); ?>" method="post">
                         <div class="card-header">
-                            <div class="card-title">Eliminar tanque</div>
+                            <div class="card-title">Inhabilitar tanque</div>
                         </div>
                         <div class="card-body">
                             <div class="alert alert-danger" role="alert">
-                                ¿Seguro que desea eliminar el Tanque: <strong> <?php echo $tan['nombre'] ?></strong> ?
+                                ¿Seguro que desea inhabilitar el Tanque: <strong> <?php echo $tan['nombre'] ?></strong> ?
                             </div>
                             <div class="row">
                                 <div class="col-md-6 col-lg-6">
@@ -132,7 +132,7 @@ include_once '../view/partials/header.php';
                             </div>
                         </div>
                         <div class="card-action text-center">
-                            <button type="submit" class="btn btn-danger">Eliminar</button>
+                            <button type="submit" class="btn btn-danger">Inhabilitar</button>
                             <a class="btn" href="<?php echo getUrl("Tanque", "Tanque", "listar"); ?>">Cancelar</a>
                         </div>
                     </form>

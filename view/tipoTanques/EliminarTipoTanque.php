@@ -37,11 +37,11 @@ include_once '../view/partials/header.php';
                     while ($tt = pg_fetch_assoc($tipoTanque)) {
                     ?>
                         <div class="card-header">
-                            <div class="card-title">Eliminar tipo de tanque</div>
+                            <div class="card-title">Inhabilitar tipo de tanque</div>
                         </div>
                         <div class="card-body">
                             <div class="alert alert-danger" role="alert">
-                                ¿Seguro que desea eliminar el Tipo de Tanque: <strong> <?php echo $tt['nombre'] ?></strong> ?
+                                ¿Seguro que desea inhabilitar el Tipo de Tanque: <strong> <?php echo $tt['nombre'] ?></strong> ?
                             </div>
                             <div class="row">
                                 <div class="col-md-4 ms-auto me-auto">
@@ -54,7 +54,7 @@ include_once '../view/partials/header.php';
                             </div>
                         </div>
                         <div class="card-action text-center">
-                            <button class="btn btn-danger">Eliminar</button>
+                            <button class="btn btn-danger">Inhabilitar</button>
                             <a class="btn btn-secundary" href="<?php echo getUrl("TipoTanques", "TipoTanques", "listar"); ?>">Cancelar</a>
                         </div>
                     <?php

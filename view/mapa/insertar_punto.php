@@ -1,11 +1,7 @@
 <?php
 
 //include_once "lib/conf/connection.php";
-<<<<<<< HEAD
-$conn = pg_connect("host=localhost port=5432 dbname=zoocriadero user=postgres password=12345");
-=======
-$conn = pg_connect("host=localhost port=5432 dbname=jjjjs user=postgres password=1234");
->>>>>>> ab1371d5d2a9de085efda61053532f2ad02a701e
+$conn = pg_connect("host=localhost port=5432 dbname=zoocriadero user=postgres password=123");
 
 $dir1 = $_GET['x'];
 $dir2 = $_GET['y'];
