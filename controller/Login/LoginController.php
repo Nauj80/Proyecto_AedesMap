@@ -47,11 +47,15 @@ class LoginController
 
                 redirect("index.php");
                 return;
+            }else{
+                $_SESSION['error'] = "El usuario con ese documento no existe";
+                redirect("Login.php");
+                return;
             }
         }
 
         // Si falla
-        $_SESSION['error'] = "Documento o contraseña incorrectos";
+        $_SESSION['error'] = "Contraseña incorrecta";
         redirect("Login.php");
     }
 
