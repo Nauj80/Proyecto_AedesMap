@@ -211,7 +211,7 @@ $urlLegend = $mapLegend->saveWebImage(MS_GIF, 0, 0, -1);
 
 
     <section class="map-wrapper" aria-label="Mapa principal y controles de capas">
-        <div class="mscross" style="overflow:hidden; width: 1100px; height:600px; -moz-user-select:none; position:relative;" id="dc_main">
+        <div class="mscross" style="overflow:hidden; width: 1600px; height:600px; -moz-user-select:none; position:relative;" id="dc_main">
             <!-- Fallback: imagen renderizada por MapScript en servidor -->
             <img src="<?php echo $urlImage ?>" alt="Mapa" style="width:100%;height:100%;object-fit:cover;" id="dc_fallback">
 
@@ -276,7 +276,7 @@ $urlLegend = $mapLegend->saveWebImage(MS_GIF, 0, 0, -1);
     var myMap1 = new msMap(document.getElementById("dc_main"), "standardLeft");
     myMap1.setCgi("<?php echo $MAPSERV_PATH; ?>");
     myMap1.setMapFile("<?php echo $MAPFILE_PATH; ?>");
-    myMap1.setFullExtent(1050867.55, 1075491.88, 858820.55);
+    myMap1.setFullExtent(1050867.55, 1077991.88, 865820.55);
     myMap1.setLayers("Cali Puntos Barrios Comunas Cali2 Malla_vial");
 
     var myMap2 = new msMap(document.getElementById("dc_main2"));
