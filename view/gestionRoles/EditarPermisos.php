@@ -119,7 +119,8 @@
 <!-- SCRIPTS DE FUNCIONALIDAD -->
 <script>
 document.addEventListener("DOMContentLoaded", function() {
-    // --- LÓGICA DEL BUSCADOR ---
+    
+    // --- 1. LÓGICA DEL BUSCADOR (Igual que antes) ---
     const buscador = document.getElementById('buscadorPermisos');
     const items = document.querySelectorAll('.modulo-item');
     const noResultados = document.getElementById('noResultados');
@@ -128,20 +129,15 @@ document.addEventListener("DOMContentLoaded", function() {
         buscador.addEventListener('keyup', function(e) {
             const termino = e.target.value.toLowerCase();
             let visibles = 0;
-
             items.forEach(function(item) {
-                // Buscamos texto dentro de todo el bloque (título del módulo + nombres de acciones)
                 const texto = item.innerText.toLowerCase();
-                
                 if (texto.includes(termino)) {
-                    item.style.display = ''; // Mostrar
+                    item.style.display = ''; 
                     visibles++;
                 } else {
-                    item.style.display = 'none'; // Ocultar
+                    item.style.display = 'none'; 
                 }
             });
-
-            // Mostrar mensaje si no hay nada visible
             if (visibles === 0) {
                 noResultados.style.display = 'block';
             } else {
@@ -149,16 +145,39 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         });
     }
+
+    // --- 2. AUTO-CARGA DE PERMISOS (CORREGIDO) ---
+    const selector = document.getElementById('selectorRol');
+    const urlParams = new URLSearchParams(window.location.search);
+    const idEnUrl = urlParams.get('id_rol');
+
+    // Si NO hay un ID en la URL (es la primera vez que entras)
+    // Y el selector existe y tiene opciones...
+    if (!idEnUrl && selector && selector.options.length > 0) {
+        
+        // Buscamos la primera opción válida
+        // Si la opción 0 es "Seleccione..." (value vacío), tomamos la 1.
+        let indice = (selector.options[0].value === "") ? 1 : 0;
+
+        // Si existe esa opción, la seleccionamos y recargamos
+        if (selector.options.length > indice) {
+            selector.selectedIndex = indice;
+            cambiarRol(selector);
+        }
+    }
 });
 
 // --- LÓGICA DE CAMBIO DE ROL ---
 function cambiarRol(selectObject) {
     var idRolSeleccionado = selectObject.value;
-    if (idRolSeleccionado) {
-        // Construimos la URL base usando PHP y le concatenamos el ID seleccionado
+    
+    // Obtenemos el ID actual de la URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const idActual = urlParams.get('id_rol');
+
+    // Solo redireccionamos si tenemos un ID y es diferente al actual
+    if (idRolSeleccionado && idRolSeleccionado !== idActual) {
         var baseUrl = "<?php echo getUrl('GestionRoles', 'GestionRoles', 'editar'); ?>";
-        
-        // Redireccionamos
         window.location.href = baseUrl + "&id_rol=" + idRolSeleccionado;
     }
 }

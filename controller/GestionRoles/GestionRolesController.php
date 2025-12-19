@@ -57,10 +57,11 @@ class GestionRolesController
         $permiso = $objeto->select($sql);
         $modulosDisponibles = pg_fetch_all($permiso);
 
-        $_SESSION['id_rol'] = $id_rol;
+        //$_SESSION['id_rol'] = $id_rol;
         $sql = "SELECT * FROM roles WHERE id_estado_rol = 1";
         $roles = $objeto->select($sql);
         $roles = pg_fetch_all($roles);
+
         include '../view/gestionRoles/EditarPermisos.php';
     }
     public function guardarPermisos()

@@ -211,9 +211,12 @@ $urlLegend = $mapLegend->saveWebImage(MS_GIF, 0, 0, -1);
 
 
     <section class="map-wrapper" aria-label="Mapa principal y controles de capas">
-        <div class="mscross" style="overflow:hidden; width: 1600px; height:600px; -moz-user-select:none; position:relative;" id="dc_main">
+        <div class="mscross"
+            style="overflow:hidden; width: 1600px; height:600px; -moz-user-select:none; position:relative;"
+            id="dc_main">
             <!-- Fallback: imagen renderizada por MapScript en servidor -->
-            <img src="<?php echo $urlImage ?>" alt="Mapa" style="width:100%;height:100%;object-fit:cover;" id="dc_fallback">
+            <img src="<?php echo $urlImage ?>" alt="Mapa" style="width:100%;height:100%;object-fit:cover;"
+                id="dc_fallback">
 
         </div>
 
@@ -226,7 +229,8 @@ $urlLegend = $mapLegend->saveWebImage(MS_GIF, 0, 0, -1);
                     Mapa de Referencia
                 </h2>
 
-                <div style="overflow: auto; width: 140px; height: 140px; -moz-user-select:none; position:relative; z-index:100;" id="dc_main2">
+                <div style="overflow: auto; width: 140px; height: 140px; -moz-user-select:none; position:relative; z-index:100;"
+                    id="dc_main2">
                 </div>
 
             </section>
@@ -269,7 +273,7 @@ $urlLegend = $mapLegend->saveWebImage(MS_GIF, 0, 0, -1);
         </aside>
     </section>
 </main>
-
+<?php include 'modal.php'; ?>
 <script>
     // Código JS sin cambios funcionales que tienes
 
@@ -299,7 +303,7 @@ $urlLegend = $mapLegend->saveWebImage(MS_GIF, 0, 0, -1);
     try {
         var fb = document.getElementById('dc_fallback');
         if (fb) fb.style.display = 'none';
-    } catch (e) {}
+    } catch (e) { }
 
     chgLayers();
 
@@ -346,7 +350,7 @@ $urlLegend = $mapLegend->saveWebImage(MS_GIF, 0, 0, -1);
 
     function queryI(event, map, x, y, xx, yy) {
         if (seleccionado) {
-           
+
             const urlRegistro = "<?php echo getUrl('Zoocriadero', 'Zoocriadero', 'registrar', array('x' => '')); ?>" + xx + "&y=" + yy;
             // Redirigimos al usuario a la página de registro.
             window.location.href = urlRegistro;
@@ -359,9 +363,31 @@ $urlLegend = $mapLegend->saveWebImage(MS_GIF, 0, 0, -1);
         if (seleccionado) {
             var consulta2 = objetoAjaX();
             consulta2.open("GET", "<?php echo $PROJECT_ROOT_URL ?>/view/mapa/consulta.php?x=" + xx + "&y=" + yy, true);
-            consulta2.onreadystatechange = function() {
+            consulta2.onreadystatechange = function () {
                 if (consulta2.readyState == 4) {
-                    alert(consulta2.responseText);
+                    try {
+                        var data = JSON.parse(consulta2.responseText);
+
+                        if (data.encontrado) {
+                            // Llenar los datos del modal
+                            document.getElementById('nombreZoocriadero').textContent = data.nombre || 'N/A';
+                            document.getElementById('estadoZoocriadero').textContent = data.estado || 'N/A';
+                            document.getElementById('direccionZoocriadero').textContent = data.direccion || 'N/A';
+                            document.getElementById('barrioZoocriadero').textContent = data.barrio || 'N/A';
+                            document.getElementById('comunaZoocriadero').textContent = data.comuna || 'N/A';
+                            document.getElementById('telefonoZoocriadero').textContent = data.telefono || 'N/A';
+                            document.getElementById('correoZoocriadero').textContent = data.correo || 'N/A';
+
+                            // Mostrar el modal (Bootstrap 5)
+                            var modal = new bootstrap.Modal(document.getElementById('detalleZoocriaderoModal'));
+                            modal.show();
+                        } else {
+                            alert("No se encontraron puntos cercanos");
+                        }
+                    } catch (e) {
+                        console.error("Error al parsear JSON:", e);
+                        alert("Error al cargar los datos: " + consulta2.responseText);
+                    }
                 }
             };
             consulta2.send(null);
