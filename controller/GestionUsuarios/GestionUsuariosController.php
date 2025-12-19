@@ -256,6 +256,22 @@ class GestionUsuariosController
             }
         }
     }
+
+    // Habilitar usuario (cambiar estado a 1)
+    public function postEnable()
+    {
+        $obj = new GestionUsuariosModel();
+        $id = isset($_POST['id']) ? $_POST['id'] : null;
+        if (!$id) jsonResponse(false, 'ID de usuario faltante');
+
+        $res = $obj->setEstado($id, 1);
+
+        if ($res) {
+            jsonResponse(true, 'Usuario habilitado correctamente', array('redirect' => getUrl('GestionUsuarios', 'GestionUsuarios', 'listar')));
+        } else {
+            jsonResponse(false, 'No se pudo habilitar el usuario');
+        }
+    }
 }
 
 ?>
