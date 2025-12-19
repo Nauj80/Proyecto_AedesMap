@@ -107,7 +107,7 @@ include_once '../view/partials/header.php';
                                             <?php
 
                                             while ($tipoTanque = pg_fetch_assoc($tipoTanques)) {
-                                                
+
                                                 print_r(
                                                     '
                                                     <tr role="row">
@@ -240,36 +240,15 @@ include_once '../view/partials/header.php';
         var baseUrl = '<?php echo getUrl("TipoTanques", "TipoTanques", "listar"); ?>&length=<?php echo $registrosPorPagina; ?>&page=1';
         window.location.href = baseUrl + '&sort_column=' + encodeURIComponent(column) + '&sort_order=' + currentSortOrder;
     }
-
+</script>
+<!-- SweetAlert2 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="/Proyecto_AedesMap/web/js/form-validations.js"></script>
+<script>
     document.addEventListener('DOMContentLoaded', function() {
-        // Se usa delegación de eventos en la tabla para manejar los formularios.
-        const tableBody = document.querySelector('#add-row tbody');
-
-        if (tableBody) {
-            tableBody.addEventListener('submit', function(e) {
-                // Nos aseguramos de que el evento provenga de un formulario de habilitación
-                if (e.target.matches('.form-habilitar')) {
-                    e.preventDefault(); // Prevenimos el envío tradicional
-
-                    const form = e.target;
-                    const url = form.action;
-                    const formData = new FormData(form);
-
-                    fetch(url, {
-                            method: 'POST',
-                            body: formData
-                        })
-                        .then(response => response.json())
-                        .then(data => {
-                            if (data.success && data.data && data.data.redirect) {
-                                window.location.href = data.data.redirect; // Redireccionamos
-                            } else {
-                                alert(data.message || 'Ocurrió un error.');
-                            }
-                        })
-                        .catch(error => console.error('Error:', error));
-                }
-            });
-        }
+        // Inicializar formularios de habilitar al cargar la página
+        document.querySelectorAll('.form-habilitar').forEach(function(form) {
+            initFormValidation(form);
+        });
     });
 </script>

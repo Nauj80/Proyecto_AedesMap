@@ -167,7 +167,7 @@ include_once '../view/partials/header.php';
                                                     } elseif ($Tanque['id_estado_tanque'] == 2) {
                                                         if (tieneAccion("Tanques", "Habilitar")) {
                                                             print_r('
-                                                                <form class="form-habilitar" action="');
+                                                                <form id="form-habilitar" action="');
                                                             echo getUrl("Tanque", "Tanque", "postUpdateStatus");
                                                             print_r('"
                                                                 method="post">
@@ -266,38 +266,39 @@ include_once '../view/partials/header.php';
         window.location.href = baseUrl + '&sort_column=' + encodeURIComponent(column) + '&sort_order=' + currentSortOrder;
     }
 
+    // Eliminado: el manejo de formularios lo realiza ajax-handler.js para unificación de alertas y UX.
+</script>
+<!-- SweetAlert2 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="/Proyecto_AedesMap/web/js/form-validations.js"></script>
+<script>
     document.addEventListener('DOMContentLoaded', function() {
-        // Se usa delegación de eventos en la tabla para manejar los formularios de habilitar,
-        // tanto los iniciales como los que se cargan con el filtro.
-        const tableBody = document.querySelector('#add-row tbody');
-    
-        tableBody.addEventListener('submit', function(e) {
-            // Nos aseguramos de que el evento provenga de un formulario de habilitación
-            if (e.target.matches('.form-habilitar')) {
-                e.preventDefault(); // Prevenimos el envío tradicional
-    
-                const form = e.target;
-                const url = form.action;
-                const formData = new FormData(form);
-    
-                fetch(url, {
-                    method: 'POST',
-                    body: formData
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success && data.data.redirect) {
-                        window.location.href = data.data.redirect; // Redireccionamos
-                    } else {
-                        alert(data.message || 'Ocurrió un error.');
-                    }
-                })
-                .catch(error => console.error('Error:', error));
-            }
+        // Inicializar formularios de habilitar al cargar la página
+        document.querySelectorAll('.form-habilitar, #form-habilitar').forEach(function(form) {
+            initFormValidation(form);
         });
 
-        // Para los enlaces de INHABILITAR
-        // Nota: Esto asume que el flujo de inhabilitación pasa por una página de confirmación.
-        // Si se quisiera hacer con un solo clic (con confirmación JS), el enfoque sería similar al de habilitar.
+        // Si usas AJAX para actualizar la tabla, re-inicializa después de cada carga
+        // Suponiendo que tienes una función que actualiza la tabla por AJAX:
+        function reinitHabilitarForms() {
+            document.querySelectorAll('.form-habilitar, #form-habilitar').forEach(function(form) {
+                initFormValidation(form);
+            });
+        }
+
+        // Si usas jQuery o fetch para el filtro, llama reinitHabilitarForms() tras actualizar el DOM
+        // Ejemplo con jQuery:
+        // $(document).on('ajaxComplete', function() { reinitHabilitarForms(); });
+        // O si usas fetch:
+        // fetch(...).then(...).then(() => { reinitHabilitarForms(); });
+
+        // Si tienes un input de filtro:
+        var filtroInput = document.getElementById('filtro');
+        if (filtroInput) {
+            filtroInput.addEventListener('input', function() {
+                // Espera a que el AJAX termine y re-inicializa
+                setTimeout(reinitHabilitarForms, 500);
+            });
+        }
     });
 </script>
