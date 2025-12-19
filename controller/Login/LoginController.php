@@ -33,8 +33,8 @@ class LoginController
             // Verificar usando bcrypt
             if ($stored_hash === sha1(trim($usu_clave))) {
                 $_SESSION['auth'] = "ok";
-                $this->contruirPermisos();
-                $this->permisos($id_rol);
+                self::contruirPermisos();
+                self::permisos($id_rol);
 
                 $_SESSION['usuario'] = array(
                     'id' => $usu['id_usuario'],
@@ -47,11 +47,15 @@ class LoginController
 
                 redirect("index.php");
                 return;
+            } else {
+                $_SESSION['error'] = "El usuario con ese documento no existe";
+                redirect("Login.php");
+                return;
             }
         }
 
         // Si falla
-        $_SESSION['error'] = "Documento o contraseña incorrectos";
+        $_SESSION['error'] = "Contraseña incorrecta, Intente nuevamente";
         redirect("Login.php");
     }
 
@@ -61,7 +65,7 @@ class LoginController
         redirect("Login.php");
     }
 
-    private function permisos($id_rol)
+    public static function permisos($id_rol)
     {
         $sql = "
             SELECT 
@@ -90,19 +94,26 @@ class LoginController
             if (!in_array($modulo, $_SESSION['modulos'])) {
                 $_SESSION['modulos'][] = $modulo;
             }
-            
+
             // Guardar acción por módulo
             $_SESSION['acciones'][$modulo][] = $accion;
-            
+
             // Guardar permisos (módulo + acción)
             $_SESSION['permisos'][] = $modulo . ":" . $accion;
         }
     }
-    private function contruirPermisos()
+    public static function contruirPermisos()
     {
         $_SESSION['modulos'] = array();
         $_SESSION['acciones'] = array();
         $_SESSION['permisos'] = array();
+    }
+    public static function recargarPermisos()
+    {
+        echo "<pre>";
+        print_r($_SESSION);
+        echo "</pre>";
+        die();
     }
 }
 ?>

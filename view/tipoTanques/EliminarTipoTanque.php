@@ -32,16 +32,16 @@ include_once '../view/partials/header.php';
     <div class="row">
         <div class="col-ms-12">
             <div class="card">
-                <form action="<?php echo getUrl("TipoTanques", "TipoTanques", "postDelete"); ?>" class="form-eliminar" method="post">
+                <form action="<?php echo getUrl("TipoTanques", "TipoTanques", "postDelete"); ?>" id="form-eliminar" method="post">
                     <?php
                     while ($tt = pg_fetch_assoc($tipoTanque)) {
                     ?>
                         <div class="card-header">
-                            <div class="card-title">Eliminar tipo de tanque</div>
+                            <div class="card-title">Inhabilitar tipo de tanque</div>
                         </div>
                         <div class="card-body">
                             <div class="alert alert-danger" role="alert">
-                                ¿Seguro que desea eliminar el Tipo de Tanque: <strong> <?php echo $tt['nombre'] ?></strong> ?
+                                ¿Seguro que desea inhabilitar el Tipo de Tanque: <strong> <?php echo $tt['nombre'] ?></strong> ?
                             </div>
                             <div class="row">
                                 <div class="col-md-4 ms-auto me-auto">
@@ -54,7 +54,7 @@ include_once '../view/partials/header.php';
                             </div>
                         </div>
                         <div class="card-action text-center">
-                            <button class="btn btn-danger">Eliminar</button>
+                            <button class="btn btn-danger">Inhabilitar</button>
                             <a class="btn btn-secundary" href="<?php echo getUrl("TipoTanques", "TipoTanques", "listar"); ?>">Cancelar</a>
                         </div>
                     <?php
@@ -64,33 +64,12 @@ include_once '../view/partials/header.php';
             </div>
         </div>
     </div>
-</body>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const form = document.querySelector('.form-eliminar');
-
-        if (form) {
-            form.addEventListener('submit', function(e) {
-                e.preventDefault(); // Prevenimos el envío tradicional del formulario
-
-                const url = form.action;
-                const formData = new FormData(form);
-
-                fetch(url, {
-                        method: 'POST',
-                        body: formData
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.success && data.data && data.data.redirect) {
-                            window.location.href = data.data.redirect; // Redireccionamos a la lista
-                        } else {
-                            alert(data.message || 'Ocurrió un error al intentar inhabilitar el registro.');
-                        }
-                    })
-                    .catch(error => console.error('Error:', error));
-            });
-        }
-    });
-</script>
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="/Proyecto_AedesMap/web/js/form-validations.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            initFormValidation('form-eliminar');
+        });
+    </script>

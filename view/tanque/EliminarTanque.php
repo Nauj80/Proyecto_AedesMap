@@ -38,11 +38,11 @@ include_once '../view/partials/header.php';
                 ?> 
                     <form id="form-eliminar" action="<?php echo getUrl("Tanque", "Tanque", "postDelete"); ?>" method="post">
                         <div class="card-header">
-                            <div class="card-title">Eliminar tanque</div>
+                            <div class="card-title">Inhabilitar tanque</div>
                         </div>
                         <div class="card-body">
                             <div class="alert alert-danger" role="alert">
-                                ¿Seguro que desea eliminar el Tanque: <strong> <?php echo $tan['nombre'] ?></strong> ?
+                                ¿Seguro que desea inhabilitar el Tanque: <strong> <?php echo $tan['nombre'] ?></strong> ?
                             </div>
                             <div class="row">
                                 <div class="col-md-6 col-lg-6">
@@ -97,7 +97,7 @@ include_once '../view/partials/header.php';
                                 <div class="col-md-6 col-lg-6">
                                     <div class="form-group">
                                         <label for="largoTanque">Largo del tanque (m)</label>
-                                        <input type="text" class="form-control" id="largoTanque" name="largoTanque" placeholder="Ingrese el largo del tanque en m" value="<?php echo $tan['largo'] ?>" readonly>
+                                        <input type="text" class="form-control" id="largoTanque" name="largoTanque" placeholder="Ingrese el largo del tanque en m" value="<?php echo $tan['alto'] ?>" readonly>
                                     </div>
                                     <div class="form-group">
                                         <label for="anchoTanque">Ancho del tanque (m)</label>
@@ -132,7 +132,7 @@ include_once '../view/partials/header.php';
                             </div>
                         </div>
                         <div class="card-action text-center">
-                            <button type="submit" class="btn btn-danger">Eliminar</button>
+                            <button type="submit" class="btn btn-danger">Inhabilitar</button>
                             <a class="btn" href="<?php echo getUrl("Tanque", "Tanque", "listar"); ?>">Cancelar</a>
                         </div>
                     </form>
@@ -142,27 +142,11 @@ include_once '../view/partials/header.php';
             </div>
         </div>
     </div>
-    <script>
-        document.getElementById('form-eliminar').addEventListener('submit', function(e) {
-            e.preventDefault(); // Evita el envío tradicional del formulario
-
-            const form = e.target;
-            const url = form.action;
-            const formData = new FormData(form);
-
-            fetch(url, {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success && data.data.redirect) {
-                    window.location.href = data.data.redirect; // Redirige si la respuesta es exitosa
-                } else {
-                    alert(data.message || 'Ocurrió un error al intentar eliminar.');
-                }
-            })
-            .catch(error => console.error('Error:', error));
-        });
-    </script>
-</body>
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="/Proyecto_AedesMap/web/js/form-validations.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        initFormValidation('form-eliminar');
+    });
+</script>

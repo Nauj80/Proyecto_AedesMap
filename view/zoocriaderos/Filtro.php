@@ -5,17 +5,16 @@ include_once 'modales/editar.php';
 <?php
 if (empty($zooCria)) {  // Cambié a empty() para detectar null o array vacío
     ?>
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        No se encontraron resultados para la búsqueda
-        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-    </div>
+    <tr>
+        <td colspan="3" class="text-center">No se encontraron zoocriaderos que coincidan con la busqueda.</td>
+    </tr>
     <?php
 } else {
     foreach ($zooCria as $zoocriadero) {
         ?>
         <tr>
             <td><?= $zoocriadero['nombre_zoocriadero'] ?></td>
-            <td><?= $zoocriadero['nombre_usuario']." ".$zoocriadero['apellido_usuario'] ?></td>
+            <td><?= $zoocriadero['nombre_usuario'] . " " . $zoocriadero['apellido_usuario'] ?></td>
             <td><?= $zoocriadero['direccion'] ?></td>
             <?php
             // Verificar si tiene alguna acción
@@ -42,21 +41,21 @@ if (empty($zooCria)) {  // Cambié a empty() para detectar null o array vacío
                             </button>
                         <?php } ?>
                         <?php
-                            if (tieneAccion("Zoocriaderos", "Inhabilitar")) {
-                                $texto = $zoocriadero['id_estado_zoocriadero'] == 1 ? 'Inhabilitar' : 'Habilitar';
-                                if($texto == "Inhabilitar"){
-                                    ?>
-                                    <button type="button" class="btn btn-danger btn-md"
-                                        data-id="<?php echo $zoocriadero['id_zoocriadero']?>"
-                                        data-estado="<?php echo $zoocriadero['id_estado_zoocriadero']?>"      
-                                        data-bs-toggle="modal" data-bs-target="#modalInhabilitarZoo">
-                                        <?php echo $texto ?>
-                                    </button>
-                                <?php }else{ ?>
-                                    <a type="button" class="btn btn-success btn-md" href="<?php getUrl("Zoocriadero","Zoocriadero","getInhabilitar", array("id_zoocriadero" => $zoocriadero['id_zoocriadero'])); ?>"><?php echo $texto ?></a>
-                                <?php  } ?>
-                                <?php
-                            } ?>
+                        if (tieneAccion("Zoocriaderos", "Inhabilitar")) {
+                            $texto = $zoocriadero['id_estado_zoocriadero'] == 1 ? 'Inhabilitar' : 'Habilitar';
+                            if ($texto == "Inhabilitar") {
+                                ?>
+                                <button type="button" class="btn btn-danger btn-md" data-id="<?php echo $zoocriadero['id_zoocriadero'] ?>"
+                                    data-estado="<?php echo $zoocriadero['id_estado_zoocriadero'] ?>" data-bs-toggle="modal"
+                                    data-bs-target="#modalInhabilitarZoo">
+                                    <?php echo $texto ?>
+                                </button>
+                            <?php } else { ?>
+                                <a type="button" class="btn btn-success btn-md"
+                                    href="<?php getUrl("Zoocriadero", "Zoocriadero", "getInhabilitar", array("id_zoocriadero" => $zoocriadero['id_zoocriadero'])); ?>"><?php echo $texto ?></a>
+                            <?php } ?>
+                            <?php
+                        } ?>
                     </div>
                 </td>
             <?php } ?>

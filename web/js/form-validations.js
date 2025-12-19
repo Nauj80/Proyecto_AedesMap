@@ -114,7 +114,11 @@
 
       // SI HAY ERRORES, DETENER COMPLETAMENTE EL ENVÍO
       if (!ok) {
-        console.log("Formulario con errores. No se enviará.");
+        Swal.fire({
+          icon: "error",
+          title: "Formulario con errores",
+          text: "Por favor corrija los campos marcados en rojo.",
+        });
         return false;
       }
 
@@ -143,17 +147,34 @@
           if (res.json) {
             const json = res.json;
             if (json && json.success && json.data && json.data.redirect) {
-              window.location.replace(json.data.redirect);
+              Swal.fire({
+                icon: "success",
+                title: "¡Éxito!",
+                text: json.message || "Operación realizada correctamente.",
+                timer: 1800,
+                showConfirmButton: false,
+              }).then(() => {
+                window.location.href = json.data.redirect;
+              });
               return;
             }
-            /*  // Si hay un mensaje de error del servidor, mostrarlo
+            // Si hay un mensaje de error del servidor, mostrarlo
             if (json && !json.success && json.message) {
-              alert(json.message);
-            } */
+              Swal.fire({
+                icon: "error",
+                title: "Error",
+                text: json.message,
+              });
+            }
           }
           if (res.text) {
             const text = res.text;
             if (/</.test(text)) {
+              Swal.fire({
+                icon: "error",
+                title: "Error",
+                text: "Respuesta inesperada del servidor.",
+              });
               document.open();
               document.write(text);
               document.close();
@@ -163,15 +184,12 @@
         })
         .catch(function (error) {
           console.error("Error en el envío:", error);
-          // Código sugerido para form-validations.js
-          if (campo.value === "") {
-            Swal.fire({
-              icon: "error",
-              title: "Oops...",
-              text: "Hubo un error al procesar la solicitud",
-            });
-            return false;
-          }
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Hubo un error al procesar la solicitud",
+          });
+          return false;
         });
     });
   }
