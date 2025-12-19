@@ -1,5 +1,5 @@
     <div class="page-header">
-        <h3 class="fw-bold mb-3">Eliminar usuario</h3>
+        <h3 class="fw-bold mb-3">Inhabilitar usuario</h3>
     </div>
 
     <div class="row">
