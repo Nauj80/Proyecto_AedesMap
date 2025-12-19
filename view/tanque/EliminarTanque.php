@@ -97,7 +97,7 @@ include_once '../view/partials/header.php';
                                 <div class="col-md-6 col-lg-6">
                                     <div class="form-group">
                                         <label for="largoTanque">Largo del tanque (m)</label>
-                                        <input type="text" class="form-control" id="largoTanque" name="largoTanque" placeholder="Ingrese el largo del tanque en m" value="<?php echo $tan['largo'] ?>" readonly>
+                                        <input type="text" class="form-control" id="largoTanque" name="largoTanque" placeholder="Ingrese el largo del tanque en m" value="<?php echo $tan['alto'] ?>" readonly>
                                     </div>
                                     <div class="form-group">
                                         <label for="anchoTanque">Ancho del tanque (m)</label>
@@ -142,27 +142,11 @@ include_once '../view/partials/header.php';
             </div>
         </div>
     </div>
-    <script>
-        document.getElementById('form-eliminar').addEventListener('submit', function(e) {
-            e.preventDefault(); // Evita el envío tradicional del formulario
-
-            const form = e.target;
-            const url = form.action;
-            const formData = new FormData(form);
-
-            fetch(url, {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success && data.data.redirect) {
-                    window.location.href = data.data.redirect; // Redirige si la respuesta es exitosa
-                } else {
-                    alert(data.message || 'Ocurrió un error al intentar eliminar.');
-                }
-            })
-            .catch(error => console.error('Error:', error));
-        });
-    </script>
-</body>
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="/Proyecto_AedesMap/web/js/form-validations.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        initFormValidation('form-eliminar');
+    });
+</script>

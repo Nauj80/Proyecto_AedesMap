@@ -103,9 +103,11 @@ include_once '../view/partials/header.php';
             </div>
         </div>
     </div>
-    <script src="js/form-validations.js"></script>
-    <script>
-        // initialize validation for this form
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="/Proyecto_AedesMap/web/js/form-validations.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
         initFormValidation('formu');
-    </script>
-</body>
+    });
+</script>
