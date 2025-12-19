@@ -35,13 +35,8 @@
             }
             ?>
             <ul class="nav nav-secondary">
-<<<<<<< HEAD
-                <li class="nav-item">
-                    <a href="<?php echo getUrl("Mapa", "Mapa", "listar")?>">
-=======
                 <li class="nav-item <?php echo ($controller === 'Mapa') ? 'active' : ''; ?>">
                     <a  href="<?php echo getUrl("Mapa", "Mapa", "listar")?>">
->>>>>>> 0b9b3380745b03250dfbd479c6c437b1b927adc9
                         <i class="fas fa-map-marked-alt"></i>
                         <p>Visualización del mapa</p>
                     </a>
