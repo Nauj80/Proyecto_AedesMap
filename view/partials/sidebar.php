@@ -319,21 +319,29 @@
                         </a>
                         <div class="collapse <?php echo ($controller === 'Reportes') ? 'show' : ''; ?>" id="reportes">
                             <ul class="nav nav-collapse">
-                                <?php if (tienePermiso("Reportes", "Registrar")) { ?>
-                                    <li>
-                                        <a href="charts/charts.html">
-                                            <span class="sub-item">Chart Js</span>
-                                        </a>
-                                    </li>
-                                <?php } ?>
-                                <?php if (tienePermiso("Reportes", "Consultar")) { ?>
-                                    <li>
-                                        <a href="charts/sparkline.html">
-                                            <span class="sub-item">Sparkline</span>
-                                        </a>
-                                    </li>
-                                <?php } ?>
+                                <li>
+                                    <a href="<?php echo getUrl("Reportes", "Reportes", "listSeguimientoActividad"); ?>">
+                                        <span class="sub-item">Seguimiento de Actividades</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo getUrl("Reportes", "NacidosMuertes", "listSeguimientoTanques"); ?>">
+                                        <span class="sub-item">Nacimientos y muertes por tanque</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="charts/sparkline.html">
+                                        <span class="sub-item">Tanques por Zoocriadero</span>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="charts/sparkline.html">
+                                        <span class="sub-item">Actividad por tanque</span>
+                                    </a>
+                                </li>
                             </ul>
+
                         </div>
                     </li>
                     <?php
