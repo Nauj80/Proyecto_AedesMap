@@ -1,7 +1,7 @@
 <?php
 header('Content-Type: application/json');
 
-$conn = pg_connect("host=localhost port=5432 dbname=zoocriadero user=postgres password=123");
+$conn = pg_connect("host=localhost port=5432 dbname=zoocriadero user=postgres password=12345");
 
 if (!$conn) {
     echo json_encode(array('error' => 'Error de conexión'));

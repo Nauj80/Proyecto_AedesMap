@@ -224,15 +224,15 @@
                             <ul class="nav nav-collapse">
                                 <?php if (tienePermiso("Gestión de usuarios", "Registrar")) { ?>
                                     <li>
-                                        <a href="maps/googlemaps.html">
-                                            <span class="sub-item">Google Maps</span>
+                                        <a href="<?php echo getUrl("GestionUsuarios", "GestionUsuarios", "getCreate"); ?>">
+                                            <span class="sub-item">Registrar usuario</span>
                                         </a>
                                     </li>
                                 <?php } ?>
                                 <?php if (tienePermiso("Gestión de usuarios", "Consultar")) { ?>
                                     <li>
-                                        <a href="maps/jsvectormap.html">
-                                            <span class="sub-item">Jsvectormap</span>
+                                        <a href="<?php echo getUrl("GestionUsuarios", "GestionUsuarios", "listar"); ?>">
+                                            <span class="sub-item">Cosultar usuario</span>
                                         </a>
                                     </li>
                                 <?php } ?>
@@ -257,14 +257,14 @@
                                 <?php if (tienePermiso("Gestión de roles", "Registrar")) { ?>
                                     <li>
                                         <a href="<?php echo getUrl("GestionRoles", "GestionRoles", "listar"); ?>">
-                                            <span class="sub-item">Permisos del rol</span>
+                                            <span class="sub-item">Consultar roles</span>
                                         </a>
                                     </li>
                                 <?php } ?>
                                 <?php if (tienePermiso("Gestión de roles", "Consultar")) { ?>
                                     <li>
                                         <a href="<?php echo getUrl("GestionRoles", "GestionRoles", "editar"); ?>">
-                                            <span class="sub-item">Consultar Roles</span>
+                                            <span class="sub-item">Editar Roles</span>
                                         </a>
                                     </li>
                                 <?php } ?>
@@ -289,15 +289,15 @@
                             <ul class="nav nav-collapse">
                                 <?php if (tienePermiso("Configuración", "Registrar")) { ?>
                                     <li>
-                                        <a href="charts/charts.html">
-                                            <span class="sub-item">Chart Js</span>
+                                        <a href="<?php echo getUrl("Configuracion", "Configuracion", "verManuales"); ?>">
+                                            <span class="sub-item">Manuales</span>
                                         </a>
                                     </li>
                                 <?php } ?>
                                 <?php if (tienePermiso("Configuración", "Consultar")) { ?>
                                     <li>
-                                        <a href="charts/sparkline.html">
-                                            <span class="sub-item">Sparkline</span>
+                                        <a href="<?php echo getUrl("Configuracion", "Configuracion", "verManuales"); ?>">
+                                            <span class="sub-item">Actualizar perfil</span>
                                         </a>
                                     </li>
                                 <?php } ?>
