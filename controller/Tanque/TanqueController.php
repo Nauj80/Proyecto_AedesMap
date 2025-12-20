@@ -166,15 +166,23 @@ class TanqueController
         $profundidadTanque = $_POST['profundidadTanque'];
         $estadoTanque = $_POST['estadoTanque'];
 
+        // Validar si ya existe un tanque con el mismo nombre en el mismo zoocriadero
+        $sql_check = "SELECT COUNT(*) AS total FROM tanques WHERE nombre = '$nombre' AND id_zoocriadero = $zoocriadero";
+        $result_check = $obj->select($sql_check);
+        $row_check = pg_fetch_assoc($result_check);
 
-        $sql = "UPDATE tanques SET id_zoocriadero = $zoocriadero, id_tipo_tanque = $tipoTanque, cantidad_peces = $cantidadPeces, nombre = '$nombre', ancho = $anchoTanque, alto = $largoTanque, profundo = $profundidadTanque, id_estado_tanque = $estadoTanque WHERE id_tanque = $id";
-
-        $ejecutar = $obj->update($sql);
-
-        if ($ejecutar) {
-            jsonResponse(true, "Tanque actualizado correctamente", array('redirect' => getUrl("Tanque", "Tanque", "listar")));
+        if ($row_check['total'] > 0) {
+            jsonResponse(false, "Ya existe un tanque con este nombre en el zoocriadero seleccionado.");
         } else {
-            jsonResponse(false, "Hubo un problema al actualizar el tanque");
+            $sql = "UPDATE tanques SET id_zoocriadero = $zoocriadero, id_tipo_tanque = $tipoTanque, cantidad_peces = $cantidadPeces, nombre = '$nombre', ancho = $anchoTanque, alto = $largoTanque, profundo = $profundidadTanque, id_estado_tanque = $estadoTanque WHERE id_tanque = $id";
+
+            $ejecutar = $obj->update($sql);
+
+            if ($ejecutar) {
+                jsonResponse(true, "Tanque actualizado correctamente", array('redirect' => getUrl("Tanque", "Tanque", "listar")));
+            } else {
+                jsonResponse(false, "Hubo un problema al actualizar el tanque");
+            }
         }
     }
     public function getDelete()
