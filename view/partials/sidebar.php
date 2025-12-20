@@ -224,7 +224,7 @@
                             <ul class="nav nav-collapse">
                                 <?php if (tienePermiso("Gestión de usuarios", "Registrar")) { ?>
                                     <li>
-                                        <a href="<?php echo getUrl("GestionUsuarios", "GestionUsuarios", "listar"); ?>">
+                                        <a href="<?php echo getUrl("GestionUsuarios", "GestionUsuarios", "getCreate"); ?>">
                                             <span class="sub-item">Registrar usuario</span>
                                         </a>
                                     </li>
@@ -289,14 +289,14 @@
                             <ul class="nav nav-collapse">
                                 <?php if (tienePermiso("Configuración", "Registrar")) { ?>
                                     <li>
-                                        <a href="charts/charts.html">
+                                        <a href="<?php echo getUrl("Configuracion", "Configuracion", "verManuales"); ?>">
                                             <span class="sub-item">Manuales</span>
                                         </a>
                                     </li>
                                 <?php } ?>
                                 <?php if (tienePermiso("Configuración", "Consultar")) { ?>
                                     <li>
-                                        <a href="charts/sparkline.html">
+                                        <a href="<?php echo getUrl("Configuracion", "Configuracion", "verManuales"); ?>">
                                             <span class="sub-item">Actualizar perfil</span>
                                         </a>
                                     </li>
