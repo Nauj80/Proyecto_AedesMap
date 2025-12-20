@@ -66,13 +66,6 @@
                                         </a>
                                     </li>
                                 <?php } ?>
-                                <?php if (tienePermiso("Zoocriaderos", "Consultar")) { ?>
-                                    <li>
-                                        <a href="<?php echo getUrl("Zoocriadero", "Zoocriadero", "listar"); ?>">
-                                            <span class="sub-item">Consultar Zoocriaderos</span>
-                                        </a>
-                                    </li>
-                                <?php } ?>
                             </ul>
                         </div>
                     </li>

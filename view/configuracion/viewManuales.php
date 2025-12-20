@@ -62,7 +62,7 @@
         <div class="card">
             <div class="card-header">
                 <div class="card-title text-center">
-                    <i class="fas fa-play-circle text-danger"></i> Video Manual de Capacitación
+                    <i class="fas fa-play-circle text-danger"></i> Video Manual
                 </div>
             </div>
             <div class="card-body">
