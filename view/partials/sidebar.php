@@ -224,14 +224,14 @@
                             <ul class="nav nav-collapse">
                                 <?php if (tienePermiso("Gestión de usuarios", "Registrar")) { ?>
                                     <li>
-                                        <a href="maps/googlemaps.html">
+                                        <a href="<?php echo getUrl("GestionUsuarios", "GestionUsuarios", "listar"); ?>">
                                             <span class="sub-item">Registrar usuario</span>
                                         </a>
                                     </li>
                                 <?php } ?>
                                 <?php if (tienePermiso("Gestión de usuarios", "Consultar")) { ?>
                                     <li>
-                                        <a href="maps/jsvectormap.html">
+                                        <a href="<?php echo getUrl("GestionUsuarios", "GestionUsuarios", "listar"); ?>">
                                             <span class="sub-item">Cosultar usuario</span>
                                         </a>
                                     </li>

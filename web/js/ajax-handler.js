@@ -1,5 +1,14 @@
 // Manejador global para formularios AJAX con SweetAlert
 
+// Wrapper global para openEnableModal (evita ReferenceError si se invoca antes de definir la implementación)
+window.openEnableModal = window.openEnableModal || function(id) {
+  if (typeof window._realOpenEnableModal === 'function') {
+    try { return window._realOpenEnableModal(id); } catch (e) { console.error('Error calling _realOpenEnableModal (wrapper):', e); }
+  }
+  window.__pendingEnableCalls = window.__pendingEnableCalls || [];
+  window.__pendingEnableCalls.push(id);
+};
+
 document.addEventListener("DOMContentLoaded", function () {
   // Encontrar todos los formularios y agregar listener
   const formularios = document.querySelectorAll("form");
@@ -16,6 +25,24 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Attach handlers for edit/disable buttons in user list
   attachUserListHandlers();
+
+  // Fallback: attach direct click handlers to any existing enable buttons (evita depender solo de delegación)
+  const enableBtns = document.querySelectorAll('.btn-enable');
+  enableBtns.forEach(function(btn) {
+    btn.addEventListener('click', function (e) {
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      const id = this.dataset.id;
+      if (!id) return Swal.fire('Error', 'ID de usuario no encontrado', 'error');
+      if (typeof window.openEnableModal === 'function') {
+        try { window.openEnableModal(id); } catch (err) { console.error('Error calling openEnableModal from direct handler', err); Swal.fire('Error', 'Ocurrió un error', 'error'); }
+      } else {
+        console.error('openEnableModal not defined at click time (direct handler)');
+        Swal.fire('Error', 'Función de habilitar no disponible (ver consola)', 'error');
+      }
+    });
+  });
+
 });
 
 /* Handlers to show edit modal and confirm-disable modal for user list */
@@ -58,6 +85,25 @@ function attachUserListHandlers() {
         } catch (err) {
           console.error('openDisableModal error', err);
           Swal.fire('Error', 'No se pudo abrir el modal de confirmación', 'error');
+        }
+      }
+
+      const enableBtn = e.target.closest('.btn-enable');
+      if (enableBtn) {
+        console.log('user-list: enable button clicked', enableBtn.dataset);
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        const href = enableBtn.getAttribute('href') || enableBtn.dataset.href || '';
+        const id = enableBtn.dataset.id || getQueryParam(href, 'id');
+        if (!id) {
+          console.warn('No id found for enable button', enableBtn);
+          return Swal.fire('Error', 'ID de usuario no encontrado', 'error');
+        }
+        try {
+          openEnableModal(id);
+        } catch (err) {
+          console.error('openEnableModal error', err);
+          Swal.fire('Error', 'No se pudo abrir el modal de habilitación', 'error');
         }
       }
     } catch (err) {
@@ -246,9 +292,83 @@ function openDisableModal(id) {
     }
   };
 
-  // Replace previous click handler to avoid duplication
+  
   confirmBtn.onclick = handler;
 }
+
+window._realOpenEnableModal = async function(id) {
+  console.log('openEnableModal called for id', id);
+  const modalEl = document.getElementById('modalConfirmEnable');
+  if (!modalEl) {
+    console.error('Modal #modalConfirmEnable not found');
+    return Swal.fire('Error', 'El modal de habilitación no está disponible', 'error');
+  }
+  const modal = new bootstrap.Modal(modalEl);
+  modal.show();
+
+  const confirmBtn = document.getElementById('confirmEnableBtn');
+  if (!confirmBtn) {
+    console.error('Botón #confirmEnableBtn no encontrado');
+    modal.hide();
+    return Swal.fire('Error', 'El botón de confirmación no está disponible', 'error');
+  }
+
+  const handler = async function () {
+    confirmBtn.disabled = true;
+    try {
+      const fd = new FormData();
+      fd.append('id', id);
+      const res = await fetch('index.php?modulo=GestionUsuarios&controlador=GestionUsuarios&funcion=postEnable', {
+        method: 'POST',
+        body: fd,
+      });
+
+      // Manejo seguro de la respuesta
+      if (!res.ok) {
+        const text = await res.text();
+        console.error('Server returned non-OK status (postEnable)', res.status, text);
+        Swal.fire('Error', 'Error del servidor al habilitar (ver consola)', 'error');
+        return;
+      }
+
+      const ct = res.headers.get('content-type') || '';
+      if (!ct.includes('application/json')) {
+        const text = await res.text();
+        console.error('Respuesta postEnable no es JSON:', text);
+        Swal.fire('Error', 'Respuesta inválida del servidor al habilitar (ver consola)', 'error');
+        return;
+      }
+
+      const data = await res.json();
+      if (data.success) {
+        Swal.fire({ icon: 'success', title: '¡Éxito!', text: data.message, timer: 1500, showConfirmButton: false }).then(() => location.reload());
+      } else {
+        Swal.fire('Error', data.message || 'No se pudo habilitar', 'error');
+      }
+    } catch (err) {
+      console.error(err);
+      Swal.fire('Error', 'Ocurrió un error', 'error');
+    } finally {
+      confirmBtn.disabled = false;
+      modal.hide();
+      confirmBtn.onclick = null;
+    }
+  };
+
+  // Replace previous click handler to avoid duplication
+  confirmBtn.onclick = handler;
+};
+
+// Si hubo llamadas pendientes mientras el archivo se cargaba, procesarlas
+if (window.__pendingEnableCalls && window.__pendingEnableCalls.length && typeof window._realOpenEnableModal === 'function') {
+  window.__pendingEnableCalls.forEach(function(id){
+    try { window._realOpenEnableModal(id); } catch(e){ console.error('Error processing pending openEnableModal call', e); }
+  });
+  delete window.__pendingEnableCalls;
+}
+
+// Exponer la función real como la función pública
+window.openEnableModal = window._realOpenEnableModal;
 
 function enviarFormularioAjax(formulario) {
   // Client-side validation: clear previous errors and validate required fields
@@ -436,3 +556,4 @@ function attachNumericHandlers() {
     });
   });
 }
+
