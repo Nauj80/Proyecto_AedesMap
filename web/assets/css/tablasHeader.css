@@ -1,0 +1,10 @@
+.thead-custom th {
+    background-color: #0d6efd !important;
+    color: #fff !important;
+    font-weight: bold !important;
+    text-align: center !important;
+    vertical-align: middle !important;
+    border-color: #0004ff !important;
+    border-width: 2px !important;
+    border-style: solid !important;
+}

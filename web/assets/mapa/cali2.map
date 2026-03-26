@@ -1,0 +1,122 @@
+MAP
+   NAME "colombia"
+   SIZE 800 700
+   STATUS ON
+
+   EXTENT 1053867 860190 1068491 879411 
+   SHAPEPATH "shape/calif"
+   IMAGECOLOR 255 255 255
+
+   FONTSET "misc/fonts/fonts.txt"
+   SYMBOLSET "misc/symbols/symbols.sym"
+
+   WEB
+     IMAGEPATH "C:/ms4w/tmp/ms_tmp/"
+     IMAGEURL "/ms_tmp/"
+   END
+
+   LEGEND
+     STATUS ON
+     IMAGECOLOR 255 255 255
+     POSITION LL
+     KEYSIZE 30 30 
+     KEYSPACING 10 10
+     LABEL
+      TYPE TRUETYPE
+     FONT "sans"
+     SIZE 9
+     COLOR 0 0 0 
+   END 
+    OUTLINECOLOR 0 0 0
+   END
+
+   SCALEBAR
+    STATUS EMBED
+    SIZE 250 4
+    COLOR 0 0 0 
+    UNITS KILOMETERS
+    INTERVALS 5
+    TRANSPARENT OFF
+    POSITION LL 
+    BACKGROUNDCOLOR 255 255 255
+    IMAGECOLOR 255 255 255
+    OUTLINECOLOR 211 211 211
+    LABEL
+      COLOR 0 0 0 
+      SIZE TINY
+    END
+   END
+
+   LAYER
+     CONNECTIONTYPE postgis
+     NAME "Puntos"
+     STATUS ON
+     CONNECTION "user=postgres password=1234 dbname=prueba host=localhost port=5432"
+     DATA "geom from puntos using unique id using SRID=4326"
+     TYPE POINT
+     CLASS
+      STYLE
+        SYMBOL star
+        SIZE 30
+        COLOR 255 0 255
+        OUTLINECOLOR 0 0 0
+      END
+     END
+    END
+
+   LAYER
+    NAME "Malla_Vial"
+    TRANSPARENCY 50
+    STATUS ON
+    DATA "MallaVialC.shp"
+    TYPE LINE
+    LABELITEM "nombre"
+    CLASS
+      NAME "MALLAVIAL"
+      STYLE
+        COLOR 160 118 105
+        OUTLINECOLOR 160 118 105
+      END
+      LABEL
+        FONT "sans"
+        TYPE truetype
+        ENCODING "UTF-8"
+        SIZE 9
+        POSITION cc
+        ANGLE auto
+        PARTIALS TRUE
+        COLOR 0 0 0
+      END  
+    END
+  END
+
+   LAYER
+    NAME "Barrios"
+    TRANSPARENCY 80
+    STATUS ON
+    DATA "BarriosC.shp"
+    TYPE LINE
+    CLASS
+      NAME "BARRIOS"
+      STYLE
+        COLOR 224 255 255
+        OUTLINECOLOR 200 230 230
+      END
+    END
+  END
+
+   LAYER
+     NAME "Cali"
+     TRANSPARENCY 30
+     STATUS ON
+     DATA "Cali3.shp"
+     TYPE POLYGON
+     CLASS
+       SIZE 50
+         COLOR 173 216 230
+         OUTLINECOLOR 150 190 205
+       END
+     END
+   END
+
+END
